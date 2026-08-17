@@ -177,6 +177,37 @@ def simhat_removal_stages(carrier):
     return stages, test_carrier
 
 
+def service_envelope_checks(carrier):
+    """Connector service envelopes: no printed material may enter these
+    volumes (USB-C plug, SMA antenna connectors, SIM swap, battery JST)."""
+    results = []
+    for name, (x0, y0, x1, y1, z0, z1) in P.SERVICE_ENVELOPES.items():
+        env = cq.Solid.makeBox(x1 - x0, y1 - y0, z1 - z0,
+                               cq.Vector(x0, y0, z0))
+        results.append({"envelope": name,
+                        "interference_mm3": round(common_vol(carrier, env), 4)})
+    return results
+
+
+def antenna_checks(carrier):
+    """Tray slide path clear; seated sticker clear of carrier; sticker flat."""
+    g = holder._antenna_tray_geometry()
+    slide = cq.Solid.makeBox(
+        P.ANT_W - 2.0, abs(g["entry_y"] - g["far_y"]) - P.ANT_STOP_T, 1.5,
+        cq.Vector(P.ANT_X_C - P.ANT_W / 2 + 1.0,
+                  g["far_y"] + P.ANT_STOP_T, P.ANT_FLOOR_T + 0.1))
+    sticker = cq.Solid.makeBox(
+        P.ANT_W, P.ANT_SLIDE, 0.35,
+        cq.Vector(P.ANT_X_C - P.ANT_W / 2, g["far_y"] + P.ANT_STOP_T + 0.3,
+                  P.ANT_FLOOR_T))
+    return {
+        "slide_path_interference_mm3": round(common_vol(carrier, slide), 4),
+        "seated_sticker_interference_mm3": round(common_vol(carrier, sticker), 4),
+        "sticker_plane": "flat, horizontal, on tray floor",
+        "tray_extends_to_y": round(g["far_y"], 2),
+    }
+
+
 def main():
     report = {"parameters_of_record": {}}
     checks = []
@@ -257,6 +288,24 @@ def main():
                    "value": sum(1 for f in feats if f["pass"]), "total": len(feats),
                    "pass": all(f["pass"] for f in feats)})
     report["features"] = feats
+
+    print("== connector service envelopes ==")
+    envs = service_envelope_checks(carrier)
+    env_ok = all(e["interference_mm3"] < VOLUME_TOL for e in envs)
+    checks.append({"check": "connector_service_envelopes", "value": envs,
+                   "pass": env_ok})
+    report["service_envelopes"] = envs
+
+    if P.ANT_ENABLED:
+        print("== antenna tray ==")
+        ant = antenna_checks(carrier)
+        checks.append({
+            "check": "antenna_tray",
+            "value": ant,
+            "pass": (ant["slide_path_interference_mm3"] < VOLUME_TOL
+                     and ant["seated_sticker_interference_mm3"] < VOLUME_TOL),
+        })
+        report["antenna"] = ant
 
     print("== simhat removal simulation ==")
     stages, _ = simhat_removal_stages(carrier)

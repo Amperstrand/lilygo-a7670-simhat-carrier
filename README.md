@@ -12,8 +12,8 @@ regenerable with one command.
 ![Assembly render](renders/assembly.png)
 
 *T-SimHat (amber) mounted flipped — relay down, pin headers up. T-A7670X
-(green) on screw standoffs. Carrier (grey) 129 × 127.5 mm, fits a Bambu
-A1 mini with large margin.*
+(green) on screw standoffs. LTE sticker-antenna slide-in tray at the far
+end. Carrier (grey) 129 × 173.5 mm, fits a Bambu A1 mini.*
 
 ## Status
 
@@ -30,6 +30,23 @@ physically test-printed.** Print the snap-fit test coupon first (see below).
 | T-SimHat PCB | 33.0 × 94.8 × **1.0 mm** | STEP cross-section (verify with calipers: some batches 1.6) |
 | T-SimHat mounting holes | **none** (hence snap-in cage) | STEP |
 | T-SimHat relay | OMRON G5LE-class, 16.5 × 22.7 × 18.25 mm, single relay confirmed in STEP | STEP solids |
+| LTE sticker antenna | no manufacturer CAD — **parametric tray; caliper `ANT_SLIDE`/`ANT_W`** (defaults 45 × 50) | — |
+
+## Antenna tray
+
+The bundled full-band LTE sticker (698–2690 MHz, SMA coax) slides into a
+flat tray at the carrier's far end: floor keeps it flat, flared channel
+walls locate it, end stop + friction retain it (adhesive optional for
+permanence), and a coax notch passes the cable through the frame rail to
+the modem's SMA jacks. Sticker slides along its **shorter** dimension so
+even a 60 × 45 sticker stays inside the 175 mm envelope.
+
+## Port access (validated)
+
+Keep-clear service envelopes with zero printed-material interference:
+USB-C plug (+Y end), both SMA antenna connectors (+X edge), SIM-tray
+swap zone, battery JST — see `connector_service_envelopes` in
+`analysis/interference_report.json`.
 
 ## How the T-SimHat is held
 

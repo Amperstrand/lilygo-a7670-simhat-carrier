@@ -1857,6 +1857,30 @@
       "pass": true
     }
   ],
+  "service_envelopes": [
+    {
+      "envelope": "usb_c_plug",
+      "interference_mm3": 0.0
+    },
+    {
+      "envelope": "sma_antenna_conn",
+      "interference_mm3": 0.0
+    },
+    {
+      "envelope": "sim_tray_swap",
+      "interference_mm3": 0.0
+    },
+    {
+      "envelope": "battery_jst",
+      "interference_mm3": 0.0
+    }
+  ],
+  "antenna": {
+    "slide_path_interference_mm3": 0.0,
+    "seated_sticker_interference_mm3": 0.0,
+    "sticker_plane": "flat, horizontal, on tray floor",
+    "tray_extends_to_y": -109.77
+  },
   "simhat_removal": [
     {
       "stage": "lift_0.15mm_tabs_released",
@@ -1873,7 +1897,7 @@
   ],
   "carrier_bbox": {
     "dx": 129.07,
-    "dy": 127.54,
+    "dy": 173.54,
     "dz": 33.4
   },
   "checks": [
@@ -1886,7 +1910,7 @@
       "check": "a1mini_envelope_xy",
       "value": [
         129.07,
-        127.54
+        173.54
       ],
       "pass": true
     },
@@ -1898,8 +1922,8 @@
     {
       "check": "step_roundtrip_volume",
       "value": [
-        28208.51,
-        28208.51
+        32729.4,
+        32729.4
       ],
       "pass": true
     },
@@ -1915,7 +1939,7 @@
     },
     {
       "check": "stl_volume_positive",
-      "value": 28207.7,
+      "value": 32728.6,
       "pass": true
     },
     {
@@ -1946,6 +1970,38 @@
       "pass": true
     },
     {
+      "check": "connector_service_envelopes",
+      "value": [
+        {
+          "envelope": "usb_c_plug",
+          "interference_mm3": 0.0
+        },
+        {
+          "envelope": "sma_antenna_conn",
+          "interference_mm3": 0.0
+        },
+        {
+          "envelope": "sim_tray_swap",
+          "interference_mm3": 0.0
+        },
+        {
+          "envelope": "battery_jst",
+          "interference_mm3": 0.0
+        }
+      ],
+      "pass": true
+    },
+    {
+      "check": "antenna_tray",
+      "value": {
+        "slide_path_interference_mm3": 0.0,
+        "seated_sticker_interference_mm3": 0.0,
+        "sticker_plane": "flat, horizontal, on tray floor",
+        "tray_extends_to_y": -109.77
+      },
+      "pass": true
+    },
+    {
       "check": "simhat_toolless_removal",
       "value": [
         {
@@ -1970,7 +2026,7 @@
     },
     {
       "check": "deterministic_rebuild",
-      "value": "16b07135a5b9bdb5",
+      "value": "11dbf1581cf0dbe1",
       "pass": true
     }
   ],

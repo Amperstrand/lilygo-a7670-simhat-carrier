@@ -190,10 +190,13 @@ def _clip_geometry(clear, side):
 
 def _clip_arm_pts(clear, side):
     g = _clip_geometry(clear, side)
+    c = min(P.SIMHAT_HOOK_LEAD_CHAMFER, P.SIMHAT_HOOK_ENGAGE * 0.8,
+            (g["v_tip"] - g["v_l0"]) * 0.4)
+    u_tip = g["u_tip"]
     return [(g["u_out"], g["v_root"]), (g["u_out"], g["v_tip"]),
-            (g["u_in"], g["v_tip"]), (g["u_tip"], g["v_tip"]),
-            (g["u_tip"], g["v_l0"]), (g["u_in"], g["v_l0"]),
-            (g["u_in"], g["v_root"])]
+            (g["u_in"], g["v_tip"]), (u_tip, g["v_tip"]),
+            (u_tip, g["v_l0"] + c), (u_tip + side * c, g["v_l0"]),
+            (g["u_in"], g["v_l0"]), (g["u_in"], g["v_root"])]
 
 
 def _hook_undercut_cutter():
@@ -341,18 +344,75 @@ def cut_tie_slots(carrier):
 
 
 # ---------------------------------------------------------------------------
+# LTE sticker antenna slide-in tray (-Y end, appendage beyond ring rail)
+# ---------------------------------------------------------------------------
+
+def _antenna_tray_geometry():
+    x_lo, y_lo, _, _ = _frame_extents()
+    entry_y = y_lo                     # channels start at the outer frame line
+    far_y = y_lo - (P.ANT_SLIDE + P.ANT_STOP_T + 0.6)
+    ch_half = P.ANT_W / 2 + P.ANT_SIDE_CLEAR
+    return {
+        "entry_y": entry_y, "far_y": far_y,
+        "ch_x_lo": P.ANT_X_C - ch_half, "ch_x_hi": P.ANT_X_C + ch_half,
+    }
+
+
+def build_antenna_tray():
+    """Floor + two flared channel walls + end stop. The sticker slides in
+    along -Y on the floor between the walls; wall mouths flare outward at
+    the entry so a slightly misaligned sticker self-guides into place."""
+    g = _antenna_tray_geometry()
+    y0, y1 = g["far_y"], g["entry_y"]
+    f = P.ANT_ENTRY_CHAMFER
+    solids = []
+
+    floor = _rect(P.ANT_X_C - P.ANT_W / 2 - P.ANT_WALL_T - 2.0, y0,
+                  P.ANT_X_C + P.ANT_W / 2 + P.ANT_WALL_T + 2.0, y1 + f + 1.0,
+                  0, P.ANT_FLOOR_T)
+
+    for xi, side in ((g["ch_x_lo"], -1), (g["ch_x_hi"], 1)):
+        pts = [(xi, y0), (xi, y1), (xi + side * f, y1),
+               (xi + side * f, y1 + f), (xi + side * P.ANT_WALL_T, y1 + f),
+               (xi + side * P.ANT_WALL_T, y0)]
+        solids.append(cq.Workplane("XY").polyline(pts).close()
+                      .extrude(P.ANT_WALL_H).val())
+
+    stop = _rect(P.ANT_X_C - P.ANT_W / 2 - P.ANT_WALL_T - 2.0, y0,
+                 P.ANT_X_C + P.ANT_W / 2 + P.ANT_WALL_T + 2.0,
+                 y0 + P.ANT_STOP_T, 0, P.ANT_WALL_H)
+
+    solids = [floor, stop] + solids
+    return cq.Workplane("XY").newObject(solids).combine()
+
+
+def cut_coax_notch(carrier):
+    if not P.ANT_ENABLED:
+        return carrier
+    _, y_lo, _, _ = _frame_extents()
+    notch = _rect(P.ANT_X_C - P.ANT_COAX_NOTCH_W / 2, y_lo - 1.0,
+                  P.ANT_X_C + P.ANT_COAX_NOTCH_W / 2, y_lo + P.RAIL_W + 0.6,
+                  0, 3.0)
+    return carrier.cut(notch)
+
+
+# ---------------------------------------------------------------------------
 # Top-level builds
 # ---------------------------------------------------------------------------
 
 def build_carrier(clip_deflect=0.0):
     carrier = build_base()
-    for part in (build_standoffs(), build_simhat_pads(), build_simhat_lip(),
-                 build_simhat_clips(deflect=clip_deflect), build_simhat_fences(),
-                 build_tape_pads(), build_ears()):
+    parts = [build_standoffs(), build_simhat_pads(), build_simhat_lip(),
+             build_simhat_clips(deflect=clip_deflect), build_simhat_fences(),
+             build_tape_pads(), build_ears()]
+    if P.ANT_ENABLED:
+        parts.append(build_antenna_tray())
+    for part in parts:
         carrier = carrier.union(part, tol=1e-4)
     carrier = cut_screw_pilots(carrier)
     carrier = cut_tie_slots(carrier)
     carrier = cut_ear_slots(carrier)
+    carrier = cut_coax_notch(carrier)
     return carrier
 
 

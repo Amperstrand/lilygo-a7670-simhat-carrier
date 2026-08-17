@@ -119,8 +119,10 @@ SIMHAT_LIP_T = 2.4                  # lip ledge thickness
 SIMHAT_HOOK_ENGAGE = 1.0            # ledge reach past PCB edge face
 SIMHAT_HOOK_T = 2.2                 # hook ledge vertical thickness
 SIMHAT_HOOK_REACH_V = 2.4           # ledge reach onto PCB top (in v)
-SIMHAT_HOOK_LEAD_ANGLE = 40.0       # intended lead-in chamfer (deg); chamfer
-                                    # applied where OCC allows, else square edge
+SIMHAT_HOOK_LEAD_CHAMFER = 0.8   # plan-view ramp on hook inner corner; turns
+                                 # corner-on-corner insertion contact into a
+                                 # smooth ramp ride (same corner acts on release)
+SIMHAT_HOOK_LEAD_ANGLE = 40.0       # informational: atan(chamfer c/c) intent
 SIMHAT_ARM_LEN = 14.0               # cantilever length root->hook center
 SIMHAT_ARM_W = 6.0                  # arm depth in Z
 SIMHAT_ARM_T = 2.0                  # arm thickness in u (bending direction)
@@ -161,6 +163,38 @@ EAR_T = BASE_T                      # ear thickness (flush with base)
 EAR_SLOT_ANGLE = 0.0                # 0 = slot long axis along Y; 90 = along X
 TAPE_PAD_SIZE = 24.0                # flat VHB landing zones (kept hole-free)
 TAPE_PADS = [("a7670-mid", 0.0), ("simhat-mid", 0.0)]
+
+# ---------------------------------------------------------------------------
+# LTE sticker antenna slide-in tray (-Y end; slide along sticker SHORT dim)
+# LILYGO "full band 698-1710-2690" FPC sticker, SMA coax. No manufacturer CAD
+# exists -> CALIPER the sticker and set ANT_SLIDE/ANT_W before printing.
+# Defaults assume ~50 x 45 mm class, slid along its 45 mm dimension.
+# ---------------------------------------------------------------------------
+
+ANT_ENABLED = True
+ANT_SLIDE = 45.0          # sticker dimension along slide direction (mm)
+ANT_W = 50.0              # sticker dimension across channels (mm)
+ANT_X_C = 5.0             # tray center X (over gap + A7670 side, clear of cage)
+ANT_SIDE_CLEAR = 0.5      # per-side clearance between sticker and channel walls
+ANT_FLOOR_T = 1.2         # tray floor thickness
+ANT_WALL_T = 2.4          # channel wall thickness
+ANT_WALL_H = 4.5          # channel wall height above plate
+ANT_STOP_T = 2.4          # end-stop wall thickness
+ANT_ENTRY_CHAMFER = 1.5   # lead-in chamfer on channel mouths
+ANT_COAX_NOTCH_W = 5.0    # coax pass-through notch in the -Y ring rail
+
+# ---------------------------------------------------------------------------
+# Connector service envelopes (validated keep-clear volumes, carrier coords)
+# Derived from measured STEP islands: USB-C on +Y edge at x[13,31] z[13,16];
+# both SMA jacks on +X edge at y[-21,-3] z[13,15]; envelopes add plug bodies.
+# ---------------------------------------------------------------------------
+
+SERVICE_ENVELOPES = {
+    "usb_c_plug":       (19.0, 55.0, 37.5, 68.0, 12.0, 18.0),
+    "sma_antenna_conn": (40.0, -22.0, 56.0, -2.0, 12.0, 16.5),
+    "sim_tray_swap":    (10.0, 30.0, 40.0, 58.0, 14.0, 24.0),
+    "battery_jst":      (12.0, -14.0, 30.0, 4.0, 14.0, 24.0),
+}
 
 # ---------------------------------------------------------------------------
 # Print envelope (Bambu A1 mini safety target)
