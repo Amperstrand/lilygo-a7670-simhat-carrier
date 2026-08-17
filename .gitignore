@@ -1,0 +1,12 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+
+# Vendor clones (recreated via scripts; provenance in references/PROVENANCE.md)
+vendor/
+
+# Large intermediates not tracked
+tmp/

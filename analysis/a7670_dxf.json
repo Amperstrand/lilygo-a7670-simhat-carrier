@@ -1,0 +1,284 @@
+{
+  "source_file": "T-A7670X-ESP32.dxf",
+  "dimensions": [
+    {
+      "defpoint": [
+        267.487,
+        220.975
+      ],
+      "measurement": 1.7296,
+      "text": ""
+    },
+    {
+      "defpoint": [
+        295.199,
+        220.975
+      ],
+      "measurement": 1.7296,
+      "text": ""
+    },
+    {
+      "defpoint": [
+        295.199,
+        115.438
+      ],
+      "measurement": 1.7296,
+      "text": ""
+    },
+    {
+      "defpoint": [
+        267.462,
+        115.388
+      ],
+      "measurement": 1.7296,
+      "text": ""
+    },
+    {
+      "defpoint": [
+        241.787,
+        223.644
+      ],
+      "measurement": 0.0058,
+      "text": ""
+    },
+    {
+      "defpoint": [
+        297.931,
+        240.669
+      ],
+      "measurement": 33.0708,
+      "text": ""
+    },
+    {
+      "defpoint": [
+        315.26,
+        180.823
+      ],
+      "measurement": 2.54,
+      "text": ""
+    },
+    {
+      "defpoint": [
+        335.265,
+        178.283
+      ],
+      "measurement": 38.1,
+      "text": ""
+    },
+    {
+      "defpoint": [
+        258.457,
+        180.823
+      ],
+      "measurement": 2.54,
+      "text": ""
+    },
+    {
+      "defpoint": [
+        296.272,
+        178.532
+      ],
+      "measurement": 0.9,
+      "text": ""
+    },
+    {
+      "defpoint": [
+        252.686,
+        115.391
+      ],
+      "measurement": 0.0254,
+      "text": ""
+    },
+    {
+      "defpoint": [
+        295.22,
+        103.713
+      ],
+      "measurement": 27.7368,
+      "text": ""
+    },
+    {
+      "defpoint": [
+        295.199,
+        233.501
+      ],
+      "measurement": 27.7114,
+      "text": ""
+    },
+    {
+      "defpoint": [
+        324.776,
+        115.425
+      ],
+      "measurement": 0.0254,
+      "text": ""
+    }
+  ],
+  "texts": [
+    {
+      "text": "BOT",
+      "at": [
+        292.61,
+        114.45
+      ]
+    },
+    {
+      "text": "-",
+      "at": [
+        277.93,
+        161.77
+      ]
+    },
+    {
+      "text": "+",
+      "at": [
+        276.91,
+        161.65
+      ]
+    },
+    {
+      "text": "+",
+      "at": [
+        296.24,
+        119.88
+      ]
+    },
+    {
+      "text": "-",
+      "at": [
+        295.96,
+        121.64
+      ]
+    },
+    {
+      "text": "-",
+      "at": [
+        295.96,
+        122.71
+      ]
+    },
+    {
+      "text": "+",
+      "at": [
+        296.24,
+        124.01
+      ]
+    },
+    {
+      "text": "GNSS",
+      "at": [
+        297.51,
+        147.98
+      ]
+    },
+    {
+      "text": "RF",
+      "at": [
+        282.98,
+        117.81
+      ]
+    },
+    {
+      "text": "DCD",
+      "at": [
+        296.75,
+        127.89
+      ]
+    },
+    {
+      "text": "CTS",
+      "at": [
+        296.84,
+        129.08
+      ]
+    },
+    {
+      "text": "RTS",
+      "at": [
+        296.8,
+        130.35
+      ]
+    },
+    {
+      "text": "CK",
+      "at": [
+        296.84,
+        131.06
+      ]
+    },
+    {
+      "text": "CS",
+      "at": [
+        296.84,
+        131.66
+      ]
+    },
+    {
+      "text": "SI",
+      "at": [
+        296.84,
+        132.34
+      ]
+    },
+    {
+      "text": "SO",
+      "at": [
+        296.84,
+        132.99
+      ]
+    },
+    {
+      "text": "RST",
+      "at": [
+        294.69,
+        213.03
+      ]
+    },
+    {
+      "text": "IO0",
+      "at": [
+        294.84,
+        192.56
+      ]
+    }
+  ],
+  "circles": [
+    {
+      "center_x": 296.647,
+      "center_y": 178.283,
+      "diameter": 0.9
+    }
+  ],
+  "circle_polylines": [],
+  "entity_counts": {
+    "LINE": 148,
+    "LWPOLYLINE": 226,
+    "CIRCLE": 1,
+    "ARC": 0,
+    "TEXT": 18,
+    "DIMENSION": 14,
+    "INSERT": 217
+  },
+  "mounting_holes_dxf": [
+    {
+      "center_x": 267.487,
+      "center_y": 220.975,
+      "diameter": 1.7296
+    },
+    {
+      "center_x": 295.199,
+      "center_y": 220.975,
+      "diameter": 1.7296
+    },
+    {
+      "center_x": 295.199,
+      "center_y": 115.438,
+      "diameter": 1.7296
+    },
+    {
+      "center_x": 267.462,
+      "center_y": 115.388,
+      "diameter": 1.7296
+    }
+  ]
+}
