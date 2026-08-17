@@ -4,6 +4,38 @@ These are **conservative starting points, not universal truths**. Tune to
 your filament and printer. Both parts print **as oriented in the STL** —
 carrier base flat on the plate, no rotation, **no supports**.
 
+## PRINT THIS FIRST: Gridfinity fit-check tray — `exports/lilygo_fitcheck_tray_gridfinity.3mf`
+
+Open the **3MF directly in Bambu Studio** (File → Open) and slice with:
+
+| Setting | Fast (target ~15 min) | Balanced |
+|---|---|---|
+| Layer height | 0.32 mm | 0.28 mm |
+| Wall loops | 2 | 3 |
+| Top / bottom | 3 / 2 | 4 / 3 |
+| Infill | 5 % Gyroid | 10 % Gyroid |
+| Speeds | default Draft profile | default profile |
+| Brim / supports | none / none | none / none |
+
+Model is ~16.7 g of PETG → expect **12–18 min** on an A1 mini. Enable
+"Arachne"/thin-wall detection so the Ø1.25 gauge pins slice cleanly (they
+print as a single perimeter spiral). The tray is deliberately NOT durable:
+1.2 mm walls, 0.6 mm floors.
+
+**What it verifies (in one print):**
+1. A7670X **hole pattern** — drop the board (battery installed is fine)
+   over the 4 pins; all 4 engage = positions correct. Pin Ø1.25 fits the
+   modelled drill; the plated Ø1.73 spec stays a caliper/screw check.
+2. A7670X **outline** — board lands on its support rib without touching
+   fences/walls.
+3. SimHat **outline + cage XY** — relay-down board rests flat, edges at
+   0.3 mm from the three fence gauges.
+4. Antenna sticker **fits the 110 × 20 channel** and slides to the stop.
+
+After the check it stays useful: it clips onto any **Gridfinity 3 × 4
+baseplate** (or sits on the desk) as a tray for the boards + antenna
+during assembly. Boards sit proud of the low walls by design.
+
 ## Full carrier — `exports/lilygo_a7670_simhat_carrier.stl`
 
 | Setting | Start value | Why |

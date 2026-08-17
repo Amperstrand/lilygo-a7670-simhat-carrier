@@ -65,10 +65,13 @@ printing.**
 
 | Variant | File | Print height | Purpose |
 |---|---|---|---|
+| **Gridfinity fit-check tray** | `exports/lilygo_fitcheck_tray_gridfinity.3mf` | 33 mm pins / 7 mm body, **~15 min** | FIRST PRINT: gauge pins verify the A7670 hole pattern (drop the board over them, battery installed OK), fences gauge the SimHat outline, channel gauges the 110×20 antenna. Then clips onto any Gridfinity 3×4 baseplate as a real desk tray |
 | Full carrier | `exports/lilygo_a7670_simhat_carrier.stl` | ~40 mm | production holder |
-| **Low-profile template** | `exports/lilygo_a7670_simhat_carrier_lowprofile.stl` | **9 mm** | ~15-min fit check: hole pattern (real M1.6 screw test), pad window, lip/fence positions. Open frame — relay/shield hang through; test the SimHat at a desk edge. Also wall-mountable via M3 ear slots (flat against a box wall). Build: `CARRIER_PROFILE=low python scripts/build.py` |
+| Low-profile template | `exports/lilygo_a7670_simhat_carrier_lowprofile.stl` | **9 mm** | batteryless screw-fit + cage-outline check (relay/holder hang through the open frame); wall-mountable via M3 ear slots. Build: `CARRIER_PROFILE=low python scripts/build.py` |
 | Snap coupon | `exports/simhat_clip_test.stl` | ~35 mm bay | pick XY clearance 0.20–0.50 |
 | Sections | `exports/sections/*.stl` | varies | iterate one region cheaply (A7670 plate / SimHat cage / antenna tray); volume-partition of the full carrier |
+
+Print order: **Gridfinity tray (~15 min) → coupon → full carrier.**
 
 ## Port access (validated)
 

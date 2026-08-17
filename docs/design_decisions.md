@@ -155,6 +155,29 @@ measured STEP component islands.
   cheap per-region iteration. Not for reassembly — the full carrier is
   the assembly part.
 
+## Gridfinity fit-check tray (ecosystem compatibility)
+
+- Researched standards: **Gridfinity** (42 mm grid — the dominant open
+  standard, full spec available), ToolGrid (newer, wedge interface, thinner
+  adoption), honeycomb wall storage (wall-mounted, not desk). Chose
+  Gridfinity for adoption + exact public numbers.
+- Geometry per the canonical `kennetek/gridfinity-rebuilt-openscad`
+  constants: 41.5 per-unit top (0.5 gap), dovetail base profile
+  (35.6-wide bottom, 45°→vertical→45° to full width at z=4.75, corner radii
+  0.8/3.75), built as a ruled ThruSections loft.
+- Deliberate deviations (allowed by spec, documented): no stacking lip, no
+  magnet holes, 1.2 mm walls, boards sit proud of the 7 mm rim — it's a
+  gauge first, tray second.
+- **Gauge-pin pattern**: when under-board parts (18650 holder 20.5 mm,
+  relay 18.25 mm) exceed any printable pocket, seat the board on its
+  lowest part and verify the hole pattern with drop-over pins instead of
+  seat-on bosses. Pins Ø1.25 because the STEP models ~Ø1.35 drills (the
+  Ø1.73 DXF figure is the plated spec) — pins gauge POSITION; diameter
+  stays a caliper check.
+- Layout conflict caught by slide-path validation: the compressed antenna
+  channel initially crossed the gauge pins; boards shifted −14 mm and the
+  channel moved to the +Y end. Relative gauge geometry unchanged.
+
 ## Trade-offs accepted
 
 - SimHat must slide 3.6 mm toward the clips during removal — pads are

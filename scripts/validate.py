@@ -242,6 +242,69 @@ def antenna_checks(carrier):
     }
 
 
+def fitcheck_tray_checks():
+    """Gridfinity fit-check tray: footprint exactness, single solid,
+    board + antenna drop-in gauges."""
+    from cad import fitcheck
+    wp = fitcheck.build_fitcheck_tray()
+    tray = wp.val()
+    bb = tray.BoundingBox()
+    out = []
+
+    n = len(wp.solids().vals())
+    out.append({"check": "fitcheck_single_solid", "value": n, "pass": n == 1})
+
+    fp = [round(bb.xmax - bb.xmin, 3), round(bb.ymax - bb.ymin, 3)]
+    want = [fitcheck.FOOTPRINT_X, fitcheck.FOOTPRINT_Y]
+    out.append({"check": "fitcheck_gridfinity_footprint",
+                "value": fp, "expected": want,
+                "pass": fp == want})
+
+    out.append({"check": "fitcheck_envelope_xy",
+                "value": fp, "pass": max(fp) <= P.MAX_XY})
+
+    dy = fitcheck.SHIFT_Y
+    web_top = fitcheck.WEB_Z1
+    a76 = holder.place_a7670().translate(
+        cq.Vector(0, dy, web_top + 20.5 - P.A7670_STANDOFF_H))
+    a76_pinrest = holder.place_a7670().translate(
+        cq.Vector(0, dy, web_top + 15.0 - P.A7670_STANDOFF_H))
+    sh = holder.place_simhat().translate(
+        cq.Vector(0, dy, web_top + 18.25 - P.SIMHAT_SUPPORT_H))
+
+    v_batt = common_vol(tray, a76)
+    v_pinrest = common_vol(tray, a76_pinrest)
+    v_sh = common_vol(tray, sh)
+    out.append({"check": "fitcheck_a7670_battery_holder_rest",
+                "value": round(v_batt, 4),
+                "note": "residual <= 1 mm3 is the designed gauge-pin/hole tangency",
+                "pass": v_batt < 1.0})
+    out.append({"check": "fitcheck_a7670_stacking_pin_rest",
+                "value": round(v_pinrest, 4), "pass": v_pinrest < 1.0})
+    out.append({"check": "fitcheck_simhat_relay_down_rest",
+                "value": round(v_sh, 4), "pass": abs(v_sh) < VOLUME_TOL})
+
+    ch_len = P.ANT_SLIDE + 2 * P.ANT_SIDE_CLEAR + P.ANT_STOP_T
+    y_c = 55.27 + dy + 2.0 + ch_len / 2
+    stop_face = y_c - ch_len / 2 + P.ANT_STOP_T
+    seated = cq.Solid.makeBox(P.ANT_W, P.ANT_SLIDE, 0.3,
+                              cq.Vector(P.ANT_X_C - P.ANT_W / 2, stop_face,
+                                        web_top))
+    path = cq.Solid.makeBox(P.ANT_W, P.ANT_SLIDE + 12, 0.3,
+                            cq.Vector(P.ANT_X_C - P.ANT_W / 2, stop_face,
+                                      web_top))
+    v_seat = common_vol(tray, seated)
+    v_path = common_vol(tray, path)
+    out.append({"check": "fitcheck_antenna_seated", "value": round(v_seat, 4),
+                "pass": v_seat < 0.1})
+    out.append({"check": "fitcheck_antenna_slide_path", "value": round(v_path, 4),
+                "pass": v_path < 0.1})
+
+    out.append({"check": "fitcheck_est_mass_g",
+                "value": round(tray.Volume() * 1.24 / 1000, 1), "pass": True})
+    return out
+
+
 def main():
     report = {"parameters_of_record": {}}
     checks = []
@@ -386,6 +449,12 @@ def main():
         lifted = a76t.translate(cq.Vector(0, 0, 30))
         checks.append({"check": "a7670_lift_free", "value": round(common_vol(carrier, lifted), 5),
                        "pass": abs(common_vol(carrier, lifted)) < VOLUME_TOL})
+
+    print("== gridfinity fit-check tray ==")
+    for c in fitcheck_tray_checks():
+        checks.append(c)
+    report.setdefault("fitcheck_tray", []).extend(
+        [{k["check"]: k["value"]} for k in checks if k["check"].startswith("fitcheck_")])
 
     print("== determinism ==")
     h1 = hashlib.sha256(open(tmp_stl, "rb").read()).hexdigest()

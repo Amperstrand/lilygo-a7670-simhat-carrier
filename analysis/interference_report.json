@@ -1,6 +1,1780 @@
 {
   "parameters_of_record": {},
-  "profile_note": "low profile: boards do not seat (open frame template) - seated interference / clearance / removal checks apply to the full profile only",
+  "a7670_full_model_overlap_mm3": 0.0,
+  "a7670_full_model_overlap_note": "Manufacturer STEP includes 16 mm stacking-header pins below the board. The 25 mm default standoffs clear both the pins and the 18650 holder.",
+  "component_clearances": [
+    {
+      "zone": "a7670_above[0]",
+      "bbox": {
+        "xmin": 34.55320000000003,
+        "xmax": 39.18520000000004,
+        "ymin": -0.5887000000000029,
+        "ymax": 5.383099999999999,
+        "zmin": 26.2,
+        "zmax": 32.2,
+        "dx": 4.632,
+        "dy": 5.9718,
+        "dz": 6.0
+      },
+      "min_distance": 23.0
+    },
+    {
+      "zone": "a7670_above[1]",
+      "bbox": {
+        "xmin": 37.59850000000003,
+        "xmax": 38.24090000000004,
+        "ymin": 0.4620000000000033,
+        "ymax": 1.710099999999997,
+        "zmin": 26.2,
+        "zmax": 32.2,
+        "dx": 0.6424,
+        "dy": 1.2481,
+        "dz": 6.0
+      },
+      "min_distance": 23.0
+    },
+    {
+      "zone": "a7670_above[2]",
+      "bbox": {
+        "xmin": 37.59850000000003,
+        "xmax": 38.1858,
+        "ymin": 3.362000000000009,
+        "ymax": 4.609999999999999,
+        "zmin": 26.2,
+        "zmax": 32.2,
+        "dx": 0.5873,
+        "dy": 1.2481,
+        "dz": 6.0
+      },
+      "min_distance": 23.0246
+    },
+    {
+      "zone": "a7670_above[3]",
+      "bbox": {
+        "xmin": 6.039800000000042,
+        "xmax": 11.639800000000008,
+        "ymin": 3.7205000000000013,
+        "ymax": 15.120500000000007,
+        "zmin": 26.2,
+        "zmax": 29.3,
+        "dx": 5.6,
+        "dy": 11.4,
+        "dz": 3.1
+      },
+      "min_distance": 15.3055
+    },
+    {
+      "zone": "a7670_above[4]",
+      "bbox": {
+        "xmin": 21.42519999999999,
+        "xmax": 23.92519999999999,
+        "ymin": 52.7705,
+        "ymax": 55.2705,
+        "zmin": 26.2,
+        "zmax": 27.5,
+        "dx": 2.5,
+        "dy": 2.5,
+        "dz": 1.3
+      },
+      "min_distance": 8.4675
+    },
+    {
+      "zone": "a7670_above[5]",
+      "bbox": {
+        "xmin": 29.67519999999999,
+        "xmax": 32.17519999999999,
+        "ymin": 52.7705,
+        "ymax": 55.2705,
+        "zmin": 26.2,
+        "zmax": 27.5,
+        "dx": 2.5,
+        "dy": 2.5,
+        "dz": 1.3
+      },
+      "min_distance": 4.1809
+    },
+    {
+      "zone": "a7670_above[6]",
+      "bbox": {
+        "xmin": 35.77459999999999,
+        "xmax": 41.071,
+        "ymin": -8.996099999999998,
+        "ymax": -0.6140999999999934,
+        "zmin": 26.2,
+        "zmax": 29.7,
+        "dx": 5.2964,
+        "dy": 8.382,
+        "dz": 3.5
+      },
+      "min_distance": 23.0
+    },
+    {
+      "zone": "a7670_above[7]",
+      "bbox": {
+        "xmin": 13.919800000000038,
+        "xmax": 31.919800000000038,
+        "ymin": -55.770300000000006,
+        "ymax": -24.270300000000006,
+        "zmin": 26.2,
+        "zmax": 29.3,
+        "dx": 18.0,
+        "dy": 31.5,
+        "dz": 3.1
+      },
+      "min_distance": 1.4861
+    },
+    {
+      "zone": "a7670_above[8]",
+      "bbox": {
+        "xmin": 4.889800000000008,
+        "xmax": 13.68980000000002,
+        "ymin": -6.479499999999987,
+        "ymax": 2.4705000000000013,
+        "zmin": 26.2,
+        "zmax": 29.36,
+        "dx": 8.8,
+        "dy": 8.95,
+        "dz": 3.16
+      },
+      "min_distance": 17.4132
+    },
+    {
+      "zone": "a7670_above[9]",
+      "bbox": {
+        "xmin": 8.60220000000001,
+        "xmax": 11.60220000000001,
+        "ymin": -43.5655,
+        "ymax": -39.50150000000001,
+        "zmin": 26.2,
+        "zmax": 28.2,
+        "dx": 3.0,
+        "dy": 4.064,
+        "dz": 2.0
+      },
+      "min_distance": 6.8434
+    },
+    {
+      "zone": "a7670_above[10]",
+      "bbox": {
+        "xmin": 8.60220000000001,
+        "xmax": 11.60220000000001,
+        "ymin": -37.164699999999996,
+        "ymax": -33.1007,
+        "zmin": 26.2,
+        "zmax": 28.2,
+        "dx": 3.0,
+        "dy": 4.064,
+        "dz": 2.0
+      },
+      "min_distance": 13.1929
+    },
+    {
+      "zone": "a7670_above[11]",
+      "bbox": {
+        "xmin": 21.646600000000007,
+        "xmax": 25.710600000000028,
+        "ymin": 49.37050000000001,
+        "ymax": 52.37050000000001,
+        "zmin": 26.2,
+        "zmax": 28.2,
+        "dx": 4.064,
+        "dy": 3.0,
+        "dz": 2.0
+      },
+      "min_distance": 8.7011
+    },
+    {
+      "zone": "a7670_above[12]",
+      "bbox": {
+        "xmin": 12.310599999999994,
+        "xmax": 36.51060000000004,
+        "ymin": 20.370500000000007,
+        "ymax": 44.57050000000001,
+        "zmin": 26.2,
+        "zmax": 28.599999999999998,
+        "dx": 24.2,
+        "dy": 24.2,
+        "dz": 2.4
+      },
+      "min_distance": 6.3241
+    },
+    {
+      "zone": "a7670_above[13]",
+      "bbox": {
+        "xmin": 33.110600000000005,
+        "xmax": 35.610600000000005,
+        "ymin": -19.970299999999995,
+        "ymax": -16.670299999999983,
+        "zmin": 26.2,
+        "zmax": 29.0,
+        "dx": 2.5,
+        "dy": 3.3,
+        "dz": 2.8
+      },
+      "min_distance": 23.4694
+    },
+    {
+      "zone": "a7670_above[14]",
+      "bbox": {
+        "xmin": 19.110600000000005,
+        "xmax": 21.610600000000005,
+        "ymin": -23.57029999999999,
+        "ymax": -20.270300000000006,
+        "zmin": 26.2,
+        "zmax": 29.0,
+        "dx": 2.5,
+        "dy": 3.3,
+        "dz": 2.8
+      },
+      "min_distance": 23.1734
+    },
+    {
+      "zone": "a7670_above[15]",
+      "bbox": {
+        "xmin": 22.139800000000008,
+        "xmax": 24.639800000000008,
+        "ymin": -8.270300000000006,
+        "ymax": -4.970299999999995,
+        "zmin": 26.2,
+        "zmax": 29.0,
+        "dx": 2.5,
+        "dy": 3.3,
+        "dz": 2.8
+      },
+      "min_distance": 23.0
+    },
+    {
+      "zone": "a7670_above[16]",
+      "bbox": {
+        "xmin": 26.539800000000042,
+        "xmax": 29.039800000000042,
+        "ymin": -10.470299999999995,
+        "ymax": -7.170299999999983,
+        "zmin": 26.2,
+        "zmax": 29.0,
+        "dx": 2.5,
+        "dy": 3.3,
+        "dz": 2.8
+      },
+      "min_distance": 23.0
+    },
+    {
+      "zone": "a7670_above[17]",
+      "bbox": {
+        "xmin": 28.610600000000005,
+        "xmax": 31.01060000000004,
+        "ymin": -21.8703,
+        "ymax": -17.8703,
+        "zmin": 26.2,
+        "zmax": 28.45,
+        "dx": 2.4,
+        "dy": 4.0,
+        "dz": 2.25
+      },
+      "min_distance": 23.4418
+    },
+    {
+      "zone": "a7670_above[18]",
+      "bbox": {
+        "xmin": 26.539800000000042,
+        "xmax": 31.139800000000008,
+        "ymin": -16.3703,
+        "ymax": -11.770300000000006,
+        "zmin": 26.2,
+        "zmax": 28.2,
+        "dx": 4.6,
+        "dy": 4.6,
+        "dz": 2.0
+      },
+      "min_distance": 23.0
+    },
+    {
+      "zone": "a7670_above[19]",
+      "bbox": {
+        "xmin": 20.039800000000042,
+        "xmax": 24.639800000000008,
+        "ymin": -19.520300000000006,
+        "ymax": -14.920299999999983,
+        "zmin": 26.2,
+        "zmax": 28.2,
+        "dx": 4.6,
+        "dy": 4.6,
+        "dz": 2.0
+      },
+      "min_distance": 23.1847
+    },
+    {
+      "zone": "a7670_above[20]",
+      "bbox": {
+        "xmin": 34.735600000000005,
+        "xmax": 36.685599999999994,
+        "ymin": -47.8703,
+        "ymax": -46.720299999999995,
+        "zmin": 26.2,
+        "zmax": 27.7,
+        "dx": 1.95,
+        "dy": 1.15,
+        "dz": 1.5
+      },
+      "min_distance": 3.0028
+    },
+    {
+      "zone": "a7670_above[21]",
+      "bbox": {
+        "xmin": 34.935599999999994,
+        "xmax": 36.485600000000005,
+        "ymin": -49.020300000000006,
+        "ymax": -48.32029999999999,
+        "zmin": 26.2,
+        "zmax": 27.7,
+        "dx": 1.55,
+        "dy": 0.7,
+        "dz": 1.5
+      },
+      "min_distance": 2.1536
+    },
+    {
+      "zone": "a7670_above[22]",
+      "bbox": {
+        "xmin": 7.539800000000042,
+        "xmax": 8.68980000000002,
+        "ymin": 47.5205,
+        "ymax": 49.4705,
+        "zmin": 26.2,
+        "zmax": 27.7,
+        "dx": 1.15,
+        "dy": 1.95,
+        "dz": 1.5
+      },
+      "min_distance": 2.1026
+    },
+    {
+      "zone": "a7670_above[23]",
+      "bbox": {
+        "xmin": 9.156200000000041,
+        "xmax": 9.85620000000003,
+        "ymin": 47.7205,
+        "ymax": 49.2705,
+        "zmin": 26.2,
+        "zmax": 27.7,
+        "dx": 0.7,
+        "dy": 1.55,
+        "dz": 1.5
+      },
+      "min_distance": 1.8972
+    },
+    {
+      "zone": "a7670_above[24]",
+      "bbox": {
+        "xmin": 23.210600000000028,
+        "xmax": 37.21060000000003,
+        "ymin": 6.970500000000001,
+        "ymax": 18.67049999999999,
+        "zmin": 26.2,
+        "zmax": 27.5,
+        "dx": 14.0,
+        "dy": 11.7,
+        "dz": 1.3
+      },
+      "min_distance": 23.0
+    },
+    {
+      "zone": "a7670_below[0]",
+      "bbox": {
+        "xmin": 36.438500000000005,
+        "xmax": 38.54769999999999,
+        "ymin": -8.543999999999997,
+        "ymax": -6.43480000000001,
+        "zmin": 22.4,
+        "zmax": 25.0,
+        "dx": 2.1092,
+        "dy": 2.1092,
+        "dz": 2.6
+      },
+      "min_distance": 19.2
+    },
+    {
+      "zone": "a7670_below[1]",
+      "bbox": {
+        "xmin": 36.438500000000005,
+        "xmax": 38.54769999999999,
+        "ymin": -5.36460000000001,
+        "ymax": -3.2553999999999945,
+        "zmin": 22.4,
+        "zmax": 25.0,
+        "dx": 2.1092,
+        "dy": 2.1092,
+        "dz": 2.6
+      },
+      "min_distance": 19.2
+    },
+    {
+      "zone": "a7670_below[2]",
+      "bbox": {
+        "xmin": 36.438500000000005,
+        "xmax": 38.54769999999999,
+        "ymin": -2.5779999999999887,
+        "ymax": -0.46880000000000166,
+        "zmin": 22.4,
+        "zmax": 25.0,
+        "dx": 2.1092,
+        "dy": 2.1092,
+        "dz": 2.6
+      },
+      "min_distance": 19.2
+    },
+    {
+      "zone": "a7670_below[3]",
+      "bbox": {
+        "xmin": 36.543900000000036,
+        "xmax": 38.65310000000002,
+        "ymin": 0.6555000000000035,
+        "ymax": 2.7646999999999906,
+        "zmin": 22.4,
+        "zmax": 25.0,
+        "dx": 2.1092,
+        "dy": 2.1092,
+        "dz": 2.6
+      },
+      "min_distance": 19.2
+    },
+    {
+      "zone": "a7670_below[4]",
+      "bbox": {
+        "xmin": 12.063800000000043,
+        "xmax": 33.06380000000004,
+        "ymin": -46.56269999999999,
+        "ymax": 42.5659,
+        "zmin": 10.0,
+        "zmax": 25.0,
+        "dx": 21.0,
+        "dy": 89.1286,
+        "dz": 15.0
+      },
+      "min_distance": 3.8829,
+      "optional_stacking_pin_zone": true
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[0]",
+      "bbox": {
+        "xmin": -24.5,
+        "xmax": -8.0,
+        "ymin": 18.2,
+        "ymax": 40.9,
+        "zmin": 4.75,
+        "zmax": 23.0,
+        "dx": 16.5,
+        "dy": 22.7,
+        "dz": 18.25
+      },
+      "min_distance": 0.3
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[1]",
+      "bbox": {
+        "xmin": -40.5,
+        "xmax": -30.0,
+        "ymin": 31.599999999999998,
+        "ymax": 47.4,
+        "zmin": 9.2,
+        "zmax": 23.0,
+        "dx": 10.5,
+        "dy": 15.8,
+        "dz": 13.8
+      },
+      "min_distance": 0.8
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[2]",
+      "bbox": {
+        "xmin": -41.0,
+        "xmax": -31.7,
+        "ymin": -2.0,
+        "ymax": 10.399999999999999,
+        "zmin": 16.0,
+        "zmax": 23.0,
+        "dx": 9.3,
+        "dy": 12.4,
+        "dz": 7.0
+      },
+      "min_distance": 0.3
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[3]",
+      "bbox": {
+        "xmin": -17.3,
+        "xmax": -8.0,
+        "ymin": -2.0,
+        "ymax": 10.399999999999999,
+        "zmin": 16.0,
+        "zmax": 23.0,
+        "dx": 9.3,
+        "dy": 12.4,
+        "dz": 7.0
+      },
+      "min_distance": 0.7
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[4]",
+      "bbox": {
+        "xmin": -40.5,
+        "xmax": -35.3,
+        "ymin": 15.599999999999998,
+        "ymax": 28.099999999999998,
+        "zmin": 22.2,
+        "zmax": 23.0,
+        "dx": 5.2,
+        "dy": 12.5,
+        "dz": 0.8
+      },
+      "min_distance": 4.3
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[5]",
+      "bbox": {
+        "xmin": -37.85,
+        "xmax": -33.5,
+        "ymin": -6.350000000000001,
+        "ymax": -3.1000000000000014,
+        "zmin": 20.2,
+        "zmax": 23.0,
+        "dx": 4.35,
+        "dy": 3.25,
+        "dz": 2.8
+      },
+      "min_distance": 3.45
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[6]",
+      "bbox": {
+        "xmin": -30.45,
+        "xmax": -26.1,
+        "ymin": -6.350000000000001,
+        "ymax": -3.1000000000000014,
+        "zmin": 20.2,
+        "zmax": 23.0,
+        "dx": 4.35,
+        "dy": 3.25,
+        "dz": 2.8
+      },
+      "min_distance": 5.5
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[7]",
+      "bbox": {
+        "xmin": -22.9,
+        "xmax": -18.55,
+        "ymin": -6.350000000000001,
+        "ymax": -3.1000000000000014,
+        "zmin": 20.2,
+        "zmax": 23.0,
+        "dx": 4.35,
+        "dy": 3.25,
+        "dz": 2.8
+      },
+      "min_distance": 5.5
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[8]",
+      "bbox": {
+        "xmin": -15.5,
+        "xmax": -11.15,
+        "ymin": -6.350000000000001,
+        "ymax": -3.1000000000000014,
+        "zmin": 20.2,
+        "zmax": 23.0,
+        "dx": 4.35,
+        "dy": 3.25,
+        "dz": 2.8
+      },
+      "min_distance": 6.0415
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[9]",
+      "bbox": {
+        "xmin": -15.5,
+        "xmax": -11.15,
+        "ymin": -9.950000000000003,
+        "ymax": -6.950000000000003,
+        "zmin": 22.05,
+        "zmax": 23.0,
+        "dx": 4.35,
+        "dy": 3.0,
+        "dz": 0.95
+      },
+      "min_distance": 9.6785
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[10]",
+      "bbox": {
+        "xmin": -22.9,
+        "xmax": -18.55,
+        "ymin": -9.950000000000003,
+        "ymax": -6.950000000000003,
+        "zmin": 22.05,
+        "zmax": 23.0,
+        "dx": 4.35,
+        "dy": 3.0,
+        "dz": 0.95
+      },
+      "min_distance": 9.35
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[11]",
+      "bbox": {
+        "xmin": -30.45,
+        "xmax": -26.1,
+        "ymin": -9.950000000000003,
+        "ymax": -6.950000000000003,
+        "zmin": 22.05,
+        "zmax": 23.0,
+        "dx": 4.35,
+        "dy": 3.0,
+        "dz": 0.95
+      },
+      "min_distance": 9.35
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[12]",
+      "bbox": {
+        "xmin": -37.85,
+        "xmax": -33.5,
+        "ymin": -9.950000000000003,
+        "ymax": -6.950000000000003,
+        "zmin": 22.05,
+        "zmax": 23.0,
+        "dx": 4.35,
+        "dy": 3.0,
+        "dz": 0.95
+      },
+      "min_distance": 4.8088
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[13]",
+      "bbox": {
+        "xmin": -19.4,
+        "xmax": -14.65,
+        "ymin": -17.949999999999996,
+        "ymax": -15.450000000000003,
+        "zmin": 20.8,
+        "zmax": 23.0,
+        "dx": 4.75,
+        "dy": 2.5,
+        "dz": 2.2
+      },
+      "min_distance": 7.4381
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[14]",
+      "bbox": {
+        "xmin": -15.9,
+        "xmax": -11.15,
+        "ymin": -13.950000000000003,
+        "ymax": -11.450000000000003,
+        "zmin": 20.8,
+        "zmax": 23.0,
+        "dx": 4.75,
+        "dy": 2.5,
+        "dz": 2.2
+      },
+      "min_distance": 7.4917
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[15]",
+      "bbox": {
+        "xmin": -22.9,
+        "xmax": -18.15,
+        "ymin": -13.950000000000003,
+        "ymax": -11.450000000000003,
+        "zmin": 20.8,
+        "zmax": 23.0,
+        "dx": 4.75,
+        "dy": 2.5,
+        "dz": 2.2
+      },
+      "min_distance": 12.3865
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[16]",
+      "bbox": {
+        "xmin": -30.85,
+        "xmax": -26.1,
+        "ymin": -13.950000000000003,
+        "ymax": -11.450000000000003,
+        "zmin": 20.8,
+        "zmax": 23.0,
+        "dx": 4.75,
+        "dy": 2.5,
+        "dz": 2.2
+      },
+      "min_distance": 13.07
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[17]",
+      "bbox": {
+        "xmin": -37.85,
+        "xmax": -33.1,
+        "ymin": -13.950000000000003,
+        "ymax": -11.450000000000003,
+        "zmin": 20.8,
+        "zmax": 23.0,
+        "dx": 4.75,
+        "dy": 2.5,
+        "dz": 2.2
+      },
+      "min_distance": 8.5747
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[18]",
+      "bbox": {
+        "xmin": -34.35,
+        "xmax": -29.6,
+        "ymin": -17.949999999999996,
+        "ymax": -15.450000000000003,
+        "zmin": 20.8,
+        "zmax": 23.0,
+        "dx": 4.75,
+        "dy": 2.5,
+        "dz": 2.2
+      },
+      "min_distance": 13.7377
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[19]",
+      "bbox": {
+        "xmin": -16.5,
+        "xmax": -11.15,
+        "ymin": -24.6,
+        "ymax": -20.4,
+        "zmin": 21.7,
+        "zmax": 23.0,
+        "dx": 5.35,
+        "dy": 4.2,
+        "dz": 1.3
+      },
+      "min_distance": 3.45
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[20]",
+      "bbox": {
+        "xmin": -22.9,
+        "xmax": -17.55,
+        "ymin": -24.6,
+        "ymax": -20.4,
+        "zmin": 21.7,
+        "zmax": 23.0,
+        "dx": 5.35,
+        "dy": 4.2,
+        "dz": 1.3
+      },
+      "min_distance": 9.85
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[21]",
+      "bbox": {
+        "xmin": -31.45,
+        "xmax": -26.1,
+        "ymin": -24.6,
+        "ymax": -20.4,
+        "zmin": 21.7,
+        "zmax": 23.0,
+        "dx": 5.35,
+        "dy": 4.2,
+        "dz": 1.3
+      },
+      "min_distance": 18.4
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[22]",
+      "bbox": {
+        "xmin": -37.85,
+        "xmax": -32.5,
+        "ymin": -24.6,
+        "ymax": -20.4,
+        "zmin": 21.7,
+        "zmax": 23.0,
+        "dx": 5.35,
+        "dy": 4.2,
+        "dz": 1.3
+      },
+      "min_distance": 17.1506
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[23]",
+      "bbox": {
+        "xmin": -18.4,
+        "xmax": -15.9,
+        "ymin": -28.6,
+        "ymax": -25.300000000000004,
+        "zmin": 20.8,
+        "zmax": 23.0,
+        "dx": 2.5,
+        "dy": 3.3,
+        "dz": 2.2
+      },
+      "min_distance": 8.2
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[24]",
+      "bbox": {
+        "xmin": -33.1,
+        "xmax": -30.6,
+        "ymin": -28.6,
+        "ymax": -25.300000000000004,
+        "zmin": 20.8,
+        "zmax": 23.0,
+        "dx": 2.5,
+        "dy": 3.3,
+        "dz": 2.2
+      },
+      "min_distance": 16.5484
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[25]",
+      "bbox": {
+        "xmin": -14.0,
+        "xmax": -10.8,
+        "ymin": -30.199999999999996,
+        "ymax": -25.699999999999996,
+        "zmin": 22.5,
+        "zmax": 23.0,
+        "dx": 3.2,
+        "dy": 4.5,
+        "dz": 0.5
+      },
+      "min_distance": 3.1
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[26]",
+      "bbox": {
+        "xmin": -38.2,
+        "xmax": -35.0,
+        "ymin": -30.199999999999996,
+        "ymax": -25.699999999999996,
+        "zmin": 22.5,
+        "zmax": 23.0,
+        "dx": 3.2,
+        "dy": 4.5,
+        "dz": 0.5
+      },
+      "min_distance": 14.9482
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[27]",
+      "bbox": {
+        "xmin": -23.6,
+        "xmax": -20.6,
+        "ymin": -30.699999999999996,
+        "ymax": -25.699999999999996,
+        "zmin": 20.7,
+        "zmax": 23.0,
+        "dx": 3.0,
+        "dy": 5.0,
+        "dz": 2.3
+      },
+      "min_distance": 12.9
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[28]",
+      "bbox": {
+        "xmin": -28.4,
+        "xmax": -25.4,
+        "ymin": -30.699999999999996,
+        "ymax": -25.699999999999996,
+        "zmin": 20.7,
+        "zmax": 23.0,
+        "dx": 3.0,
+        "dy": 5.0,
+        "dz": 2.3
+      },
+      "min_distance": 15.3235
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[29]",
+      "bbox": {
+        "xmin": -34.3,
+        "xmax": -29.5,
+        "ymin": -38.300000000000004,
+        "ymax": -31.500000000000007,
+        "zmin": 21.5,
+        "zmax": 23.0,
+        "dx": 4.8,
+        "dy": 6.8,
+        "dz": 1.5
+      },
+      "min_distance": 6.9051
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[30]",
+      "bbox": {
+        "xmin": -19.5,
+        "xmax": -14.7,
+        "ymin": -38.300000000000004,
+        "ymax": -31.500000000000007,
+        "zmin": 21.5,
+        "zmax": 23.0,
+        "dx": 4.8,
+        "dy": 6.8,
+        "dz": 1.5
+      },
+      "min_distance": 6.9051
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[31]",
+      "bbox": {
+        "xmin": -20.1,
+        "xmax": -14.3,
+        "ymin": -30.9,
+        "ymax": -29.199999999999996,
+        "zmin": 22.5,
+        "zmax": 23.0,
+        "dx": 5.8,
+        "dy": 1.7,
+        "dz": 0.5
+      },
+      "min_distance": 6.6
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[32]",
+      "bbox": {
+        "xmin": -34.7,
+        "xmax": -28.9,
+        "ymin": -30.9,
+        "ymax": -29.199999999999996,
+        "zmin": 22.5,
+        "zmax": 23.0,
+        "dx": 5.8,
+        "dy": 1.7,
+        "dz": 0.5
+      },
+      "min_distance": 14.2506
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[33]",
+      "bbox": {
+        "xmin": -12.4,
+        "xmax": -10.8,
+        "ymin": -32.50000000000001,
+        "ymax": -31.500000000000007,
+        "zmin": 22.5,
+        "zmax": 23.0,
+        "dx": 1.6,
+        "dy": 1.0,
+        "dz": 0.5
+      },
+      "min_distance": 3.1
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[34]",
+      "bbox": {
+        "xmin": -13.9,
+        "xmax": -12.9,
+        "ymin": -33.1,
+        "ymax": -31.500000000000007,
+        "zmin": 22.5,
+        "zmax": 23.0,
+        "dx": 1.0,
+        "dy": 1.6,
+        "dz": 0.5
+      },
+      "min_distance": 5.2
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[35]",
+      "bbox": {
+        "xmin": -13.9,
+        "xmax": -12.9,
+        "ymin": -38.300000000000004,
+        "ymax": -36.699999999999996,
+        "zmin": 22.5,
+        "zmax": 23.0,
+        "dx": 1.0,
+        "dy": 1.6,
+        "dz": 0.5
+      },
+      "min_distance": 6.6219
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[36]",
+      "bbox": {
+        "xmin": -34.3,
+        "xmax": -32.3,
+        "ymin": -42.00000000000001,
+        "ymax": -38.800000000000004,
+        "zmin": 22.5,
+        "zmax": 23.0,
+        "dx": 2.0,
+        "dy": 3.2,
+        "dz": 0.5
+      },
+      "min_distance": 3.3242
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[37]",
+      "bbox": {
+        "xmin": -23.4579,
+        "xmax": -20.3172,
+        "ymin": -33.172000000000004,
+        "ymax": -31.4643,
+        "zmin": 22.0,
+        "zmax": 23.0,
+        "dx": 3.1407,
+        "dy": 1.7077,
+        "dz": 1.0
+      },
+      "min_distance": 12.6172
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[38]",
+      "bbox": {
+        "xmin": -28.2867,
+        "xmax": -26.5789,
+        "ymin": -34.5264,
+        "ymax": -31.385799999999996,
+        "zmin": 22.0,
+        "zmax": 23.0,
+        "dx": 1.7077,
+        "dy": 3.1407,
+        "dz": 1.0
+      },
+      "min_distance": 11.8499
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[39]",
+      "bbox": {
+        "xmin": -26.1078,
+        "xmax": -24.5,
+        "ymin": -34.5264,
+        "ymax": -31.425000000000004,
+        "zmin": 22.0,
+        "zmax": 23.0,
+        "dx": 1.6078,
+        "dy": 3.1014,
+        "dz": 1.0
+      },
+      "min_distance": 12.9571
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[40]",
+      "bbox": {
+        "xmin": -22.001,
+        "xmax": -20.293300000000002,
+        "ymin": -38.300000000000004,
+        "ymax": -35.159299999999995,
+        "zmin": 22.0,
+        "zmax": 23.0,
+        "dx": 1.7077,
+        "dy": 3.1407,
+        "dz": 1.0
+      },
+      "min_distance": 8.4057
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[41]",
+      "bbox": {
+        "xmin": -23.8103,
+        "xmax": -22.5422,
+        "ymin": -37.33650000000001,
+        "ymax": -35.142900000000004,
+        "zmin": 22.0,
+        "zmax": 23.0,
+        "dx": 1.268,
+        "dy": 2.1936,
+        "dz": 1.0
+      },
+      "min_distance": 10.5502
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[42]",
+      "bbox": {
+        "xmin": -28.706699999999998,
+        "xmax": -26.999,
+        "ymin": -38.300000000000004,
+        "ymax": -35.159299999999995,
+        "zmin": 22.0,
+        "zmax": 23.0,
+        "dx": 1.7077,
+        "dy": 3.1407,
+        "dz": 1.0
+      },
+      "min_distance": 8.4057
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[43]",
+      "bbox": {
+        "xmin": -26.4578,
+        "xmax": -25.1897,
+        "ymin": -37.33650000000001,
+        "ymax": -35.142900000000004,
+        "zmin": 22.0,
+        "zmax": 23.0,
+        "dx": 1.268,
+        "dy": 2.1936,
+        "dz": 1.0
+      },
+      "min_distance": 10.5501
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[44]",
+      "bbox": {
+        "xmin": -18.1314,
+        "xmax": -16.0686,
+        "ymin": -42.6,
+        "ymax": -39.4103,
+        "zmin": 22.2,
+        "zmax": 23.0,
+        "dx": 2.0629,
+        "dy": 3.1897,
+        "dz": 0.8
+      },
+      "min_distance": 2.8308
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[45]",
+      "bbox": {
+        "xmin": -20.7108,
+        "xmax": -18.8853,
+        "ymin": -42.6,
+        "ymax": -39.363099999999996,
+        "zmin": 22.2,
+        "zmax": 23.0,
+        "dx": 1.8255,
+        "dy": 3.2369,
+        "dz": 0.8
+      },
+      "min_distance": 4.3761
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[46]",
+      "bbox": {
+        "xmin": -40.05,
+        "xmax": -39.45,
+        "ymin": -9.469999999999999,
+        "ymax": -8.870000000000005,
+        "zmin": 20.8,
+        "zmax": 23.0,
+        "dx": 0.6,
+        "dy": 0.6,
+        "dz": 2.2
+      },
+      "min_distance": 5.4162
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[47]",
+      "bbox": {
+        "xmin": -40.05,
+        "xmax": -39.45,
+        "ymin": -12.009999999999998,
+        "ymax": -11.410000000000004,
+        "zmin": 20.8,
+        "zmax": 23.0,
+        "dx": 0.6,
+        "dy": 0.6,
+        "dz": 2.2
+      },
+      "min_distance": 7.9094
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[48]",
+      "bbox": {
+        "xmin": -40.05,
+        "xmax": -39.45,
+        "ymin": -14.550000000000004,
+        "ymax": -13.950000000000003,
+        "zmin": 20.8,
+        "zmax": 23.0,
+        "dx": 0.6,
+        "dy": 0.6,
+        "dz": 2.2
+      },
+      "min_distance": 10.4252
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[49]",
+      "bbox": {
+        "xmin": -40.05,
+        "xmax": -39.45,
+        "ymin": -17.089999999999996,
+        "ymax": -16.490000000000002,
+        "zmin": 20.8,
+        "zmax": 23.0,
+        "dx": 0.6,
+        "dy": 0.6,
+        "dz": 2.2
+      },
+      "min_distance": 12.9505
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[50]",
+      "bbox": {
+        "xmin": -40.05,
+        "xmax": -39.45,
+        "ymin": -19.630000000000003,
+        "ymax": -19.03000000000001,
+        "zmin": 20.8,
+        "zmax": 23.0,
+        "dx": 0.6,
+        "dy": 0.6,
+        "dz": 2.2
+      },
+      "min_distance": 15.4805
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[51]",
+      "bbox": {
+        "xmin": -40.05,
+        "xmax": -39.45,
+        "ymin": -22.169999999999995,
+        "ymax": -21.57,
+        "zmin": 20.8,
+        "zmax": 23.0,
+        "dx": 0.6,
+        "dy": 0.6,
+        "dz": 2.2
+      },
+      "min_distance": 18.0134
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[52]",
+      "bbox": {
+        "xmin": -40.05,
+        "xmax": -39.45,
+        "ymin": -24.71,
+        "ymax": -24.110000000000007,
+        "zmin": 20.8,
+        "zmax": 23.0,
+        "dx": 0.6,
+        "dy": 0.6,
+        "dz": 2.2
+      },
+      "min_distance": 17.681
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[53]",
+      "bbox": {
+        "xmin": -40.05,
+        "xmax": -39.45,
+        "ymin": -27.250000000000007,
+        "ymax": -26.65,
+        "zmin": 20.8,
+        "zmax": 23.0,
+        "dx": 0.6,
+        "dy": 0.6,
+        "dz": 2.2
+      },
+      "min_distance": 17.6
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[54]",
+      "bbox": {
+        "xmin": -40.05,
+        "xmax": -39.45,
+        "ymin": -29.79,
+        "ymax": -29.190000000000005,
+        "zmin": 20.8,
+        "zmax": 23.0,
+        "dx": 0.6,
+        "dy": 0.6,
+        "dz": 2.2
+      },
+      "min_distance": 15.4253
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[55]",
+      "bbox": {
+        "xmin": -40.05,
+        "xmax": -39.45,
+        "ymin": -32.330000000000005,
+        "ymax": -31.729999999999997,
+        "zmin": 20.8,
+        "zmax": 23.0,
+        "dx": 0.6,
+        "dy": 0.6,
+        "dz": 2.2
+      },
+      "min_distance": 12.908
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[56]",
+      "bbox": {
+        "xmin": -40.05,
+        "xmax": -39.45,
+        "ymin": -34.87,
+        "ymax": -34.27,
+        "zmin": 20.8,
+        "zmax": 23.0,
+        "dx": 0.6,
+        "dy": 0.6,
+        "dz": 2.2
+      },
+      "min_distance": 10.4017
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[57]",
+      "bbox": {
+        "xmin": -40.05,
+        "xmax": -39.45,
+        "ymin": -37.410000000000004,
+        "ymax": -36.809999999999995,
+        "zmin": 20.8,
+        "zmax": 23.0,
+        "dx": 0.6,
+        "dy": 0.6,
+        "dz": 2.2
+      },
+      "min_distance": 7.917
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[58]",
+      "bbox": {
+        "xmin": -40.05,
+        "xmax": -39.45,
+        "ymin": -39.949999999999996,
+        "ymax": -39.35,
+        "zmin": 20.8,
+        "zmax": 23.0,
+        "dx": 0.6,
+        "dy": 0.6,
+        "dz": 2.2
+      },
+      "min_distance": 5.4832
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[59]",
+      "bbox": {
+        "xmin": -40.05,
+        "xmax": -39.45,
+        "ymin": -42.49,
+        "ymax": -41.89000000000001,
+        "zmin": 20.8,
+        "zmax": 23.0,
+        "dx": 0.6,
+        "dy": 0.6,
+        "dz": 2.2
+      },
+      "min_distance": 3.2179
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[60]",
+      "bbox": {
+        "xmin": -40.05,
+        "xmax": -39.45,
+        "ymin": -45.03000000000001,
+        "ymax": -44.43,
+        "zmin": 20.8,
+        "zmax": 23.0,
+        "dx": 0.6,
+        "dy": 0.6,
+        "dz": 2.2
+      },
+      "min_distance": 1.8835
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[61]",
+      "bbox": {
+        "xmin": -9.55,
+        "xmax": -8.95,
+        "ymin": -9.469999999999999,
+        "ymax": -8.870000000000005,
+        "zmin": 20.8,
+        "zmax": 23.0,
+        "dx": 0.6,
+        "dy": 0.6,
+        "dz": 2.2
+      },
+      "min_distance": 11.2
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[62]",
+      "bbox": {
+        "xmin": -9.55,
+        "xmax": -8.95,
+        "ymin": -12.009999999999998,
+        "ymax": -11.410000000000004,
+        "zmin": 20.8,
+        "zmax": 23.0,
+        "dx": 0.6,
+        "dy": 0.6,
+        "dz": 2.2
+      },
+      "min_distance": 8.6805
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[63]",
+      "bbox": {
+        "xmin": -9.55,
+        "xmax": -8.95,
+        "ymin": -14.550000000000004,
+        "ymax": -13.950000000000003,
+        "zmin": 20.8,
+        "zmax": 23.0,
+        "dx": 0.6,
+        "dy": 0.6,
+        "dz": 2.2
+      },
+      "min_distance": 6.1778
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[64]",
+      "bbox": {
+        "xmin": -9.55,
+        "xmax": -8.95,
+        "ymin": -17.089999999999996,
+        "ymax": -16.490000000000002,
+        "zmin": 20.8,
+        "zmax": 23.0,
+        "dx": 0.6,
+        "dy": 0.6,
+        "dz": 2.2
+      },
+      "min_distance": 3.7259
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[65]",
+      "bbox": {
+        "xmin": -9.55,
+        "xmax": -8.95,
+        "ymin": -19.630000000000003,
+        "ymax": -19.03000000000001,
+        "zmin": 20.8,
+        "zmax": 23.0,
+        "dx": 0.6,
+        "dy": 0.6,
+        "dz": 2.2
+      },
+      "min_distance": 1.5822
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[66]",
+      "bbox": {
+        "xmin": -9.55,
+        "xmax": -8.95,
+        "ymin": -22.169999999999995,
+        "ymax": -21.57,
+        "zmin": 20.8,
+        "zmax": 23.0,
+        "dx": 0.6,
+        "dy": 0.6,
+        "dz": 2.2
+      },
+      "min_distance": 1.25
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[67]",
+      "bbox": {
+        "xmin": -9.55,
+        "xmax": -8.95,
+        "ymin": -24.71,
+        "ymax": -24.110000000000007,
+        "zmin": 20.8,
+        "zmax": 23.0,
+        "dx": 0.6,
+        "dy": 0.6,
+        "dz": 2.2
+      },
+      "min_distance": 1.25
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[68]",
+      "bbox": {
+        "xmin": -9.55,
+        "xmax": -8.95,
+        "ymin": -27.250000000000007,
+        "ymax": -26.65,
+        "zmin": 20.8,
+        "zmax": 23.0,
+        "dx": 0.6,
+        "dy": 0.6,
+        "dz": 2.2
+      },
+      "min_distance": 1.25
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[69]",
+      "bbox": {
+        "xmin": -9.55,
+        "xmax": -8.95,
+        "ymin": -29.79,
+        "ymax": -29.190000000000005,
+        "zmin": 20.8,
+        "zmax": 23.0,
+        "dx": 0.6,
+        "dy": 0.6,
+        "dz": 2.2
+      },
+      "min_distance": 1.25
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[70]",
+      "bbox": {
+        "xmin": -9.55,
+        "xmax": -8.95,
+        "ymin": -32.330000000000005,
+        "ymax": -31.729999999999997,
+        "zmin": 20.8,
+        "zmax": 23.0,
+        "dx": 0.6,
+        "dy": 0.6,
+        "dz": 2.2
+      },
+      "min_distance": 1.25
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[71]",
+      "bbox": {
+        "xmin": -9.55,
+        "xmax": -8.95,
+        "ymin": -34.87,
+        "ymax": -34.27,
+        "zmin": 20.8,
+        "zmax": 23.0,
+        "dx": 0.6,
+        "dy": 0.6,
+        "dz": 2.2
+      },
+      "min_distance": 2.086
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[72]",
+      "bbox": {
+        "xmin": -9.55,
+        "xmax": -8.95,
+        "ymin": -37.410000000000004,
+        "ymax": -36.809999999999995,
+        "zmin": 20.8,
+        "zmax": 23.0,
+        "dx": 0.6,
+        "dy": 0.6,
+        "dz": 2.2
+      },
+      "min_distance": 4.3917
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[73]",
+      "bbox": {
+        "xmin": -9.55,
+        "xmax": -8.95,
+        "ymin": -39.949999999999996,
+        "ymax": -39.35,
+        "zmin": 20.8,
+        "zmax": 23.0,
+        "dx": 0.6,
+        "dy": 0.6,
+        "dz": 2.2
+      },
+      "min_distance": 5.4832
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[74]",
+      "bbox": {
+        "xmin": -9.55,
+        "xmax": -8.95,
+        "ymin": -42.49,
+        "ymax": -41.89000000000001,
+        "zmin": 20.8,
+        "zmax": 23.0,
+        "dx": 0.6,
+        "dy": 0.6,
+        "dz": 2.2
+      },
+      "min_distance": 3.2179
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[75]",
+      "bbox": {
+        "xmin": -9.55,
+        "xmax": -8.95,
+        "ymin": -45.03000000000001,
+        "ymax": -44.43,
+        "zmin": 20.8,
+        "zmax": 23.0,
+        "dx": 0.6,
+        "dy": 0.6,
+        "dz": 2.2
+      },
+      "min_distance": 1.8835
+    },
+    {
+      "zone": "simhat_top(=down_when_flipped)[76]",
+      "bbox": {
+        "xmin": -35.0,
+        "xmax": -30.4,
+        "ymin": 16.4,
+        "ymax": 24.4,
+        "zmin": 19.2,
+        "zmax": 23.0,
+        "dx": 4.6,
+        "dy": 8.0,
+        "dz": 3.8
+      },
+      "min_distance": 0.5
+    },
+    {
+      "zone": "simhat_bottom(=up_when_flipped)[0]",
+      "bbox": {
+        "xmin": -10.5,
+        "xmax": -8.0,
+        "ymin": -47.25000000000001,
+        "ymax": -6.649999999999999,
+        "zmin": 24.0,
+        "zmax": 32.1,
+        "dx": 2.5,
+        "dy": 40.6,
+        "dz": 8.1
+      },
+      "min_distance": 0.3
+    },
+    {
+      "zone": "simhat_bottom(=up_when_flipped)[1]",
+      "bbox": {
+        "xmin": -41.0,
+        "xmax": -38.5,
+        "ymin": -47.25000000000001,
+        "ymax": -6.649999999999999,
+        "zmin": 24.0,
+        "zmax": 32.1,
+        "dx": 2.5,
+        "dy": 40.6,
+        "dz": 8.1
+      },
+      "min_distance": 0.5
+    },
+    {
+      "zone": "simhat_bottom(=up_when_flipped)[2]",
+      "bbox": {
+        "xmin": -32.5,
+        "xmax": -16.5,
+        "ymin": -46.9,
+        "ymax": -39.6,
+        "zmin": 24.0,
+        "zmax": 26.0,
+        "dx": 16.0,
+        "dy": 7.3,
+        "dz": 2.0
+      },
+      "min_distance": 1.0
+    },
+    {
+      "zone": "simhat_bottom(=up_when_flipped)[3]",
+      "bbox": {
+        "xmin": -16.8,
+        "xmax": -14.4,
+        "ymin": -0.8999999999999986,
+        "ymax": 9.100000000000001,
+        "zmin": 24.0,
+        "zmax": 25.65,
+        "dx": 2.4,
+        "dy": 10.0,
+        "dz": 1.65
+      },
+      "min_distance": 1.562
+    },
+    {
+      "zone": "simhat_bottom(=up_when_flipped)[4]",
+      "bbox": {
+        "xmin": -34.6,
+        "xmax": -32.2,
+        "ymin": -0.8999999999999986,
+        "ymax": 9.100000000000001,
+        "zmin": 24.0,
+        "zmax": 25.65,
+        "dx": 2.4,
+        "dy": 10.0,
+        "dz": 1.65
+      },
+      "min_distance": 1.562
+    },
+    {
+      "zone": "simhat_bottom(=up_when_flipped)[5]",
+      "bbox": {
+        "xmin": -37.3,
+        "xmax": -33.7,
+        "ymin": 32.95,
+        "ymax": 46.05,
+        "zmin": 24.0,
+        "zmax": 26.35,
+        "dx": 3.6,
+        "dy": 13.1,
+        "dz": 2.35
+      },
+      "min_distance": 3.0
+    },
+    {
+      "zone": "simhat_bottom(=up_when_flipped)[6]",
+      "bbox": {
+        "xmin": -11.75,
+        "xmax": -9.25,
+        "ymin": 34.5,
+        "ymax": 37.0,
+        "zmin": 24.0,
+        "zmax": 26.0,
+        "dx": 2.5,
+        "dy": 2.5,
+        "dz": 2.0
+      },
+      "min_distance": 1.55
+    },
+    {
+      "zone": "simhat_bottom(=up_when_flipped)[7]",
+      "bbox": {
+        "xmin": -23.15,
+        "xmax": -20.65,
+        "ymin": 34.5,
+        "ymax": 37.0,
+        "zmin": 24.0,
+        "zmax": 26.0,
+        "dx": 2.5,
+        "dy": 2.5,
+        "dz": 2.0
+      },
+      "min_distance": 12.95
+    },
+    {
+      "zone": "simhat_bottom(=up_when_flipped)[8]",
+      "bbox": {
+        "xmin": -23.15,
+        "xmax": -20.65,
+        "ymin": 21.7,
+        "ymax": 24.2,
+        "zmin": 24.0,
+        "zmax": 26.0,
+        "dx": 2.5,
+        "dy": 2.5,
+        "dz": 2.0
+      },
+      "min_distance": 5.8856
+    },
+    {
+      "zone": "simhat_bottom(=up_when_flipped)[9]",
+      "bbox": {
+        "xmin": -11.75,
+        "xmax": -9.25,
+        "ymin": 21.7,
+        "ymax": 24.2,
+        "zmin": 24.0,
+        "zmax": 26.0,
+        "dx": 2.5,
+        "dy": 2.5,
+        "dz": 2.0
+      },
+      "min_distance": 1.9602
+    },
+    {
+      "zone": "simhat_bottom(=up_when_flipped)[10]",
+      "bbox": {
+        "xmin": -17.45,
+        "xmax": -14.95,
+        "ymin": 18.9,
+        "ymax": 21.4,
+        "zmin": 24.0,
+        "zmax": 26.0,
+        "dx": 2.5,
+        "dy": 2.5,
+        "dz": 2.0
+      },
+      "min_distance": 3.2098
+    }
+  ],
   "features": [
     {
       "feature": "M1.6_pilot_0",
@@ -29,6 +1803,16 @@
     },
     {
       "feature": "M3_ear_slot_simhat-far",
+      "open_fraction": 0.0,
+      "pass": true
+    },
+    {
+      "feature": "M3_ear_slot_antenna_stop_tab_0",
+      "open_fraction": 0.0,
+      "pass": true
+    },
+    {
+      "feature": "M3_ear_slot_antenna_stop_tab_1",
       "open_fraction": 0.0,
       "pass": true
     },
@@ -89,17 +1873,84 @@
     {
       "envelope": "battery_jst",
       "interference_mm3": 0.0
+    },
+    {
+      "envelope": "header_jumpers",
+      "interference_mm3": 0.0
+    },
+    {
+      "envelope": "relay_terminals",
+      "interference_mm3": 0.0
     }
   ],
+  "battery_keepout": {
+    "keepout": "18650_battery_under_a7670",
+    "interference_mm3": 0.0
+  },
   "sections": [
     "a7670_section",
     "simhat_cage_section",
     "antenna_tray_section"
   ],
+  "antenna": {
+    "slide_path_interference_mm3": 0.0,
+    "seated_sticker_interference_mm3": 0.0,
+    "sticker_plane": "flat, horizontal, on tray floor",
+    "tray_extends_to_y": -84.77
+  },
+  "simhat_removal": [
+    {
+      "stage": "lift_0.15mm_tabs_released",
+      "interference_mm3": 0.0
+    },
+    {
+      "stage": "slide_out_from_lip",
+      "interference_mm3": 0.0
+    },
+    {
+      "stage": "lift_clear",
+      "interference_mm3": 0.0
+    }
+  ],
+  "fitcheck_tray": [
+    {
+      "fitcheck_single_solid": 1
+    },
+    {
+      "fitcheck_gridfinity_footprint": [
+        125.5,
+        167.5
+      ]
+    },
+    {
+      "fitcheck_envelope_xy": [
+        125.5,
+        167.5
+      ]
+    },
+    {
+      "fitcheck_a7670_battery_holder_rest": 0.7396
+    },
+    {
+      "fitcheck_a7670_stacking_pin_rest": 0.7396
+    },
+    {
+      "fitcheck_simhat_relay_down_rest": 0.0
+    },
+    {
+      "fitcheck_antenna_seated": 0.0165
+    },
+    {
+      "fitcheck_antenna_slide_path": 0.0165
+    },
+    {
+      "fitcheck_est_mass_g": 16.7
+    }
+  ],
   "carrier_bbox": {
     "dx": 133.07,
-    "dy": 125.54,
-    "dz": 13.0
+    "dy": 157.54,
+    "dz": 33.4
   },
   "checks": [
     {
@@ -111,7 +1962,7 @@
       "check": "a1mini_envelope_xy",
       "value": [
         133.07,
-        125.54
+        157.54
       ],
       "pass": true
     },
@@ -123,8 +1974,8 @@
     {
       "check": "step_roundtrip_volume",
       "value": [
-        16063.45,
-        16063.45
+        32860.99,
+        32860.99
       ],
       "pass": true
     },
@@ -140,13 +1991,34 @@
     },
     {
       "check": "stl_volume_positive",
-      "value": 16063.1,
+      "value": 32860.2,
+      "pass": true
+    },
+    {
+      "check": "seated_simhat_interference",
+      "value": 0.0,
+      "pass": true
+    },
+    {
+      "check": "seated_a7670_interference_no_stacking_pins",
+      "value": 0.0,
+      "pass": true
+    },
+    {
+      "check": "component_clearance_min",
+      "value": 0.3,
+      "small_gap_zones": [
+        "simhat_top(=down_when_flipped)[0]",
+        "simhat_top(=down_when_flipped)[2]",
+        "simhat_bottom(=up_when_flipped)[0]"
+      ],
+      "note": "Distances are to component bounding boxes. Values of 0.3 mm equal the designed XY edge clearance (fence/lip vs edge-mounted parts); zero solid overlap against real reference geometry is required.",
       "pass": true
     },
     {
       "check": "features_present",
-      "value": 14,
-      "total": 14,
+      "value": 16,
+      "total": 16,
       "pass": true
     },
     {
@@ -167,21 +2039,123 @@
         {
           "envelope": "battery_jst",
           "interference_mm3": 0.0
+        },
+        {
+          "envelope": "header_jumpers",
+          "interference_mm3": 0.0
+        },
+        {
+          "envelope": "relay_terminals",
+          "interference_mm3": 0.0
         }
       ],
       "pass": true
     },
     {
+      "check": "battery_18650_keepout",
+      "value": 0.0,
+      "pass": true
+    },
+    {
       "check": "sections_partition_volume",
       "value": {
-        "carrier_mm3": 16063.45,
-        "sections_sum_mm3": 16063.45
+        "carrier_mm3": 32860.99,
+        "sections_sum_mm3": 32860.99
       },
       "pass": true
     },
     {
+      "check": "antenna_tray",
+      "value": {
+        "slide_path_interference_mm3": 0.0,
+        "seated_sticker_interference_mm3": 0.0,
+        "sticker_plane": "flat, horizontal, on tray floor",
+        "tray_extends_to_y": -84.77
+      },
+      "pass": true
+    },
+    {
+      "check": "simhat_toolless_removal",
+      "value": [
+        {
+          "stage": "lift_0.15mm_tabs_released",
+          "interference_mm3": 0.0
+        },
+        {
+          "stage": "slide_out_from_lip",
+          "interference_mm3": 0.0
+        },
+        {
+          "stage": "lift_clear",
+          "interference_mm3": 0.0
+        }
+      ],
+      "pass": true
+    },
+    {
+      "check": "a7670_lift_free",
+      "value": 0.0,
+      "pass": true
+    },
+    {
+      "check": "fitcheck_single_solid",
+      "value": 1,
+      "pass": true
+    },
+    {
+      "check": "fitcheck_gridfinity_footprint",
+      "value": [
+        125.5,
+        167.5
+      ],
+      "expected": [
+        125.5,
+        167.5
+      ],
+      "pass": true
+    },
+    {
+      "check": "fitcheck_envelope_xy",
+      "value": [
+        125.5,
+        167.5
+      ],
+      "pass": true
+    },
+    {
+      "check": "fitcheck_a7670_battery_holder_rest",
+      "value": 0.7396,
+      "note": "residual <= 1 mm3 is the designed gauge-pin/hole tangency",
+      "pass": true
+    },
+    {
+      "check": "fitcheck_a7670_stacking_pin_rest",
+      "value": 0.7396,
+      "pass": true
+    },
+    {
+      "check": "fitcheck_simhat_relay_down_rest",
+      "value": 0.0,
+      "pass": true
+    },
+    {
+      "check": "fitcheck_antenna_seated",
+      "value": 0.0165,
+      "pass": true
+    },
+    {
+      "check": "fitcheck_antenna_slide_path",
+      "value": 0.0165,
+      "pass": true
+    },
+    {
+      "check": "fitcheck_est_mass_g",
+      "value": 16.7,
+      "pass": true
+    },
+    {
       "check": "deterministic_rebuild",
-      "value": "f64b8de6c823a143",
+      "value": "94c28ad8a85bf309",
       "pass": true
     }
   ],

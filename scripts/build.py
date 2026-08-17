@@ -20,6 +20,7 @@ os.chdir(ROOT)
 
 import cadquery as cq
 
+from cad import fitcheck
 from cad import holder
 from cad import parameters as P
 
@@ -190,6 +191,18 @@ def contact_sheet(paths_labels, out_path, cols=3):
 def build_profile_exports():
     low = P.PROFILE == "low"
     suffix = "_lowprofile" if low else ""
+
+    if not low:
+        print("== building gridfinity fit-check tray ==")
+        tray = fitcheck.build_fitcheck_tray()
+        tray_name = f"{EXPORTS}/lilygo_fitcheck_tray_gridfinity"
+        export_step(tray, f"{tray_name}.step")
+        export_stl(tray, f"{tray_name}.stl")
+        try_3mf(f"{tray_name}.stl", f"{tray_name}.3mf")
+        render_png([(tray.val(), GLB_COLORS["carrier"], (0.1, 0.15))],
+                   f"{RENDERS}/fitcheck_tray.png", "iso")
+        export_glb([("carrier_ref", tray.val(), (0.1, 0.15))],
+                   f"{EXPORTS}/lilygo_fitcheck_tray_gridfinity.glb")
 
     print(f"== building carrier (profile={P.PROFILE}) ==")
     carrier = holder.build_carrier()

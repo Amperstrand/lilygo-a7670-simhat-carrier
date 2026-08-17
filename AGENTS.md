@@ -64,6 +64,22 @@ the next board-carrier project. Review this file before extending the CAD.
 14. **Camera framing:** assemblies read badly at whole-model scale. Render
     full views AND per-board close-ups (zoom + focus params on the camera).
 
+15. **Fit-check with drop-over gauge pins when under-board parts exceed
+    pocket depth.** Battery holders (20.5 mm) and relays (18.25 mm) make
+    "seated on bosses" impossible in a thin tray: seat the board on its
+    lowest part, run pins through the holes. Pin Ø follows the MODELLED
+    drill (STEP corner holes ≈ Ø1.35), not the plated spec (DXF Ø1.73) —
+    pins gauge position, calipers gauge diameter.
+16. **Attach prototypes to an ecosystem standard when one exists.**
+    Gridfinity (42 mm, exact public constants from the canonical
+    gridfinity-rebuilt repo) turns a throwaway test print into a permanent
+    desk asset and forces disciplined footprint numbers. Research
+    competitors (ToolGrid, honeycomb) but pick by adoption + spec quality.
+17. **Compressing a layout into a smaller footprint re-collides features
+    that were fine at full size.** The antenna channel (outside the frame
+    on the carrier) crossed the gauge pins once folded inside the tray.
+    Slide-path validation must re-run after ANY layout compression or shift.
+
 ## Design rules specific to this carrier
 
 - A7670 holes are Ø1.73 → M1.6 only. Standoff height is battery-driven
