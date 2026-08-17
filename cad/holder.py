@@ -17,7 +17,7 @@ facing the release tabs). Carrier Y = simhat_pcb_l/2 - v.
 from __future__ import annotations
 
 import cadquery as cq
-from OCP.BRepAlgoAPI import BRepAlgoAPI_Cut
+from OCP.BRepAlgoAPI import BRepAlgoAPI_Common, BRepAlgoAPI_Cut
 
 from cad import parameters as P
 from cad.parameters import Measured as M
@@ -30,12 +30,22 @@ SIMHAT_STEP = "references/t-simhat-pcb.stp"
 # Layout helpers
 # ---------------------------------------------------------------------------
 
+def _a7670_local_to_carrier(x, y):
+    """Board-local (from PCB lower-left) -> carrier XY, honoring rotation."""
+    if P.A7670_ROT_180:
+        x, y = M.a7670_pcb_w - x, M.a7670_pcb_l - y
+    return (P.a7670_cx() - M.a7670_pcb_w / 2 + x,
+            -M.a7670_pcb_l / 2 + y)
+
+
 def a7670_holes_carrier():
     """A7670 mounting hole centers in carrier XY (DXF/STEP derived)."""
-    cx = P.a7670_cx()
-    x0 = cx - M.a7670_pcb_w / 2
-    y0 = -M.a7670_pcb_l / 2
-    return [(x0 + hx, y0 + hy) for hx, hy in M.a7670_holes_rel]
+    return [_a7670_local_to_carrier(hx, hy) for hx, hy in M.a7670_holes_rel]
+
+
+def a7670_board_z(pcb_local_z):
+    """Board-local z (0 = PCB bottom) -> carrier z."""
+    return P.A7670_STANDOFF_H + pcb_local_z
 
 
 def sh_x(u):
@@ -52,6 +62,8 @@ def simhat_pcb_top_z():
 
 def place_a7670() -> cq.Shape:
     solid = cq.importers.importStep(A7670_STEP).val()
+    if P.A7670_ROT_180:
+        solid = solid.rotate(cq.Vector(0, 0, 0), cq.Vector(0, 0, 1), 180)
     bb = solid.BoundingBox()
     tx = P.a7670_cx() - (bb.xmin + bb.xmax) / 2
     ty = -(bb.ymin + bb.ymax) / 2
@@ -114,6 +126,14 @@ def build_base():
         x = P.simhat_cx() + u
         solids.append(_rect(x - P.RAIL_W / 2, -55.0, x + P.RAIL_W / 2,
                             55.0, 0, P.BASE_T))
+
+    if P.PROFILE == "low":
+        for y in (-53.5, 53.5):
+            solids.append(_rect(x_lo + P.RAIL_W, y - P.RAIL_W / 2,
+                                -gap_ch, y + P.RAIL_W / 2, 0, P.BASE_T))
+            solids.append(_rect(gap_ch, y - P.RAIL_W / 2,
+                                x_hi - P.RAIL_W, y + P.RAIL_W / 2, 0, P.BASE_T))
+        return cq.Workplane("XY").newObject(solids).combine()
 
     for y in (-53.5, -28.0, 0.0, 28.0, 53.5):
         solids.append(_rect(x_lo + P.RAIL_W, y - P.RAIL_W / 2,
@@ -189,14 +209,19 @@ def _clip_geometry(clear, side):
 
 
 def _clip_arm_pts(clear, side):
+    """Plan-view outline of one clip arm in board-local (u, v), including
+    the hook lead-in chamfer. Shared by the carrier clips AND the coupon so
+    the coupon always exercises the exact production snap geometry."""
     g = _clip_geometry(clear, side)
     c = min(P.SIMHAT_HOOK_LEAD_CHAMFER, P.SIMHAT_HOOK_ENGAGE * 0.8,
             (g["v_tip"] - g["v_l0"]) * 0.4)
     u_tip = g["u_tip"]
-    return [(g["u_out"], g["v_root"]), (g["u_out"], g["v_tip"]),
+    gs = P.SIMHAT_ARM_ROOT_GUSSET
+    return [(g["u_out"], g["v_root"] - gs), (g["u_out"], g["v_tip"]),
             (g["u_in"], g["v_tip"]), (u_tip, g["v_tip"]),
             (u_tip, g["v_l0"] + c), (u_tip + side * c, g["v_l0"]),
-            (g["u_in"], g["v_l0"]), (g["u_in"], g["v_root"])]
+            (g["u_in"], g["v_l0"]), (g["u_in"], g["v_root"] - gs),
+            (g["u_in"] + side * gs, g["v_root"] - gs)]
 
 
 def _hook_undercut_cutter():
@@ -305,16 +330,29 @@ def _ear_geometry():
         x_edge = x_hi if sx > 0 else x_lo
         y_c = sy * (y_half - P.EAR_W / 2 + 2.0)
         out.append({
-            "name": name, "sx": sx, "x_edge": x_edge, "y_c": y_c,
-            "tip_x": x_edge + sx * P.EAR_EXT,
+            "name": name, "kind": "corner", "sx": sx, "x_edge": x_edge,
+            "y_c": y_c, "tip_x": x_edge + sx * P.EAR_EXT,
             "slot_x": x_edge + sx * (P.EAR_EXT - 4.0),
+            "slot_angle": 0,
         })
+    if P.ANT_ENABLED:
+        y0 = _antenna_tray_geometry()["far_y"]
+        for i, tx in enumerate(P.ANT_STOP_TAB_X):
+            out.append({
+                "name": f"antenna_stop_tab_{i}", "kind": "stop_tab", "sx": 0,
+                "x_edge": tx, "y_c": y0 - P.ANT_STOP_TAB_EXT / 2 + P.ANT_STOP_T / 2,
+                "tip_x": tx, "slot_x": tx,
+                "slot_y": y0 - P.ANT_STOP_TAB_EXT / 2 + P.ANT_STOP_T / 2,
+                "slot_angle": 90,
+            })
     return out
 
 
 def build_ears():
     solids = []
     for e in _ear_geometry():
+        if e["kind"] != "corner":
+            continue
         body = _rect(min(e["x_edge"], e["tip_x"]), e["y_c"] - P.EAR_W / 2,
                      max(e["x_edge"], e["tip_x"]), e["y_c"] + P.EAR_W / 2,
                      0, P.EAR_T)
@@ -332,8 +370,9 @@ def _slot_cutter(x, y, angle):
 
 def cut_ear_slots(carrier):
     for e in _ear_geometry():
-        carrier = carrier.cut(_slot_cutter(e["slot_x"], e["y_c"],
-                                           0 if P.EAR_SLOT_ANGLE == 0 else 90))
+        y = e.get("slot_y", e["y_c"])
+        carrier = carrier.cut(_slot_cutter(e["slot_x"], y,
+                                           e.get("slot_angle", 0)))
     return carrier
 
 
@@ -381,9 +420,14 @@ def build_antenna_tray():
     stop = _rect(P.ANT_X_C - P.ANT_W / 2 - P.ANT_WALL_T - 2.0, y0,
                  P.ANT_X_C + P.ANT_W / 2 + P.ANT_WALL_T + 2.0,
                  y0 + P.ANT_STOP_T, 0, P.ANT_WALL_H)
+    solids.append(stop)
 
-    solids = [floor, stop] + solids
-    return cq.Workplane("XY").newObject(solids).combine()
+    for tx in P.ANT_STOP_TAB_X:
+        solids.append(_rect(tx - P.EAR_W / 2, y0 - P.ANT_STOP_TAB_EXT,
+                            tx + P.EAR_W / 2, y0 + P.ANT_STOP_T,
+                            0, P.EAR_T))
+
+    return cq.Workplane("XY").newObject([floor] + solids).combine()
 
 
 def cut_coax_notch(carrier):
@@ -402,9 +446,13 @@ def cut_coax_notch(carrier):
 
 def build_carrier(clip_deflect=0.0):
     carrier = build_base()
-    parts = [build_standoffs(), build_simhat_pads(), build_simhat_lip(),
-             build_simhat_clips(deflect=clip_deflect), build_simhat_fences(),
-             build_tape_pads(), build_ears()]
+    parts = [build_standoffs(), build_simhat_pads(), build_simhat_lip()]
+    if P.SIMHAT_CLIPS_ENABLED:
+        parts.append(build_simhat_clips(deflect=clip_deflect))
+    parts.append(build_simhat_fences())
+    if P.PROFILE == "full":
+        parts.append(build_tape_pads())
+    parts.append(build_ears())
     if P.ANT_ENABLED:
         parts.append(build_antenna_tray())
     for part in parts:
@@ -427,6 +475,31 @@ def build_assembly():
     return asm, carrier, place_a7670(), place_simhat()
 
 
+def build_sections(carrier=None):
+    """Split the finished carrier into three independently printable,
+    exactly partitioning sections (volume sum equals the whole):
+    A7670 plate (x>=0), SimHat cage (x<=0), and the -Y strip carrying the
+    antenna tray. Intended for cheap per-section iteration, not reassembly."""
+    if carrier is None:
+        carrier = build_carrier().val()
+    split_y = _frame_extents()[1] + 2 * P.RAIL_W
+
+    def keep(box_origin, box_dx, box_dy):
+        box = cq.Solid.makeBox(box_dx, box_dy, 80,
+                               cq.Vector(box_origin[0], box_origin[1], -10))
+        return cq.Shape.cast(BRepAlgoAPI_Common(
+            carrier.wrapped, box.wrapped).Shape())
+
+    return {
+        "a7670_section": cq.Workplane("XY").newObject(
+            [keep((0.0, split_y), 150, 200)]),
+        "simhat_cage_section": cq.Workplane("XY").newObject(
+            [keep((-150.0, split_y), 150, 200)]),
+        "antenna_tray_section": cq.Workplane("XY").newObject(
+            [keep((-150.0, -150.0), 300, 150 + split_y)]),
+    }
+
+
 # ---------------------------------------------------------------------------
 # Snap-fit test coupon: 4 clearance variants in a 2x2 grid, notch-counted
 # ---------------------------------------------------------------------------
@@ -437,33 +510,29 @@ _COUPON_CELL_W, _COUPON_CELL_L = 52.0, 40.0
 
 def _coupon_bay(ox, oy, clear, index):
     """One bay: pair of corner clips + 2 pads + 2 fences for a board end at
-    (ox, oy). Notch count (index+1) marks the clearance variant."""
+    (ox, oy). Clips reuse the production clip outline (_clip_arm_pts) so the
+    coupon exercises the exact carrier snap geometry. Notch count (index+1)
+    marks the clearance variant."""
     solids = []
     half = M.simhat_pcb_w / 2 + clear
+    z_top = _clip_slab_top()
+    z_bot = z_top - P.SIMHAT_ARM_W
 
     for side in (-1, 1):
+        arm = (cq.Workplane("XY")
+               .polyline([(ox + u, oy + v) for u, v in _clip_arm_pts(clear, side)])
+               .close().extrude(z_top - z_bot).translate((0, 0, z_bot)).val())
+        undercut = cq.Solid.makeBox(
+            2 * (M.simhat_pcb_w / 2 + clear), 400,
+            simhat_pcb_top_z() + P.SIMHAT_PCB_T_CLEAR + 1,
+            cq.Vector(ox - (M.simhat_pcb_w / 2 + clear), oy - 200, -1))
+        arm = cq.Shape.cast(BRepAlgoAPI_Cut(arm.wrapped, undercut.wrapped).Shape())
         u_out = side * (half + P.SIMHAT_ARM_T)
-        u_in = side * half
-        u_tip = side * (half - P.SIMHAT_HOOK_ENGAGE)
         u_far = side * (half + P.SIMHAT_ARM_T + 4.0)
         u_fin = side * (half + P.SIMHAT_ARM_T + 1.0)
-        v_l0 = clear
-        v_tip = clear + P.SIMHAT_HOOK_REACH_V
-        v_root = v_tip - P.SIMHAT_ARM_LEN
-        z_top = _clip_slab_top()
-        z_bot = z_top - P.SIMHAT_ARM_W
-        pts = [(u_out, v_root), (u_out, v_tip), (u_in, v_tip),
-               (u_tip, v_tip), (u_tip, v_l0), (u_in, v_l0), (u_in, v_root)]
-        arm = (cq.Workplane("XY")
-               .polyline([(ox + u, oy + v) for u, v in pts]).close()
-               .extrude(z_top - z_bot).translate((0, 0, z_bot)).val())
-        half_env = M.simhat_pcb_w / 2 + clear
-        undercut = cq.Solid.makeBox(
-            2 * half_env, 400, simhat_pcb_top_z() + P.SIMHAT_PCB_T_CLEAR + 1,
-            cq.Vector(ox - half_env, oy - 200, -1))
-        arm = cq.Shape.cast(BRepAlgoAPI_Cut(arm.wrapped, undercut.wrapped).Shape())
-        block = _rect(ox + min(u_in, u_far), oy + v_root - 4.0,
-                      ox + max(u_in, u_far), oy + v_root + 2.5, 0, z_top)
+        v_root = clear + P.SIMHAT_HOOK_REACH_V - P.SIMHAT_ARM_LEN
+        block = _rect(ox + min(u_out, u_far), oy + v_root - 4.0,
+                      ox + max(u_out, u_far), oy + v_root + 2.5, 0, z_top)
         fin = _rect(ox + u_fin - P.SIMHAT_RELEASE_TAB_T / 2, oy + v_root - 3.0,
                     ox + u_fin + P.SIMHAT_RELEASE_TAB_T / 2, oy + v_root + 2.0,
                     z_top, P.SIMHAT_RELEASE_TAB_H)

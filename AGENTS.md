@@ -1,0 +1,115 @@
+# AGENTS.md — LLM-driven CAD for PCB carriers: lessons & skills
+
+Working notes distilled from this project's iterations (v0.1 → v0.2).
+Audience: any coding agent (or human) doing parametric mechanical design
+around measured electronics in this repo — and the pattern generalizes to
+the next board-carrier project. Review this file before extending the CAD.
+
+## Process rules that paid for themselves
+
+1. **Measure first, model second.** Never type a dimension that exists in
+   manufacturer CAD. Pipeline: clone fork → `analyze_step.py`/`analyze_dxf.py`
+   → `analysis/*.json` → `cad/parameters.py` loads measured values; only
+   *design decisions* are literals. DXF `DIMENSION` measurements and STEP
+   cylinder radii can disagree (Ø1.7296 vs Ø1.700) — take the tighter for
+   fastener sizing, cross-check both, document the delta.
+2. **Validation is the design review.** Every geometric claim gets a boolean
+   check (`scripts/validate.py`): seated interference, removal kinematics,
+   keep-outs, feature presence, watertight STL, deterministic rebuild. A
+   render is never evidence. Keep the check list growing with the design.
+3. **Boolean volume overlap vs real reference geometry is the pass gate.**
+   Bbox-distance checks are advisory only: bbox granularity produces both
+   false alarms (0.3 mm "violations" that are designed clearances) and false
+   comfort. Zero mm³ common volume is the criterion.
+4. **Derive placement transforms from measured slab data, never assumptions.**
+   Both real bugs in v0.1 were transform bugs: (a) SimHat placed 18 mm high
+   because tz used the flipped bbox z-min (relay tip) instead of the PCB slab
+   face; (b) an A7670 tz used PCB thickness instead of slab z-bottom. Rule:
+   the plane that *contacts* the support feature must be the plane you
+   transform by.
+5. **A 180° flip mirrors X, not just Y.** Rotating "about the long axis"
+   maps (x,y,z)→(−x,y,−z): left-strip free windows become right-strip
+   windows. A pad that was safe landed inside the relay. Always re-run the
+   full-solid keep-out scan after any board reorientation.
+6. **Keep-out scans must use ALL component solids, not the top-N.** The
+   first pad placement used the 10 largest zones and collided with a 3 mm
+   SMD at v 50.5–53.8. Component count on a hat-class PCB: ~80.
+7. **Simulate removal as staged kinematics, and sanity-check the stages
+   against physics.** Two v0.1 mistakes: tilt-sign inverted (dipped the relay
+   into the base), and tilt-at-all is wrong for a 95 mm board over an 18 mm
+   relay (real motion: lift 0.15 mm, slide, lift). Components SWEEP volumes
+   during removal — pads must clear the swept path, not just the seat.
+8. **One geometry source of truth.** When the carrier clip gained a lead-in
+   chamfer, the test coupon kept the old square profile (duplicated inline
+   point list) — the coupon would have validated the wrong geometry. Coupon
+   bays now call the carrier's `_clip_arm_pts()` directly. Any derived
+   variant (coupon, low profile, sections) must consume the same builder
+   functions as the production part.
+9. **When OCC fillets fail on fused prisms, move the feature into the 2D
+   profile.** Plan-view polygon chamfers/tapers print better anyway
+   (no support, no scorching). Flexure-root relief = tapered root polygon.
+10. **Metadata lists that drive BOTH builds and cuts need a kind tag.** The
+    ear list grew antenna-tab entries and `build_ears` materialized them as
+    corner ears 8 mm off-position. `kind: corner|stop_tab` now filters.
+11. **Fused single-solid STEP boards are normal.** Don't wait for a part
+    tree: cross-section area sweeps (PCB slab), horizontal planar-face
+    clustering (slab z-planes), cylindrical-face enumeration (holes),
+    island maps at several z (component layout). Filter cylinders within
+    one radius of the outline bbox — corner fillets masquerade as big holes.
+12. **GitHub renders STL blobs in-browser; GLB covers everything else.**
+    Link both from the README. A contact sheet of 8-9 labeled views catches
+    what a single iso hides (relay side, tray mouth, clip detail).
+13. **pip-audit every added dependency; keep the set minimal.** cadquery,
+    ezdxf, trimesh, numpy, (pillow, lxml for images/3MF). No more.
+14. **Camera framing:** assemblies read badly at whole-model scale. Render
+    full views AND per-board close-ups (zoom + focus params on the camera).
+
+## Design rules specific to this carrier
+
+- A7670 holes are Ø1.73 → M1.6 only. Standoff height is battery-driven
+  (25 mm for 18650+holder under the board; 13 without; 9 on the fit-check
+  template).
+- SimHat pads live in the ONLY both-strips-free laminate window
+  (v 31–50.5, biased to v ≤ 45 for the removal sweep). Pads, lip segments
+  and fences must re-verify against ALL solids after any change.
+- Snap arms: 14 × 2.0 mm XY-plane flexures, ε≈1.6 %, chamfered hook tip,
+  tapered root. PETG only (never PLA for clips).
+- The two −Y mounting points moved from corner ears to tray-stop tabs
+  because the 110 mm tray mouth swallowed the corners. Re-check ear vs
+  appendage collisions whenever frame width changes.
+
+## Prompt / skill library for the next board-carrier project
+
+Reusable prompts (tested patterns, in order of use):
+
+1. **measure-first**: "Clone the vendor repo, find STEP/DXF under
+   dimensions/, enumerate PCB slab/outline/holes/components into JSON;
+   cross-check hole diameters between DXF dims and STEP cylinders; report
+   deltas. Do not model anything yet."
+2. **fastener-truth**: "From the measured hole diameters, derive the correct
+   metric screw size; refuse to default to M2/M3. Report pilot diameter for
+   self-tap in PETG."
+3. **keep-out-scan**: "Given the component solids JSON, compute every
+   ≥N-mm window of bare laminate on both board strips in the AS-ORIENTED
+   coordinate frame; verify support-pad candidates against all solids, not
+   top-N."
+4. **removal-sim**: "Write staged kinematics for board removal (release
+   tabs → lift δ → slide s → lift clear) and boolean-test each stage against
+   the carrier; include the component sweep envelope during slide."
+5. **coupon-first**: "Extract the exact production snap geometry into a
+   4-variant clearance coupon sharing the same builder functions; label
+   variants by notch count."
+6. **variant-audit**: "After any parameter change (rotation, standoff
+   height, tray width), list every downstream consumer of that parameter
+   and re-run the full validation matrix for each build profile."
+7. **render-honesty**: "Render full + close-up views; verify with a vision
+   model that the feature under test is actually distinguishable; link STL
+   (GitHub viewer) + GLB exports."
+8. **lessons-sync** (end of every session): "Diff what failed vs what the
+   docs claim; append new failure modes and rules to AGENTS.md; delete rules
+   that no longer apply."
+
+Suggested OpenCode skills to capture if this becomes a repeated workflow:
+`pcb-measure` (steps 1-2), `carrier-keepouts` (3, 5), `carrier-validate`
+(4, 6), `cad-render-verify` (7). Each maps 1:1 to a script in `scripts/`
+here — the scripts are the skill bodies.

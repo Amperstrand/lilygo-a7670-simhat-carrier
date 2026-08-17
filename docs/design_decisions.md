@@ -123,6 +123,38 @@ swap zone, battery-JST headroom — are checked against the carrier solid
 in validation: zero interference. Envelope coordinates derive from the
 measured STEP component islands.
 
+## A7670X rotation (180°) and battery lift
+
+- Rotating the A7670X 180° about Z puts its 2×16 pin-header rails at the
+  −Y end — the same end as the SimHat's up-facing sockets. Jumper length
+  drops from ~120 mm to ~15–25 mm across the 16 mm channel. The SMA jacks
+  then face the channel, feeding the antenna coax straight from the tray
+  through the tie-slot row. The gap widened 12 → 16 mm for SMA plug
+  bodies (~10 mm) facing each other.
+- Envelope/hole positions derive programmatically
+  (`_a7670_local_to_carrier`), never hand-rotated — the service envelopes
+  and mounting holes follow `A7670_ROT_180` automatically.
+- The 18650 + holder under the board sets standoff height: 25 mm =
+  base 3.2 + cell/holder ~20.5 + air. Validated keep-out: 20 × 71 mm
+  center strip under the board, zero carrier intersection. Without the
+  holder, 13 mm; the fit-check template uses 9 mm.
+- Rotating the SimHat instead was rejected: its pad/lip/fence placement is
+  tied to component zones that don't survive a mirror (free laminate
+  windows are asymmetric), while the A7670X is screw-located and rotates
+  freely.
+
+## Low-profile fit-check template + sections
+
+- `CARRIER_PROFILE=low` builds a 9 mm open-frame template: bosses tall
+  enough for a real M1.6 screw-fit, cage walls for outline/lip/fence
+  position checks, cross ribs only at ±53.5 (outside every board
+  underhang), no clips (the coupon covers snap feel), no tray/tape pads.
+  Doubles as a flat wall-mount bracket via its 4 M3 ear slots.
+- Sections (`exports/sections/`) are an exact volume partition of the
+  finished carrier (validated: section volumes sum to the whole) for
+  cheap per-region iteration. Not for reassembly — the full carrier is
+  the assembly part.
+
 ## Trade-offs accepted
 
 - SimHat must slide 3.6 mm toward the clips during removal — pads are

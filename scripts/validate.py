@@ -78,33 +78,34 @@ def box_solid(bb):
 
 
 def transform_a7670_bbox(bb):
-    solid = holder.place_a7670()
-    t = solid.BoundingBox()
-    bb2 = dict(bb)
-    bb2["xmin"] += t.xmin - M.a7670["overall"]["bbox"]["xmin"]
-    bb2["xmax"] += t.xmin - M.a7670["overall"]["bbox"]["xmin"]
-    bb2["ymin"] += t.ymin - M.a7670["overall"]["bbox"]["ymin"]
-    bb2["ymax"] += t.ymin - M.a7670["overall"]["bbox"]["ymin"]
-    z_off = P.A7670_STANDOFF_H - M.a7670["pcb_slab"]["z_bottom"]
-    bb2["zmin"] += z_off
-    bb2["zmax"] += z_off
-    bb2["dx"], bb2["dy"], bb2["dz"] = bb["dx"], bb["dy"], bb["dz"]
-    return bb2
+    """STEP-native bbox -> carrier coords via the same mapping place_a7670
+    uses (translation + optional 180-deg Z rotation)."""
+    o = M.a7670["overall"]["bbox"]
+    slab = M.a7670["pcb_slab"]
+    x0, y0 = bb["xmin"] - o["xmin"], bb["ymin"] - o["ymin"]
+    x1, y1 = bb["xmax"] - o["xmin"], bb["ymax"] - o["ymin"]
+    corners = [holder._a7670_local_to_carrier(x, y)
+               for x in (x0, x1) for y in (y0, y1)]
+    xs = [c[0] for c in corners]
+    ys = [c[1] for c in corners]
+    z_off = P.A7670_STANDOFF_H - slab["z_bottom"]
+    return {"xmin": min(xs), "xmax": max(xs),
+            "ymin": min(ys), "ymax": max(ys),
+            "zmin": bb["zmin"] + z_off, "zmax": bb["zmax"] + z_off,
+            "dx": bb["dx"], "dy": bb["dy"], "dz": bb["dz"]}
 
 
 def transform_simhat_bbox(bb):
-    x_lo = min(-bb["xmin"], -bb["xmax"])
-    x_hi = max(-bb["xmin"], -bb["xmax"])
-    sh = holder.place_simhat()
-    t = sh.BoundingBox()
-    dx0 = M.simhat["overall"]["bbox"]
-    out = {
-        "xmin": x_lo + t.xmin - (-dx0["xmax"]), "xmax": x_hi + t.xmin - (-dx0["xmax"]),
-        "ymin": bb["ymin"] + t.ymin - dx0["ymin"], "ymax": bb["ymax"] + t.ymin - dx0["ymin"],
-        "zmin": -bb["zmax"] + t.zmin - (-dx0["zmax"]), "zmax": -bb["zmin"] + t.zmin - (-dx0["zmax"]),
-        "dx": bb["dx"], "dy": bb["dy"], "dz": bb["dz"],
-    }
-    return out
+    """STEP-native bbox -> carrier coords via the flip mapping used by
+    place_simhat: (x,y,z)->(-x, y, sh + slab_z_top - z)."""
+    sh = P.SIMHAT_SUPPORT_H
+    zt = M.simhat["pcb_slab"]["z_top"]
+    cx = P.simhat_cx()
+    return {"xmin": cx - bb["xmax"], "xmax": cx - bb["xmin"],
+            "ymin": M.simhat_pcb_l / 2 + bb["ymin"],
+            "ymax": M.simhat_pcb_l / 2 + bb["ymax"],
+            "zmin": sh + zt - bb["zmax"], "zmax": sh + zt - bb["zmin"],
+            "dx": bb["dx"], "dy": bb["dy"], "dz": bb["dz"]}
 
 
 def component_clearances(carrier):
@@ -142,8 +143,10 @@ def check_holes(carrier):
         results.append({"feature": f"M1.6_pilot_{i}", "open_fraction": round(frac, 4),
                         "pass": frac < 0.05})
     for e in holder._ear_geometry():
-        probe = (cq.Workplane("XY").moveTo(e["slot_x"], e["y_c"])
-                 .slot2D(P.EAR_SLOT_L - 0.1, P.EAR_SLOT_W - 0.1, 0)
+        y = e.get("slot_y", e["y_c"])
+        probe = (cq.Workplane("XY").moveTo(e["slot_x"], y)
+                 .slot2D(P.EAR_SLOT_L - 0.1, P.EAR_SLOT_W - 0.1,
+                         e.get("slot_angle", 0))
                  .extrude(P.EAR_T).val())
         frac = common_vol(probe, carrier) / vol(probe)
         results.append({"feature": f"M3_ear_slot_{e['name']}", "open_fraction": round(frac, 4),
@@ -179,14 +182,45 @@ def simhat_removal_stages(carrier):
 
 def service_envelope_checks(carrier):
     """Connector service envelopes: no printed material may enter these
-    volumes (USB-C plug, SMA antenna connectors, SIM swap, battery JST)."""
+    volumes (USB-C plug, SMA antenna connectors, SIM swap, battery JST,
+    SimHat jumper socket zone, relay/terminal cavity)."""
     results = []
-    for name, (x0, y0, x1, y1, z0, z1) in P.SERVICE_ENVELOPES.items():
-        env = cq.Solid.makeBox(x1 - x0, y1 - y0, z1 - z0,
-                               cq.Vector(x0, y0, z0))
+    o = M.a7670["overall"]["bbox"]
+    slab_t = M.a7670_pcb_t
+    for name, (x0, y0, x1, y1, z0, z1) in P.SERVICE_ENVELOPES_A7670.items():
+        pts = [holder._a7670_local_to_carrier(x, y)
+               for x in (x0, x1) for y in (y0, y1)]
+        xs, ys = [p[0] for p in pts], [p[1] for p in pts]
+        env = cq.Solid.makeBox(
+            max(xs) - min(xs), max(ys) - min(ys), z1 - z0,
+            cq.Vector(min(xs), min(ys), P.A7670_STANDOFF_H + slab_t + z0))
+        results.append({"envelope": name,
+                        "interference_mm3": round(common_vol(carrier, env), 4)})
+    for name, (x0, y0, x1, y1, z0, z1) in P.SERVICE_ENVELOPES_SIMHAT.items():
+        b = transform_simhat_bbox({"xmin": x0, "ymin": y0, "zmin": z0,
+                                   "xmax": x1, "ymax": y1, "zmax": z1,
+                                   "dx": 0, "dy": 0, "dz": 0})
+        env = cq.Solid.makeBox(
+            b["xmax"] - b["xmin"], b["ymax"] - b["ymin"], b["zmax"] - b["zmin"],
+            cq.Vector(b["xmin"], b["ymin"], b["zmin"]))
         results.append({"envelope": name,
                         "interference_mm3": round(common_vol(carrier, env), 4)})
     return results
+
+
+def battery_keepout_check(carrier):
+    """18650 + holder below the A7670 PCB must clear all printed material."""
+    x0, y0 = ((M.a7670_pcb_w - P.A7670_BATTERY_KEEP_W) / 2,
+              (M.a7670_pcb_l - P.A7670_BATTERY_KEEP_L) / 2)
+    pts = [holder._a7670_local_to_carrier(x, y)
+           for x in (x0, x0 + P.A7670_BATTERY_KEEP_W)
+           for y in (y0, y0 + P.A7670_BATTERY_KEEP_L)]
+    xs, ys = [p[0] for p in pts], [p[1] for p in pts]
+    env = cq.Solid.makeBox(
+        max(xs) - min(xs), max(ys) - min(ys), 19.5,
+        cq.Vector(min(xs), min(ys), P.A7670_STANDOFF_H - 20.5))
+    return {"keepout": "18650_battery_under_a7670",
+            "interference_mm3": round(common_vol(carrier, env), 4)}
 
 
 def antenna_checks(carrier):
@@ -244,43 +278,50 @@ def main():
     checks.append({"check": "stl_volume_positive", "value": round(float(mesh.volume), 1),
                    "pass": bool(mesh.volume > 1000)})
 
-    print("== seated interference ==")
-    a76 = holder.place_a7670()
-    a76t = a7670_trimmed()
-    sh = holder.place_simhat()
-    iv_sh = common_vol(carrier, sh)
-    iv_a76t = common_vol(carrier, a76t)
-    iv_a76_full = common_vol(carrier, a76)
-    checks.append({"check": "seated_simhat_interference", "value": round(iv_sh, 5),
-                   "pass": abs(iv_sh) < VOLUME_TOL})
-    checks.append({"check": "seated_a7670_interference_no_stacking_pins",
-                   "value": round(iv_a76t, 5), "pass": abs(iv_a76t) < VOLUME_TOL})
-    report["a7670_full_model_overlap_mm3"] = round(iv_a76_full, 4)
-    report["a7670_full_model_overlap_note"] = (
-        "Manufacturer STEP includes 16 mm stacking-header pins below the board. "
-        "Default standoffs (13 mm) assume they are NOT soldered. "
-        "Set A7670_STANDOFF_H = 21.0 if they are.")
+    if P.PROFILE == "full":
+        print("== seated interference ==")
+        a76 = holder.place_a7670()
+        a76t = a7670_trimmed()
+        sh = holder.place_simhat()
+        iv_sh = common_vol(carrier, sh)
+        iv_a76t = common_vol(carrier, a76t)
+        iv_a76_full = common_vol(carrier, a76)
+        checks.append({"check": "seated_simhat_interference", "value": round(iv_sh, 5),
+                       "pass": abs(iv_sh) < VOLUME_TOL})
+        checks.append({"check": "seated_a7670_interference_no_stacking_pins",
+                       "value": round(iv_a76t, 5), "pass": abs(iv_a76t) < VOLUME_TOL})
+        report["a7670_full_model_overlap_mm3"] = round(iv_a76_full, 4)
+        report["a7670_full_model_overlap_note"] = (
+            "Manufacturer STEP includes 16 mm stacking-header pins below the board. "
+            "The 25 mm default standoffs clear both the pins and the 18650 holder.")
+    else:
+        a76t = None
+        report["profile_note"] = (
+            "low profile: boards do not seat (open frame template) - seated "
+            "interference / clearance / removal checks apply to the full "
+            "profile only")
 
-    print("== component clearances ==")
-    comps = component_clearances(carrier)
-    strict = [c for c in comps if not c.get("optional_stacking_pin_zone")]
-    worst = min(c["min_distance"] for c in strict)
-    sh_solid = holder.place_simhat()
-    a76_solid = a7670_trimmed()
-    sh_overlap = common_vol(carrier, sh_solid)
-    a76_overlap = common_vol(carrier, a76_solid)
-    small_gap = [c["zone"] for c in strict if c["min_distance"] < COMPONENT_CLEARANCE_MIN]
-    checks.append({
-        "check": "component_clearance_min",
-        "value": worst,
-        "small_gap_zones": small_gap,
-        "note": ("Distances are to component bounding boxes. Values of "
-                 f"{P.SIMHAT_PCB_XY_CLEAR} mm equal the designed XY edge "
-                 "clearance (fence/lip vs edge-mounted parts); zero solid "
-                 "overlap against real reference geometry is required."),
-        "pass": worst >= 0.25 and abs(sh_overlap) < VOLUME_TOL and abs(a76_overlap) < VOLUME_TOL,
-    })
-    report["component_clearances"] = comps
+    if P.PROFILE == "full":
+        print("== component clearances ==")
+        comps = component_clearances(carrier)
+        strict = [c for c in comps if not c.get("optional_stacking_pin_zone")]
+        worst = min(c["min_distance"] for c in strict)
+        sh_solid = holder.place_simhat()
+        a76_solid = a7670_trimmed()
+        sh_overlap = common_vol(carrier, sh_solid)
+        a76_overlap = common_vol(carrier, a76_solid)
+        small_gap = [c["zone"] for c in strict if c["min_distance"] < COMPONENT_CLEARANCE_MIN]
+        checks.append({
+            "check": "component_clearance_min",
+            "value": worst,
+            "small_gap_zones": small_gap,
+            "note": ("Distances are to component bounding boxes. Values of "
+                     f"{P.SIMHAT_PCB_XY_CLEAR} mm equal the designed XY edge "
+                     "clearance (fence/lip vs edge-mounted parts); zero solid "
+                     "overlap against real reference geometry is required."),
+            "pass": worst >= 0.25 and abs(sh_overlap) < VOLUME_TOL and abs(a76_overlap) < VOLUME_TOL,
+        })
+        report["component_clearances"] = comps
 
     print("== feature presence ==")
     feats = check_holes(carrier)
@@ -290,11 +331,37 @@ def main():
     report["features"] = feats
 
     print("== connector service envelopes ==")
-    envs = service_envelope_checks(carrier)
+    envs = [e for e in service_envelope_checks(carrier)
+            if not (P.PROFILE == "low" and e["envelope"] in
+                    ("header_jumpers", "relay_terminals"))]
     env_ok = all(e["interference_mm3"] < VOLUME_TOL for e in envs)
     checks.append({"check": "connector_service_envelopes", "value": envs,
                    "pass": env_ok})
     report["service_envelopes"] = envs
+
+    if P.PROFILE == "full":
+        print("== battery keep-out ==")
+        bat = battery_keepout_check(carrier)
+        checks.append({"check": "battery_18650_keepout",
+                       "value": bat["interference_mm3"],
+                       "pass": bat["interference_mm3"] < VOLUME_TOL})
+        report["battery_keepout"] = bat
+
+    print("== sections partition ==")
+    sections = holder.build_sections(carrier)
+    v_total = vol(carrier.wrapped)
+    v_sum = 0.0
+    sec_ok = True
+    for name, wp in sections.items():
+        n = len(wp.solids().vals())
+        v = wp.val().Volume()
+        v_sum += v
+        sec_ok &= n == 1
+    checks.append({"check": "sections_partition_volume",
+                   "value": {"carrier_mm3": round(v_total, 2),
+                             "sections_sum_mm3": round(v_sum, 2)},
+                   "pass": sec_ok and abs(v_sum - v_total) / v_total < 0.005})
+    report["sections"] = list(sections)
 
     if P.ANT_ENABLED:
         print("== antenna tray ==")
@@ -307,16 +374,18 @@ def main():
         })
         report["antenna"] = ant
 
-    print("== simhat removal simulation ==")
-    stages, _ = simhat_removal_stages(carrier)
-    ok = all(s["interference_mm3"] < VOLUME_TOL for s in stages)
-    checks.append({"check": "simhat_toolless_removal", "value": stages, "pass": ok})
-    report["simhat_removal"] = stages
+    if P.SIMHAT_CLIPS_ENABLED:
+        print("== simhat removal simulation ==")
+        stages, _ = simhat_removal_stages(carrier)
+        ok = all(s["interference_mm3"] < VOLUME_TOL for s in stages)
+        checks.append({"check": "simhat_toolless_removal", "value": stages, "pass": ok})
+        report["simhat_removal"] = stages
 
-    print("== a7670 removal ==")
-    lifted = a76t.translate(cq.Vector(0, 0, 30))
-    checks.append({"check": "a7670_lift_free", "value": round(common_vol(carrier, lifted), 5),
-                   "pass": abs(common_vol(carrier, lifted)) < VOLUME_TOL})
+    if P.PROFILE == "full":
+        print("== a7670 removal ==")
+        lifted = a76t.translate(cq.Vector(0, 0, 30))
+        checks.append({"check": "a7670_lift_free", "value": round(common_vol(carrier, lifted), 5),
+                       "pass": abs(common_vol(carrier, lifted)) < VOLUME_TOL})
 
     print("== determinism ==")
     h1 = hashlib.sha256(open(tmp_stl, "rb").read()).hexdigest()

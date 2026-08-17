@@ -11,14 +11,25 @@ regenerable with one command.
 
 ![Assembly render](renders/assembly.png)
 
-*T-SimHat (amber) mounted flipped — relay down, pin headers up. T-A7670X
-(green) on screw standoffs. LTE sticker-antenna slide-in tray at the far
-end. Carrier (grey) 129 × 173.5 mm, fits a Bambu A1 mini.*
+![Contact sheet](renders/contact_sheet.png)
 
-## Status
+*T-SimHat (amber) flipped — relay down, headers up. T-A7670X (green) on
+25 mm standoffs (18650 + holder underneath). LTE sticker-antenna slide-in
+tray at the far end. Full carrier 133 × 157.5 mm.*
 
-`v0.1.0-prototype` — **all software validation checks pass; not yet
-physically test-printed.** Print the snap-fit test coupon first (see below).
+## Explore in 3D
+
+- **Interactive in-browser**: open any `.stl` on GitHub — it renders in a
+  built-in 3D viewer you can rotate: [carrier](exports/lilygo_a7670_simhat_carrier.stl),
+  [low-profile template](exports/lilygo_a7670_simhat_carrier_lowprofile.stl),
+  [clip coupon](exports/simhat_clip_test.stl), [A7670 section](exports/sections/a7670_section.stl),
+  [SimHat cage section](exports/sections/simhat_cage_section.stl),
+  [antenna tray section](exports/sections/antenna_tray_section.stl).
+- **Download & spin anywhere**: [assembly GLB](exports/lilygo_a7670_simhat_assembly.glb)
+  and [carrier GLB](exports/lilygo_a7670_simhat_carrier.glb) open in Windows
+  3D Viewer, macOS Preview, Blender, https://gltf-viewer.donmccurdy.com.
+- **Renders**: `renders/` — 9 labeled views incl. per-board close-ups
+  (`a7670_closeup.png`, `simhat_closeup.png`) and the contact sheet above.
 
 ## Key measured dimensions (from manufacturer CAD)
 
@@ -27,26 +38,51 @@ physically test-printed.** Print the snap-fit test coupon first (see below).
 | T-A7670X PCB | 33.071 × 110.54 × 1.2 mm | STEP cross-section + DXF dim `33.071` |
 | T-A7670X mounting holes | 4 × Ø1.73 mm, 27.71 × 105.59 mm grid | DXF hole-callout dims, cross-checked vs STEP cylinders |
 | T-A7670X screw size | **M1.6** (hole Ø1.73) | derived, not assumed |
+| T-A7670X battery | 18650 + holder under board → 25 mm standoffs | user hardware + product docs |
 | T-SimHat PCB | 33.0 × 94.8 × **1.0 mm** | STEP cross-section (verify with calipers: some batches 1.6) |
 | T-SimHat mounting holes | **none** (hence snap-in cage) | STEP |
 | T-SimHat relay | OMRON G5LE-class, 16.5 × 22.7 × 18.25 mm, single relay confirmed in STEP | STEP solids |
-| LTE sticker antenna | no manufacturer CAD — **parametric tray; caliper `ANT_SLIDE`/`ANT_W`** (defaults 45 × 50) | — |
+| LTE sticker antenna | ~110 × 20 mm sticker, 10–15 cm coax (user-measured; parametric `ANT_W`/`ANT_SLIDE`/`ANT_CABLE_L`) | — |
+
+## Layout: rotated for short jumpers
+
+The A7670X is mounted rotated 180° (`A7670_ROT_180`) so its pin-header
+rails land at the same end as the SimHat's up-facing sockets: jumpers
+cross the 16 mm wiring channel at ~15–25 mm instead of ~120 mm, and the
+SMA antenna jacks face the channel for a clean coax run to the tray.
 
 ## Antenna tray
 
-The bundled full-band LTE sticker (698–2690 MHz, SMA coax) slides into a
-flat tray at the carrier's far end: floor keeps it flat, flared channel
-walls locate it, end stop + friction retain it (adhesive optional for
-permanence), and a coax notch passes the cable through the frame rail to
-the modem's SMA jacks. Sticker slides along its **shorter** dimension so
-even a 60 × 45 sticker stays inside the 175 mm envelope.
+The bundled full-band LTE sticker (~110 × 20 mm, SMA coax, three punched
+holes) lies flat in a slide-in tray at the carrier's far end: floor keeps
+it flat, flared channel walls locate it, end stop + friction retain it
+(adhesive optional), and a coax notch passes the cable through the frame
+rail to the modem's SMA jacks — which face the wiring channel after the
+board rotation. **Caliper your sticker and set `ANT_W`/`ANT_SLIDE` before
+printing.**
+
+## Print variants (all parametric)
+
+| Variant | File | Print height | Purpose |
+|---|---|---|---|
+| Full carrier | `exports/lilygo_a7670_simhat_carrier.stl` | ~40 mm | production holder |
+| **Low-profile template** | `exports/lilygo_a7670_simhat_carrier_lowprofile.stl` | **9 mm** | ~15-min fit check: hole pattern (real M1.6 screw test), pad window, lip/fence positions. Open frame — relay/shield hang through; test the SimHat at a desk edge. Also wall-mountable via M3 ear slots (flat against a box wall). Build: `CARRIER_PROFILE=low python scripts/build.py` |
+| Snap coupon | `exports/simhat_clip_test.stl` | ~35 mm bay | pick XY clearance 0.20–0.50 |
+| Sections | `exports/sections/*.stl` | varies | iterate one region cheaply (A7670 plate / SimHat cage / antenna tray); volume-partition of the full carrier |
 
 ## Port access (validated)
 
 Keep-clear service envelopes with zero printed-material interference:
-USB-C plug (+Y end), both SMA antenna connectors (+X edge), SIM-tray
-swap zone, battery JST — see `connector_service_envelopes` in
-`analysis/interference_report.json`.
+USB-C plug, both SMA antenna connectors, SIM-tray swap zone, battery JST,
+SimHat jumper-socket zone, relay/terminal cavity, and the 18650 battery
+keep-out under the A7670X — see `analysis/interference_report.json`.
+
+## Status
+
+`v0.2.0-prototype` — all software validation passes for both build
+profiles (full: 18 checks, low: 11); **not yet physically test-printed**.
+Print order: coupon → low-profile template → full carrier. Lessons and
+prompt library for future LLM-driven CAD work: `AGENTS.md`.
 
 ## How the T-SimHat is held
 
@@ -64,10 +100,11 @@ No screws, no load on components:
 ## Quick start
 
 ```bash
-uv venv .venv && uv pip install --python .venv/bin/python cadquery ezdxf trimesh numpy
+uv venv .venv && uv pip install --python .venv/bin/python cadquery ezdxf trimesh numpy pillow lxml
 .venv/bin/python scripts/analyze_step.py   # already run; regenerates analysis/*.json
-.venv/bin/python scripts/build.py          # rebuilds exports/ + renders/
-.venv/bin/python scripts/validate.py       # 14 checks -> analysis/interference_report.json
+.venv/bin/python scripts/build.py          # rebuilds exports/ (full + low) + renders/ + GLB/3MF
+.venv/bin/python scripts/validate.py       # 18 checks -> analysis/interference_report.json
+CARRIER_PROFILE=low .venv/bin/python scripts/validate.py   # low-profile checks (11)
 ```
 
 ## Printing

@@ -43,6 +43,22 @@ white stress marks at the flex roots after ~10 cycles. Then set
 `SIMHAT_PCB_XY_CLEAR` in `cad/parameters.py` to the winning value and
 rebuild (`python scripts/build.py`).
 
+## Low-profile fit-check template — `exports/lilygo_a7670_simhat_carrier_lowprofile.stl`
+
+Same material settings; only 9 mm tall, ~15–20 minutes, ~8 g. Purpose:
+verify XY dimensions and the M1.6 hole pattern with real screws before
+committing to the 2 h full print. Lay the A7670X on the 4 bosses (18650
+holder hangs through the open frame); sight the SimHat outline against
+the pad/lip/fence footprint at a desk edge (relay overhangs below).
+
+## Sections — `exports/sections/*.stl`
+
+Same settings; each section is a standalone printable piece (A7670 plate,
+SimHat cage, antenna tray + end wall with its 2 mounting tabs). Use to
+re-print just one region after a parameter tweak instead of the whole
+carrier. They are a volume-partition of the full carrier — iterate and
+verify with them, then rebuild the whole.
+
 ## After-print checks
 
 - Caliper the SimHat bay: PCB should slide in with the coupon's chosen feel.

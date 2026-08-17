@@ -1,13 +1,17 @@
 #!/usr/bin/env python3
-"""Rebuild all generated geometry from source: carrier, coupon, assembly,
-renders, and optional 3MF. Deterministic; run from repo root.
+"""Rebuild all generated geometry from source: carrier (full + low profile),
+coupon, assembly, per-section exports, renders, GLB, validated 3MF.
+Deterministic; run from repo root.
 
-Usage: python scripts/build.py   (or ./build.sh)
+Usage:
+    python scripts/build.py             full-profile exports (spawns low pass)
+    CARRIER_PROFILE=low python scripts/build.py --low-pass   low only
 """
 
 from __future__ import annotations
 
 import os
+import subprocess
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -17,9 +21,25 @@ os.chdir(ROOT)
 import cadquery as cq
 
 from cad import holder
+from cad import parameters as P
 
 EXPORTS = "exports"
 RENDERS = "renders"
+
+VIEWS = {
+    "top": ((0.3, 0.3, 1.0), (0, 1, 0)),
+    "bottom": ((0.3, 0.3, -1.0), (0, 1, 0)),
+    "iso": ((1.0, -0.9, 0.8), (0, 0, 1)),
+    "iso_back": ((-1.0, 0.9, 0.8), (0, 0, 1)),
+    "clip_end": ((0.15, 1.0, 0.35), (0, 0, 1)),
+    "tray_end": ((0.15, -1.0, 0.35), (0, 0, 1)),
+}
+
+GLB_COLORS = {
+    "carrier": (0.72, 0.73, 0.76),
+    "board": (0.25, 0.55, 0.30),
+    "simhat": (0.90, 0.70, 0.15),
+}
 
 
 def export_step(shape, path):
@@ -32,16 +52,16 @@ def export_stl(shape, path):
     print(f"wrote {path}")
 
 
-def render_png(shapes_with_colors, path, view, size=(1400, 1050)):
-    """Offscreen VTK render; returns False when unavailable."""
-    try:
-        import vtk
-    except ImportError:
-        return False
+def render_png(entries, path, view, size=(1500, 1100), zoom=1.0, focus=None):
+    """Offscreen VTK render. entries: list of (shape, rgb, tessellation).
+    zoom<1 frames tighter; focus=(x,y,z) overrides the framing center."""
+    view = VIEWS[view]
+    import vtk
     ren = vtk.vtkRenderer()
-    ren.SetBackground(0.93, 0.93, 0.95)
-    for shape, rgb in shapes_with_colors:
-        verts, tris = shape.tessellate(0.15, 0.2)
+    ren.SetBackground(0.94, 0.94, 0.96)
+    allbb = entries[0][0].BoundingBox()
+    for shape, rgb, (tol, atol) in entries:
+        verts, tris = shape.tessellate(tol, atol)
         pd = vtk.vtkPolyData()
         pts = vtk.vtkPoints()
         for v in verts:
@@ -60,20 +80,21 @@ def render_png(shapes_with_colors, path, view, size=(1400, 1050)):
         actor.SetMapper(mapper)
         actor.GetProperty().SetColor(*rgb)
         actor.GetProperty().SetInterpolationToPhong()
+        actor.GetProperty().SetEdgeVisibility(1)
+        actor.GetProperty().SetEdgeColor(0.25, 0.25, 0.28)
+        actor.GetProperty().SetLineWidth(0.4)
         ren.AddActor(actor)
     cam = ren.GetActiveCamera()
-    bb = shapes_with_colors[0][0].BoundingBox()
-    cx, cy, cz = (bb.xmin + bb.xmax) / 2, (bb.ymin + bb.ymax) / 2, (bb.zmin + bb.zmax) / 2
-    d = max(bb.xmax - bb.xmin, bb.ymax - bb.ymin, bb.zmax - bb.zmin) * 0.9 + 20
-    views = {
-        "top": ((cx, cy + 0.001, cz + d), (0, 1, 0)),
-        "bottom": ((cx, cy + 0.001, cz - d), (0, 1, 0)),
-        "iso": ((cx + d, cy - d, cz + d), (0, 0, 1)),
-    }
-    pos, up = views[view]
-    cam.SetPosition(*pos)
+    cx, cy, cz = ((allbb.xmin + allbb.xmax) / 2, (allbb.ymin + allbb.ymax) / 2,
+                  (allbb.zmin + allbb.zmax) / 2)
+    if focus:
+        cx, cy, cz = focus
+    dx, dy, dz = view[0]
+    d = max(allbb.xmax - allbb.xmin, allbb.ymax - allbb.ymin,
+            allbb.zmax - allbb.zmin) * 0.85 * zoom + 25
+    cam.SetPosition(cx + dx * d, cy + dy * d, cz + dz * d)
     cam.SetFocalPoint(cx, cy, cz)
-    cam.SetViewUp(*up)
+    cam.SetViewUp(*view[1])
     cam.ParallelProjectionOn()
     ren.ResetCamera()
     win = vtk.vtkRenderWindow()
@@ -88,7 +109,6 @@ def render_png(shapes_with_colors, path, view, size=(1400, 1050)):
     writer.SetInputConnection(img.GetOutputPort())
     writer.Write()
     print(f"wrote {path}")
-    return True
 
 
 def try_3mf(stl_path, out_path):
@@ -114,14 +134,72 @@ def try_3mf(stl_path, out_path):
     return False
 
 
-def main():
-    os.makedirs(EXPORTS, exist_ok=True)
-    os.makedirs(RENDERS, exist_ok=True)
+def export_glb(parts, out_path):
+    """parts: list of (mesh_name, shape, tessellation)."""
+    try:
+        import numpy as np
+        import trimesh
+        scene = trimesh.Scene()
+        for name, shape, (tol, atol) in parts:
+            verts, tris = shape.tessellate(tol, atol)
+            v = np.array([[p.x, p.y, p.z] for p in verts], dtype=np.float64)
+            f = np.array(tris, dtype=np.int64)
+            mesh = trimesh.Trimesh(vertices=v, faces=f)
+            if not mesh.is_watertight:
+                mesh.fill_holes()
+            rgb = GLB_COLORS[name.split("_ref")[0]]
+            mesh.visual.face_colors = [int(255 * c) for c in rgb] + [255]
+            scene.add_geometry(mesh, node_name=name)
+        data = scene.export(file_type="glb")
+        with open(out_path, "wb") as f:
+            f.write(data)
+        back = trimesh.load(out_path)
+        n = len(list(back.geometry.values()))
+        print(f"wrote {out_path} ({n} mesh(es), round-trip ok)")
+        return True
+    except Exception as e:
+        print(f"glb skipped: {e}")
+        return False
 
-    print("== building carrier ==")
+
+def contact_sheet(paths_labels, out_path, cols=3):
+    try:
+        from PIL import Image, ImageDraw
+    except ImportError:
+        print("contact sheet skipped (Pillow unavailable)")
+        return False
+    imgs = []
+    for p, label in paths_labels:
+        im = Image.open(p).convert("RGB")
+        d = ImageDraw.Draw(im)
+        d.rectangle([8, 8, 10 * len(label) + 22, 34], fill=(255, 255, 255))
+        d.text((15, 14), label, fill=(20, 20, 24))
+        imgs.append(im)
+    w, h = imgs[0].size
+    rows = (len(imgs) + cols - 1) // cols
+    sheet = Image.new("RGB", (cols * w + (cols + 1) * 12,
+                              rows * h + (rows + 1) * 12), (235, 235, 238))
+    for i, im in enumerate(imgs):
+        r, c = divmod(i, cols)
+        sheet.paste(im, (12 + c * (w + 12), 12 + r * (h + 12)))
+    sheet.save(out_path)
+    print(f"wrote {out_path}")
+    return True
+
+
+def build_profile_exports():
+    low = P.PROFILE == "low"
+    suffix = "_lowprofile" if low else ""
+
+    print(f"== building carrier (profile={P.PROFILE}) ==")
     carrier = holder.build_carrier()
-    export_step(carrier, f"{EXPORTS}/lilygo_a7670_simhat_carrier.step")
-    export_stl(carrier, f"{EXPORTS}/lilygo_a7670_simhat_carrier.stl")
+    export_step(carrier, f"{EXPORTS}/lilygo_a7670_simhat_carrier{suffix}.step")
+    export_stl(carrier, f"{EXPORTS}/lilygo_a7670_simhat_carrier{suffix}.stl")
+
+    if low:
+        render_png([(carrier.val(), GLB_COLORS["carrier"], (0.1, 0.15))],
+                   f"{RENDERS}/lowprofile.png", "iso")
+        return
 
     print("== building test coupon ==")
     coupon = holder.build_coupon()
@@ -133,27 +211,71 @@ def main():
     asm.save(f"{EXPORTS}/lilygo_a7670_simhat_assembly.step")
     print(f"wrote {EXPORTS}/lilygo_a7670_simhat_assembly.step")
 
-    print("== renders ==")
-    grey, green, amber = (0.72, 0.73, 0.76), (0.25, 0.55, 0.30), (0.90, 0.70, 0.15)
-    c = carrier.val()
-    ok = True
-    ok &= render_png([(c, grey)], f"{RENDERS}/top.png", "top")
-    ok &= render_png([(c, grey)], f"{RENDERS}/bottom.png", "bottom")
-    ok &= render_png([(c, grey)], f"{RENDERS}/isometric.png", "iso")
-    ok &= render_png([(c, grey), (a76, green), (sh, amber)],
-                     f"{RENDERS}/assembly.png", "iso")
-    if not ok:
-        for name, shape in [("top", c), ("bottom", c), ("isometric", c)]:
-            cq.exporters.export(
-                cq.Workplane(obj=shape), f"{RENDERS}/{name}.svg",
-                opt={"projectionDir": {"top": (0, 0, 1), "bottom": (0, 0, -1),
-                                       "isometric": (1, 1, 1)}[name],
-                     "showAxes": False, "strokeWidth": 0.4})
-            print(f"wrote {RENDERS}/{name}.svg (VTK unavailable fallback)")
+    print("== sections ==")
+    os.makedirs(f"{EXPORTS}/sections", exist_ok=True)
+    for name, wp in holder.build_sections().items():
+        export_stl(wp, f"{EXPORTS}/sections/{name}.stl")
+        export_step(wp, f"{EXPORTS}/sections/{name}.step")
 
+    print("== renders ==")
+    grey = GLB_COLORS["carrier"]
+    green, amber = GLB_COLORS["board"], GLB_COLORS["simhat"]
+    c = carrier.val()
+    fine, coarse = (0.05, 0.1), (0.1, 0.15)
+    render_png([(c, grey, coarse)], f"{RENDERS}/top.png", "top")
+    render_png([(c, grey, coarse)], f"{RENDERS}/bottom.png", "bottom")
+    render_png([(c, grey, coarse)], f"{RENDERS}/isometric.png", "iso")
+    render_png([(c, grey, coarse), (a76, green, fine), (sh, amber, fine)],
+               f"{RENDERS}/assembly.png", "iso")
+    render_png([(c, grey, coarse), (a76, green, fine), (sh, amber, fine)],
+               f"{RENDERS}/assembly_back.png", "iso_back")
+    render_png([(c, grey, coarse), (a76, green, fine), (sh, amber, fine)],
+               f"{RENDERS}/assembly_clip_end.png", "clip_end")
+    render_png([(c, grey, coarse)], f"{RENDERS}/carrier_tray_end.png", "tray_end")
+    a76_c = (P.a7670_cx(), 0.0, 20.0)
+    render_png([(c, grey, coarse), (a76, green, fine), (sh, amber, fine)],
+               f"{RENDERS}/a7670_closeup.png", "iso", zoom=0.42, focus=a76_c)
+    sh_c = (P.simhat_cx(), 10.0, 18.0)
+    render_png([(c, grey, coarse), (a76, green, fine), (sh, amber, fine)],
+               f"{RENDERS}/simhat_closeup.png", "iso_back", zoom=0.42, focus=sh_c)
+
+    contact_sheet([
+        (f"{RENDERS}/top.png", "top"),
+        (f"{RENDERS}/isometric.png", "isometric"),
+        (f"{RENDERS}/bottom.png", "bottom"),
+        (f"{RENDERS}/assembly.png", "assembly (iso)"),
+        (f"{RENDERS}/assembly_back.png", "assembly (rear iso)"),
+        (f"{RENDERS}/assembly_clip_end.png", "assembly (clip end)"),
+        (f"{RENDERS}/a7670_closeup.png", "T-A7670X close-up"),
+        (f"{RENDERS}/simhat_closeup.png", "T-SimHat close-up (headers up)"),
+        (f"{RENDERS}/carrier_tray_end.png", "antenna tray end"),
+    ], f"{RENDERS}/contact_sheet.png")
+
+    print("== 3MF + GLB ==")
     try_3mf(f"{EXPORTS}/lilygo_a7670_simhat_carrier.stl",
             f"{EXPORTS}/lilygo_a7670_simhat_carrier.3mf")
+    export_glb([
+        ("carrier_ref", c, coarse),
+        ("board_ref", a76, fine),
+        ("simhat_ref", sh, fine),
+    ], f"{EXPORTS}/lilygo_a7670_simhat_assembly.glb")
+    export_glb([("carrier_ref", c, coarse)],
+               f"{EXPORTS}/lilygo_a7670_simhat_carrier.glb")
 
+
+def main():
+    os.makedirs(EXPORTS, exist_ok=True)
+    os.makedirs(RENDERS, exist_ok=True)
+
+    if "--low-pass" in sys.argv:
+        build_profile_exports()
+        return
+
+    build_profile_exports()
+    env = dict(os.environ, CARRIER_PROFILE="low")
+    r = subprocess.run([sys.executable, __file__, "--low-pass"], env=env)
+    if r.returncode != 0:
+        sys.exit(r.returncode)
     print("build complete")
 
 

@@ -63,6 +63,15 @@ class Measured:
 
 
 # ---------------------------------------------------------------------------
+# Build profile: "full" = production carrier; "low" = ~12 mm quick-print
+# fit-check slab (desk check of hole pattern / pad window / snap feel, and
+# wall-mountable via the M3 ear slots against a box wall). Relay overhangs
+# below the low slab - test the SimHat snap at a desk edge.
+# ---------------------------------------------------------------------------
+
+PROFILE = "full"
+
+# ---------------------------------------------------------------------------
 # Fasteners
 # ---------------------------------------------------------------------------
 
@@ -82,22 +91,33 @@ RAIL_W = 3.2                        # structural rail/rib width
 FRAME_MARGIN = 6.5                  # rail setback from board edges
 OUTER_CORNER_R = 6.0                # rounded external corners
 RIB_PITCH = 38.0                    # max unsupported span between cross ribs
-BOARD_GAP = 12.0                    # service gap between the two boards
+
+# 16 mm wiring channel: room for SMA plugs (~10 mm) facing each other across
+# the gap after the A7670 180-deg rotation, plus finger access.
+BOARD_GAP = 16.0                    # service gap between the two boards
 
 # ---------------------------------------------------------------------------
-# A7670 mounting section (board sits component-up on 4 standoffs)
+# A7670 section (board component-up on 4 screw standoffs)
 # ---------------------------------------------------------------------------
 
-A7670_STANDOFF_H = 13.0             # base_top(3.2) + shield 8.4 + 1.4 clearance.
-                                    # If 16mm stacking-header pins are soldered
-                                    # to the bottom of the board, set to 21.0.
+# Rotate board 180 deg about Z: pin-header rails land at the -Y end, the
+# same end as the SimHat's up-facing sockets -> jumpers ~15-25 mm instead
+# of ~120 mm; SMA jacks then face the wiring gap.
+A7670_ROT_180 = True
+
+# 18650 + holder hangs below the PCB along the board centerline. 25 mm
+# clears: base 3.2 + cell/holder ~20.5 + air. No battery holder -> 13.0.
+A7670_STANDOFF_H = 25.0 if PROFILE == "full" else 9.0
+A7670_BATTERY_KEEP_W = 20.0         # 18650 cell 18.6 + holder walls
+A7670_BATTERY_KEEP_L = 71.0         # 65 cell + clip ends
 
 # ---------------------------------------------------------------------------
 # T-SimHat snap-in cage (board mounted FLIPPED: relay side down, pins up)
 # Board-local pad coordinates: (u, v); u from board center x, v from clip end (y=0)
 # ---------------------------------------------------------------------------
 
-SIMHAT_SUPPORT_H = 23.0             # pad top height; >= BASE_T + relay 18.25 + 1.5
+SIMHAT_SUPPORT_H = (23.0 if PROFILE == "full" else 9.0)
+SIMHAT_CLIPS_ENABLED = PROFILE == "full"
 SIMHAT_PCB_XY_CLEAR = 0.30          # per-side XY clearance around PCB edges
 SIMHAT_PCB_T_CLEAR = 0.20           # vertical clearance in lip/hook gaps
 # Pads sit on bare laminate only. Verified against ALL 77 above-PCB solids:
@@ -128,8 +148,12 @@ SIMHAT_ARM_W = 6.0                  # arm depth in Z
 SIMHAT_ARM_T = 2.0                  # arm thickness in u (bending direction)
 SIMHAT_ARM_ROOT_FILLET = 2.0        # fillet where arm meets anchor
 SIMHAT_ARM_DEFLECT = 1.05           # lateral deflection to clear PCB edge
-SIMHAT_RELEASE_TAB_H = 7.0          # finger fin height above arm
+SIMHAT_RELEASE_TAB_H = 7.0 if PROFILE == "full" else 3.0   # fin above arm
 SIMHAT_RELEASE_TAB_T = 2.0          # fin thickness
+SIMHAT_ARM_ROOT_GUSSET = 1.6        # plan-view triangular gusset at the arm
+                                    # root; blends the flexure into the anchor
+                                    # (printed stress relief in lieu of an
+                                    # OCC fillet, which fails on these prisms)
 
 # XY locating fences along long edges, (side, v) side=-1 left/+1 right
 SIMHAT_FENCES = [(-1, 45.0), (1, 16.0), (1, 74.0)]
@@ -151,12 +175,15 @@ TIE_SLOTS = [                       # (x, y) through gap rails, long axis along 
 # Enclosure mounting interface (parametric ears)
 # ---------------------------------------------------------------------------
 
-EARS = {                            # corner -> (dx, dy) direction of ear
-    "a7670-near": (+1, -1),
-    "a7670-far": (+1, +1),
-    "simhat-near": (-1, -1),
-    "simhat-far": (-1, +1),
-}
+EARS = ({"a7670-far": (+1, +1), "simhat-far": (-1, +1)}
+        if PROFILE == "full"
+        else {"a7670-near": (+1, -1), "a7670-far": (+1, +1),
+              "simhat-near": (-1, -1), "simhat-far": (-1, +1)})
+# Full profile: the two -Y mounting points live on the antenna-tray stop
+# wall as slotted tabs (the corner ears would block the 110 mm-wide tray
+# mouth). Low profile (no tray) uses all four corner ears.
+ANT_STOP_TAB_X = (-35.0, 35.0)      # tab centers on the tray stop wall
+ANT_STOP_TAB_EXT = 9.0              # how far tabs reach beyond the stop
 EAR_EXT = 11.0                      # how far ear flange reaches beyond outer rail
 EAR_W = 16.0                        # ear width
 EAR_T = BASE_T                      # ear thickness (flush with base)
@@ -165,35 +192,43 @@ TAPE_PAD_SIZE = 24.0                # flat VHB landing zones (kept hole-free)
 TAPE_PADS = [("a7670-mid", 0.0), ("simhat-mid", 0.0)]
 
 # ---------------------------------------------------------------------------
-# LTE sticker antenna slide-in tray (-Y end; slide along sticker SHORT dim)
-# LILYGO "full band 698-1710-2690" FPC sticker, SMA coax. No manufacturer CAD
-# exists -> CALIPER the sticker and set ANT_SLIDE/ANT_W before printing.
-# Defaults assume ~50 x 45 mm class, slid along its 45 mm dimension.
+# LTE sticker antenna slide-in tray (-Y end; sticker lies ALONG X, slides
+# in along its SHORT dimension). User-measured: ~110 x 20 mm sticker
+# (aliexpress 32870641099 full-band 698-2690), ~10-15 cm coax.
+# CALIPER the sticker and adjust ANT_W (long dim) / ANT_SLIDE (short dim)
+# if yours differs.
 # ---------------------------------------------------------------------------
 
-ANT_ENABLED = True
-ANT_SLIDE = 45.0          # sticker dimension along slide direction (mm)
-ANT_W = 50.0              # sticker dimension across channels (mm)
-ANT_X_C = 5.0             # tray center X (over gap + A7670 side, clear of cage)
+ANT_ENABLED = PROFILE == "full"
+ANT_SLIDE = 20.0          # sticker dimension along slide direction (short dim)
+ANT_W = 110.0             # sticker dimension lying along X (long dim)
+ANT_X_C = 0.0             # tray center X (spans the gap + both board zones)
 ANT_SIDE_CLEAR = 0.5      # per-side clearance between sticker and channel walls
 ANT_FLOOR_T = 1.2         # tray floor thickness
 ANT_WALL_T = 2.4          # channel wall thickness
 ANT_WALL_H = 4.5          # channel wall height above plate
 ANT_STOP_T = 2.4          # end-stop wall thickness
-ANT_ENTRY_CHAMFER = 1.5   # lead-in chamfer on channel mouths
+ANT_ENTRY_CHAMFER = 1.5   # lead-in flare on channel mouths
 ANT_COAX_NOTCH_W = 5.0    # coax pass-through notch in the -Y ring rail
+ANT_CABLE_L = 120.0       # coax length estimate (doc/coil-planning param)
 
 # ---------------------------------------------------------------------------
-# Connector service envelopes (validated keep-clear volumes, carrier coords)
-# Derived from measured STEP islands: USB-C on +Y edge at x[13,31] z[13,16];
-# both SMA jacks on +X edge at y[-21,-3] z[13,15]; envelopes add plug bodies.
+# Connector service envelopes (keep-clear volumes). A7670 envelopes are in
+# board-local coords (x from PCB left edge, y from PCB bottom edge, z from
+# PCB top face) and pass through a7670_local_to_carrier(), which applies
+# the A7670_ROT_180 mapping - never hardcode rotated coords.
+# SimHat envelopes are in flipped board-local (u, -y, z-from-PCB-top).
 # ---------------------------------------------------------------------------
 
-SERVICE_ENVELOPES = {
-    "usb_c_plug":       (19.0, 55.0, 37.5, 68.0, 12.0, 18.0),
-    "sma_antenna_conn": (40.0, -22.0, 56.0, -2.0, 12.0, 16.5),
-    "sim_tray_swap":    (10.0, 30.0, 40.0, 58.0, 14.0, 24.0),
-    "battery_jst":      (12.0, -14.0, 30.0, 4.0, 14.0, 24.0),
+SERVICE_ENVELOPES_A7670 = {
+    "usb_c_plug":       (13.0, 101.0, 31.0, 113.0, 0.0, 6.0),
+    "sma_antenna_conn": (27.0, 30.0, 40.0, 55.0, -1.0, 5.0),
+    "sim_tray_swap":    (10.0, 80.0, 40.0, 98.0, 1.0, 11.0),
+    "battery_jst":      (8.0, 32.0, 20.0, 52.0, 0.0, 8.0),
+}
+SERVICE_ENVELOPES_SIMHAT = {
+    "header_jumpers":   (-16.5, -94.7, 16.5, -50.0, 1.0, 15.0),
+    "relay_terminals":  (-16.5, -29.2, 16.5, 0.0, -18.25, -15.0),
 }
 
 # ---------------------------------------------------------------------------
@@ -217,3 +252,15 @@ def simhat_cx(gap=BOARD_GAP):
 
 def frame_y_half(margin=FRAME_MARGIN):
     return max(Measured.a7670_pcb_l, Measured.simhat_pcb_l) / 2 + margin
+
+
+# CARRIER_PROFILE=low env var switches to the 9 mm fit-check template
+# (open frame, 9 mm bosses/cage walls, no clips - the coupon covers snap
+# feel); explicit PROFILE assignment above still wins when env is unset.
+import os as _os  # noqa: E402
+if _os.environ.get("CARRIER_PROFILE") == "low" and PROFILE == "full":
+    PROFILE = "low"
+    A7670_STANDOFF_H = 9.0
+    SIMHAT_SUPPORT_H = 9.0
+    SIMHAT_CLIPS_ENABLED = False
+    ANT_ENABLED = False

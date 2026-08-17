@@ -44,11 +44,18 @@ far end of the carrier, flat on the tray floor.
 
 ## Install the T-A7670X
 
-1. Lower the board onto the 4 standoff bosses, PCB holes over the pilots.
-   USB-C, SIM tray, buttons, battery/JST and both SMA antenna jacks are
-   all on accessible edges/faces (nothing faces the base).
-2. Drive 4 × M1.6 screws straight down. They self-tap the PETG pilots —
-   first assembly only needs ~1 Nm; stop at snug. Do not overtighten.
+Orientation note: the board mounts **rotated 180°** (`A7670_ROT_180`) so
+its pin headers face the SimHat sockets across the wiring channel —
+jumpers stay ~15–25 mm.
+
+1. Fit the 18650 into the board's under-side holder first (if used).
+2. Lower the board onto the 4 standoff bosses — the battery + holder
+   occupy the open center strip between the bosses; the 25 mm standoffs
+   give ~1.5 mm air below the holder. No holder? Set `A7670_STANDOFF_H = 13`
+   and rebuild for a lower profile.
+3. USB-C (clip-end), SIM tray, buttons, battery JST and both SMA jacks
+   (facing the wiring channel) all stay accessible; drive 4 × M1.6 screws
+   snug — they self-tap the printed pilots.
 
 ## Wire the boards
 
@@ -61,11 +68,17 @@ far end of the carrier, flat on the tray floor.
 
 ## Mount the carrier in the enclosure
 
-- **Screws:** 4 M3 slotted ears at the frame corners. Slots are 7.5 mm
-  long, so ±3 mm of boss-spacing tolerance per ear. Loosely fit all four,
-  align, then tighten.
+- **Screws:** 4 M3 slotted points. Two corner ears at the +Y end; two
+  slotted tabs on the antenna-tray end wall at −Y (slots run fore-aft, so
+  boss spacing tolerance is ±3 mm on both axes). Loosely fit all four,
+  align, tighten.
 - **Tape instead:** two 24 × 24 mm flat pads under the board centerlines
   accept VHB tape; frame underside is flat there by design.
+- **Low-profile template as a wall bracket:** the 9 mm template can be
+  screwed flat against an enclosure wall through its 4 M3 ear slots;
+  boards face outward. (No snap clips on that variant — retention is
+  screws for the A7670X and gravity/lip for a laid-in SimHat; use the full
+  carrier for proper tool-less retention.)
 
 Do not drill the enclosure shell — either method works with stock bosses
 or a flat internal surface.
@@ -91,5 +104,13 @@ board (10 s, tool-less) to change terminal wiring later.
 2. Caliper the SimHat PCB thickness — if it is 1.6 mm not 1.0 mm, increase
    `SIMHAT_PCB_T_CLEAR` to taste (0.2 mm default still functions; the
    cage gap self-adjusts by design margin) and rebuild.
-3. If your A7670X has stacking-header pins soldered underneath, set
-   `A7670_STANDOFF_H = 21.0` and rebuild before printing.
+3. Caliper the antenna sticker (L × W) and coax; set `ANT_W` (long dim),
+   `ANT_SLIDE` (short dim), `ANT_CABLE_L` and rebuild.
+4. Confirm whether your A7670X has the 18650 holder (default assumes yes,
+   25 mm standoffs) and whether stacking-header pins are soldered (25 mm
+   already clears them).
+5. Optional 15-minute sanity print: the low-profile template
+   (`exports/lilygo_a7670_simhat_carrier_lowprofile.stl`) — lay each board
+   on it: A7670X holes should drop over the 4 bosses for a real M1.6 screw
+   fit; SimHat outline should match the pad/lip/fence footprint (relay
+   overhangs through the open frame — test at a desk edge).
