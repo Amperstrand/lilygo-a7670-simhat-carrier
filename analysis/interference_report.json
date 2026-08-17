@@ -512,7 +512,7 @@
         "dy": 12.4,
         "dz": 7.0
       },
-      "min_distance": 0.7
+      "min_distance": 1.45
     },
     {
       "zone": "simhat_top(=down_when_flipped)[4]",
@@ -527,7 +527,7 @@
         "dy": 12.5,
         "dz": 0.8
       },
-      "min_distance": 4.3
+      "min_distance": 5.05
     },
     {
       "zone": "simhat_top(=down_when_flipped)[5]",
@@ -587,7 +587,7 @@
         "dy": 3.25,
         "dz": 2.8
       },
-      "min_distance": 6.0415
+      "min_distance": 6.3885
     },
     {
       "zone": "simhat_top(=down_when_flipped)[9]",
@@ -602,7 +602,7 @@
         "dy": 3.0,
         "dz": 0.95
       },
-      "min_distance": 9.6785
+      "min_distance": 9.8987
     },
     {
       "zone": "simhat_top(=down_when_flipped)[10]",
@@ -1607,7 +1607,7 @@
         "dy": 8.0,
         "dz": 3.8
       },
-      "min_distance": 0.5
+      "min_distance": 0.522
     },
     {
       "zone": "simhat_bottom(=up_when_flipped)[0]",
@@ -1667,7 +1667,7 @@
         "dy": 10.0,
         "dz": 1.65
       },
-      "min_distance": 1.562
+      "min_distance": 2.1915
     },
     {
       "zone": "simhat_bottom(=up_when_flipped)[4]",
@@ -1682,7 +1682,7 @@
         "dy": 10.0,
         "dz": 1.65
       },
-      "min_distance": 1.562
+      "min_distance": 2.1915
     },
     {
       "zone": "simhat_bottom(=up_when_flipped)[5]",
@@ -1772,7 +1772,7 @@
         "dy": 2.5,
         "dz": 2.0
       },
-      "min_distance": 3.2098
+      "min_distance": 3.4191
     }
   ],
   "features": [
@@ -2005,8 +2005,8 @@
     {
       "check": "step_roundtrip_volume",
       "value": [
-        33379.34,
-        33379.34
+        33232.22,
+        33232.22
       ],
       "pass": true
     },
@@ -2022,7 +2022,7 @@
     },
     {
       "check": "stl_volume_positive",
-      "value": 33378.6,
+      "value": 33231.5,
       "pass": true
     },
     {
@@ -2090,8 +2090,8 @@
     {
       "check": "sections_partition_volume",
       "value": {
-        "carrier_mm3": 33379.34,
-        "sections_sum_mm3": 33379.34
+        "carrier_mm3": 33232.22,
+        "sections_sum_mm3": 33232.22
       },
       "pass": true
     },
@@ -2243,7 +2243,7 @@
     },
     {
       "check": "deterministic_rebuild",
-      "value": "753abb6a565d5636",
+      "value": "6b89980530f1d6c1",
       "pass": true
     }
   ],

@@ -60,6 +60,10 @@ class Measured:
     simhat_header_zone_x = (14.0, 16.5)                       # both edges
     simhat_header_zone_y = (-94.7, -54.0)                     # far (lip) end
     simhat_header_h = 8.1                                      # above PCB when flipped
+    # Non-circular PCB cutouts found in the slab cross-section (missed by
+    # the cylinder scan; user-confirmed on the physical board):
+    simhat_cutout_relay = (-15.25, -30.20, -1.35, -17.60)     # 13.9x12.6 oval INSIDE relay footprint - keep-out
+    simhat_cutout_slot = (2.50, -18.35, 13.40, -16.45)        # 10.9x1.9 slot past terminal
 
 
 # ---------------------------------------------------------------------------
@@ -122,11 +126,11 @@ SIMHAT_PCB_XY_CLEAR = 0.30          # per-side XY clearance around PCB edges
 SIMHAT_PCB_T_CLEAR = 0.20           # vertical clearance in lip/hook gaps
 # Pads sit on bare laminate only. Verified against ALL 77 above-PCB solids:
 # the only 7mm+ free window on BOTH u strips is v 31.0-50.5. Pads must ALSO
-# stay clear of the removal slide path: down-facing SMDs (v 50.5-53.8,
-# u +/-1.6-6) sweep 3.6mm toward the clip end during board removal, so pads
-# top out at v 45 (SMD sweep floor v 46.9). Blocked: relay v 6.5-29.2,
-# terminal v 0-15.8, SMD clusters v 50.5+.
-SIMHAT_PADS_UV = [(-3.5, 34.5), (3.5, 34.5), (-3.5, 42.0), (3.5, 42.0)]
+# stay clear of the removal slide path (down-facing SMDs v 50.5-53.8 sweep
+# 3.6mm toward the clip end) AND of SMD solder fillets: u +/-2.75 centers
+# pads in the free strip, giving ~2.0mm edge distance to the SMD bodies at
+# u +/-7.2 (was 0.7mm at u +/-3.5 - user-flagged solder-pad risk).
+SIMHAT_PADS_UV = [(-2.75, 34.5), (2.75, 34.5), (-2.75, 42.0), (2.75, 42.0)]
 SIMHAT_PAD_SIZE = 6.0               # square support pads on exposed laminate
 SIMHAT_RELAY_CLEAR = 1.75           # air gap under deepest down-facing part
 
