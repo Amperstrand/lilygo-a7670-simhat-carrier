@@ -110,6 +110,20 @@ the next board-carrier project. Review this file before extending the CAD.
     feature under test or the check is theater. Geometry truth comes
     from boolean probes, never from renders.
 
+23. **Elevated XY-flexure clip arms are floating cantilevers to a slicer.**
+    A horizontal snap arm 20 mm above the plate prints from its root into
+    air (Bambu flags it; it droops). Fix: a slim pedestal under the arm
+    free span, top face 0.3 mm below the arm underside — supports the
+    first arm layer during printing, never touches the flexure in service
+    (deflection is lateral). Make it a permanent feature, parameter-gated.
+24. **Prove printability with a slice-overlap lint, not assurances.** Scan
+    z-slabs; an island with <40 % of its area over material within 0.5 mm
+    below is a floating cantilever. Two must-haves: compare with a
+    lookback of TWO slabs (0.3 mm printed-support gaps must pass), and
+    classify large full-span sheets as edge-anchored bridge sheets (bin
+    bottoms) — only one-ended small regions are failures. Bed-zone layers
+    (<0.35 mm) are on the plate; skip them.
+
 ## Design rules specific to this carrier
 
 - A7670 holes are Ø1.73 → M1.6 only. Standoff height is battery-driven

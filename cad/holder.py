@@ -263,11 +263,31 @@ def _clip_anchor(side, clear):
     return block.fuse(fin)
 
 
+def _clip_pedestal(side, clear, z0):
+    """Bed/plate-supported wall under the arm free span. Fuses into the
+    anchor at the root end; its top stays PED_GAP below the arm underside
+    so the flexure is untouched in service."""
+    g = _clip_geometry(clear, side)
+    half = M.simhat_pcb_w / 2 + clear
+    u_c = side * (half + P.SIMHAT_ARM_T / 2)
+    v_lo = g["v_root"] - 1.0
+    v_hi = g["v_l0"] + P.SIMHAT_HOOK_REACH_V - 0.5
+    return _rect(sh_x(u_c) - P.SIMHAT_PED_T / 2, sh_y(v_hi),
+                 sh_x(u_c) + P.SIMHAT_PED_T / 2, sh_y(v_lo),
+                 z0, (g["z_bot"] - P.SIMHAT_PED_GAP) - z0)
+
+
 def build_simhat_clips(clear=None, deflect=0.0):
     c = P.SIMHAT_PCB_XY_CLEAR if clear is None else clear
     solids = []
     for side in (-1, 1):
-        solids.append(_clip_arm(side, c, deflect).fuse(_clip_anchor(side, c)))
+        parts = [_clip_arm(side, c, deflect), _clip_anchor(side, c)]
+        if P.SIMHAT_ARM_PEDESTAL:
+            ped = _clip_pedestal(side, c, 0.0)
+            if deflect:
+                ped = ped.translate(cq.Vector(side * deflect, 0, 0))
+            parts.append(ped)
+        solids.append(parts[0].fuse(parts[1]).fuse(parts[2]))
     return cq.Workplane("XY").newObject(solids).combine()
 
 
@@ -531,6 +551,13 @@ def _coupon_bay(ox, oy, clear, index):
         u_far = side * (half + P.SIMHAT_ARM_T + 4.0)
         u_fin = side * (half + P.SIMHAT_ARM_T + 1.0)
         v_root = clear + P.SIMHAT_HOOK_REACH_V - P.SIMHAT_ARM_LEN
+        v_hi = clear + P.SIMHAT_HOOK_REACH_V - 0.5
+        if P.SIMHAT_ARM_PEDESTAL:
+            u_ped = side * (half + P.SIMHAT_ARM_T / 2)
+            solids.append(_rect(ox + u_ped - P.SIMHAT_PED_T / 2, oy + v_hi,
+                                ox + u_ped + P.SIMHAT_PED_T / 2,
+                                oy + v_root - 1.0,
+                                P.BASE_T, z_bot - P.SIMHAT_PED_GAP - P.BASE_T))
         block = _rect(ox + min(u_out, u_far), oy + v_root - 4.0,
                       ox + max(u_out, u_far), oy + v_root + 2.5, 0, z_top)
         fin = _rect(ox + u_fin - P.SIMHAT_RELEASE_TAB_T / 2, oy + v_root - 3.0,

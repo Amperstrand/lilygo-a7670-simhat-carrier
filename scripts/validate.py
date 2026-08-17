@@ -357,7 +357,7 @@ def calicheck_checks():
 
     out.append({"check": "calicheck_est_mass_g",
                 "value": round(cc.Volume() * 1.24 / 1000, 1),
-                "pass": cc.Volume() * 1.24 / 1000 < 22})
+                "pass": cc.Volume() * 1.24 / 1000 < 24})
     return out
 
 
@@ -381,6 +381,63 @@ def _z_cylindrical_faces(solid):
             pass
         exp.Next()
     return out
+
+
+def printability_scan(shape, name, dz=0.25, min_area=2.0, min_frac=0.4,
+                      cantilever_area=400.0):
+    """Slice-by-slice floating-island detector (slicer-style lint).
+
+    At each z slab, islands whose XY cross-section has less than min_frac
+    of its area supported by material within the previous 0.5 mm are
+    flagged. Two classes: small one-ended regions are floating
+    CANTILEVERS (the Bambu Studio warning class - these fail); large
+    full-span sheets are edge-anchored BRIDGE SHEETS (how bin bottoms
+    print - recorded as notes, not failures). The bottom 0.35 mm sits on
+    the print bed and is skipped.
+    """
+    bb = shape.BoundingBox()
+    dx, dy = bb.xmax - bb.xmin + 4, bb.ymax - bb.ymin + 4
+    lookback = []
+    cantilevers, bridge_sheets = [], []
+    z = bb.zmin + dz / 2
+    while z < bb.zmax:
+        if z - dz / 2 < 0.35:
+            z += dz
+            continue
+        slab = cq.Solid.makeBox(dx, dy, dz,
+                                cq.Vector(bb.xmin - 2, bb.ymin - 2, z - dz / 2))
+        islands = [s for s in cq.Workplane(obj=cq.Shape.cast(
+            BRepAlgoAPI_Common(shape.wrapped, slab.wrapped).Shape()))
+            .solids().vals() if s.Volume() > 0.01]
+        for isl in islands:
+            area = isl.Volume() / dz
+            if area < min_area or not lookback:
+                continue
+            supported = 0.0
+            for prev_islands in lookback:
+                for prev in prev_islands:
+                    pbb, ibb = prev.BoundingBox(), isl.BoundingBox()
+                    if (pbb.xmin > ibb.xmax or pbb.xmax < ibb.xmin or
+                            pbb.ymin > ibb.ymax or pbb.ymax < ibb.ymin):
+                        continue
+                    lifted = prev.translate(cq.Vector(0, 0, dz - 0.02))
+                    supported += common_vol(isl, lifted) / (dz - 0.02)
+            if supported / area < min_frac:
+                b = isl.BoundingBox()
+                entry = {
+                    "z": round(z, 2), "area_mm2": round(area, 1),
+                    "supported_fraction": round(supported / area, 3),
+                    "bbox": [round(b.xmin, 1), round(b.ymin, 1),
+                             round(b.xmax, 1), round(b.ymax, 1)],
+                }
+                if area < cantilever_area:
+                    cantilevers.append(entry)
+                else:
+                    bridge_sheets.append(
+                        {**entry, "note": "edge-anchored sheet bridge"})
+        lookback = ([islands] + lookback)[:2]
+        z += dz
+    return {"cantilevers": cantilevers, "bridge_sheets": bridge_sheets}
 
 
 def main():
@@ -537,6 +594,29 @@ def main():
         checks.append(c)
     report.setdefault("fitcheck_tray", []).extend(
         [{k["check"]: k["value"]} for k in checks if k["check"].startswith("fitcheck_")])
+
+    print("== printability (floating islands) ==")
+    from cad import calicheck as CC
+    from cad import fitcheck as FC
+    scan_targets = [
+        ("carrier", carrier),
+        ("coupon", holder.build_coupon().val()),
+        ("calicheck", CC.build_calicheck().val()),
+        ("fitcheck_tray", FC.build_fitcheck_tray().val()),
+    ]
+    scan_results = {}
+    for name, shape in scan_targets:
+        found = printability_scan(shape, name)
+        scan_results[name] = found
+        if found["cantilevers"]:
+            print(f"  {name}: {len(found['cantilevers'])} floating "
+                  f"cantilever(s) at z="
+                  f"{[f['z'] for f in found['cantilevers'][:6]]}")
+    checks.append({"check": "printability_no_floating_cantilevers",
+                   "value": {k: len(v["cantilevers"])
+                             for k, v in scan_results.items()},
+                   "pass": all(not v["cantilevers"] for v in scan_results.values())})
+    report["printability"] = scan_results
 
     print("== determinism ==")
     h1 = hashlib.sha256(open(tmp_stl, "rb").read()).hexdigest()

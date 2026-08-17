@@ -150,6 +150,12 @@ SIMHAT_ARM_ROOT_FILLET = 2.0        # fillet where arm meets anchor
 SIMHAT_ARM_DEFLECT = 1.05           # lateral deflection to clear PCB edge
 SIMHAT_RELEASE_TAB_H = 7.0 if PROFILE == "full" else 3.0   # fin above arm
 SIMHAT_RELEASE_TAB_T = 2.0          # fin thickness
+SIMHAT_ARM_PEDESTAL = True          # printable support wall under the arm
+                                    # free span; 0.3mm air gap keeps the XY
+                                    # flexure unstiffened - it only carries
+                                    # the arm's first print layer
+SIMHAT_PED_T = 1.2                  # pedestal thickness (u), < arm thickness
+SIMHAT_PED_GAP = 0.3                # air gap between pedestal top and arm
 SIMHAT_ARM_ROOT_GUSSET = 1.6        # plan-view triangular gusset at the arm
                                     # root; blends the flexure into the anchor
                                     # (printed stress relief in lieu of an

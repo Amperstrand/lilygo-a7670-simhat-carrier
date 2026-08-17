@@ -144,6 +144,7 @@ def _bay() -> list[cq.Shape]:
 
     half = M.simhat_pcb_w / 2 + BAY_CLEAR
     v_root = BAY_CLEAR + P.SIMHAT_HOOK_REACH_V - P.SIMHAT_ARM_LEN
+    v_hi = BAY_CLEAR + P.SIMHAT_HOOK_REACH_V - 0.5
     for side in (-1, 1):
         pts = [(u, -v) for u, v in holder._clip_arm_pts(BAY_CLEAR, side)]
         arm = (cq.Workplane("XY")
@@ -158,6 +159,13 @@ def _bay() -> list[cq.Shape]:
         u_out = side * (half + P.SIMHAT_ARM_T)
         u_far = side * (half + P.SIMHAT_ARM_T + 4.0)
         u_fin = side * (half + P.SIMHAT_ARM_T + 1.0)
+        u_ped = side * (half + P.SIMHAT_ARM_T / 2)
+        if P.SIMHAT_ARM_PEDESTAL:
+            solids.append(cq.Workplane("XY")
+                          .center(ox + u_ped, oy - (v_root - 1.0 + v_hi) / 2)
+                          .rect(P.SIMHAT_PED_T, v_hi - (v_root - 1.0))
+                          .extrude(z_bot_clip - P.SIMHAT_PED_GAP - PLATE_T)
+                          .translate((0, 0, PLATE_T)).val())
         block = (cq.Workplane("XY")
                  .center(ox + (u_out + u_far) / 2, oy - v_root - 0.75)
                  .rect(abs(u_far - u_out) + 1.2, 6.5)
