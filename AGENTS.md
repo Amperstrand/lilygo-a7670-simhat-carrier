@@ -80,6 +80,36 @@ the next board-carrier project. Review this file before extending the CAD.
     on the carrier) crossed the gauge pins once folded inside the tray.
     Slide-path validation must re-run after ANY layout compression or shift.
 
+18. **The Y-flip mirrors u: STEP-native x is NOT board-local u.** After
+    rotating a board 180° about Y, a part at STEP x −16.5..0 lands at
+    u +0..+16.5. This bit THREE times in one session (carrier pads,
+    fitcheck channel, calicheck bay). Rule: immediately after defining a
+    board placement, print the mapped zone of every tall component in the
+    new frame and re-derive free windows there — never carry zone tables
+    across a flip or mirror.
+19. **A mirrored placement is not a real placement.** "RotZ 180" to fix a
+    handedness problem flips the board along its length and makes the
+    scene physically unrealizable. If a sub-assembly needs the board the
+    other way round, mirror the FIXTURE features (bay y = oy − v), keep
+    the board transform a pure translation.
+20. **Calibration coupon before any large print: hole-gauge ladder (Ø
+    steps), thickness/width U-slit stairs, one real clip bay.** Probes:
+    through-holes Ø±0.10 find the self-tap pilot; slits find the actual
+    part dimensions; the bay (at production support height, production
+    flip, production profile via the shared builder) finds snap feel.
+    Validate the coupon itself: enumerate hole radii from model faces,
+    probe every slit void, seat the reference STEP board in the bay.
+21. **Library research verdict for Gridfinity-in-Python:** cq-gridfinity
+    (michaelgale) exists and is CadQuery-native; we keep our ~40-line
+    spec-exact base because it is already boolean-validated against the
+    canonical constants and adds no dependency. Adopt-a-library criteria:
+    spec fidelity provable, dependency audited, replaces >100 lines, or
+    we need ecosystem features we won't hand-roll (baseplates, bins).
+22. **Render verification needs zoom.** A vision model cannot resolve
+    0.1-1 mm features at whole-part scale; render close-ups of the
+    feature under test or the check is theater. Geometry truth comes
+    from boolean probes, never from renders.
+
 ## Design rules specific to this carrier
 
 - A7670 holes are Ø1.73 → M1.6 only. Standoff height is battery-driven

@@ -4,7 +4,27 @@ These are **conservative starting points, not universal truths**. Tune to
 your filament and printer. Both parts print **as oriented in the STL** —
 carrier base flat on the plate, no rotation, **no supports**.
 
-## PRINT THIS FIRST: Gridfinity fit-check tray — `exports/lilygo_fitcheck_tray_gridfinity.3mf`
+## PRINT THIS FIRST: calibration mini-coupon — `exports/lilygo_calicheck_mini.3mf`
+
+**~21 g, ~13-18 min, one plate, no supports, no brim.** Open the 3MF in
+Bambu Studio and slice at 0.28-0.32 mm / 2-3 walls / 5-10 % gyroid.
+Enable thin-wall detection (the Ø1.2-1.6 gauge holes and clip arms need
+single-perimeter walls).
+
+Layout (as sliced, plate on bed):
+
+| Feature | Where | What to report back |
+|---|---|---|
+| M1.6 pilot-hole ladder Ø1.20→1.60 | top-right row, left→right increasing | smallest Ø an M1.6 screw taps into snugly |
+| PCB thickness stair 1.0/1.2/1.4/1.6 | left wall, bottom→top | which slit the T-SimHat edge slides into freely |
+| Antenna width slits 19.8/20.2/20.6 | left-of-center tall blocks, bottom→top | which slit the sticker slides through with light drag |
+| Snap-clip bay (production geometry) | right side | does the SimHat clip-end (relay DOWN, as installed) snap under the hooks and release with finger pressure? |
+
+This coupon calibrates the four printer-dependent numbers the whole
+design leans on. Report the three numbers + clip feel, then the full
+carrier prints with confidence.
+
+## Second: Gridfinity fit-check tray — `exports/lilygo_fitcheck_tray_gridfinity.3mf`
 
 Open the **3MF directly in Bambu Studio** (File → Open) and slice with:
 

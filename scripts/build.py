@@ -20,8 +20,7 @@ os.chdir(ROOT)
 
 import cadquery as cq
 
-from cad import fitcheck
-from cad import holder
+from cad import calicheck, fitcheck, holder
 from cad import parameters as P
 
 EXPORTS = "exports"
@@ -193,6 +192,15 @@ def build_profile_exports():
     suffix = "_lowprofile" if low else ""
 
     if not low:
+        print("== building calibration mini-coupon ==")
+        cc = calicheck.build_calicheck()
+        cc_name = f"{EXPORTS}/lilygo_calicheck_mini"
+        export_step(cc, f"{cc_name}.step")
+        export_stl(cc, f"{cc_name}.stl")
+        try_3mf(f"{cc_name}.stl", f"{cc_name}.3mf")
+        render_png([(cc.val(), GLB_COLORS["carrier"], (0.08, 0.12))],
+                   f"{RENDERS}/calicheck_mini.png", "iso")
+
         print("== building gridfinity fit-check tray ==")
         tray = fitcheck.build_fitcheck_tray()
         tray_name = f"{EXPORTS}/lilygo_fitcheck_tray_gridfinity"

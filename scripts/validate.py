@@ -305,6 +305,84 @@ def fitcheck_tray_checks():
     return out
 
 
+def calicheck_checks():
+    """Calibration mini-coupon: single solid, gauges present and to size,
+    board sits cleanly in the clip bay (component-up test orientation)."""
+    from cad import calicheck as CC
+    wp = CC.build_calicheck()
+    cc = wp.val()
+    out = []
+
+    n = len(wp.solids().vals())
+    out.append({"check": "calicheck_single_solid", "value": n, "pass": n == 1})
+
+    bb = cc.BoundingBox()
+    dx, dy = bb.xmax - bb.xmin, bb.ymax - bb.ymin
+    out.append({"check": "calicheck_envelope", "value": [round(dx, 1), round(dy, 1)],
+                "pass": dx <= 100 and dy <= 80})
+
+    radii = sorted({round(f["radius"], 3) for f in
+                    _z_cylindrical_faces(cc)})
+    want = sorted(round(d / 2, 3) for d in CC.HOLE_DIAMS)
+    out.append({"check": "calicheck_hole_gauge_diameters", "value": radii,
+                "expected": want, "pass": radii == want})
+
+    worst_slit = 0.0
+    for i, t in enumerate(CC.PCB_SLIT_HEIGHTS):
+        y_c = CC.PCB_Y0 + i * CC.PCB_SLIT_PITCH
+        probe = cq.Solid.makeBox(
+            CC.SLIT_TRAVEL - 1.0, CC.PCB_SLIT_WIDTH - 0.2, t - 0.15,
+            cq.Vector(CC.PCB_X_IN + 0.5, y_c - CC.PCB_SLIT_WIDTH / 2 + 0.1,
+                      CC.PLATE_T + CC.PCB_SLIT_FLOOR + 0.05))
+        worst_slit = max(worst_slit, common_vol(cc, probe))
+    for i, wdt in enumerate(CC.ANT_SLIT_WIDTHS):
+        x_c = CC.ANT_X0 + i * CC.ANT_X_PITCH
+        probe = cq.Solid.makeBox(
+            CC.SLIT_TRAVEL - 1.0, wdt - 0.3, CC.ANT_SLIT_HEIGHT - 0.15,
+            cq.Vector(x_c - CC.SLIT_TRAVEL / 2 + 0.5,
+                      CC.ANT_Y_C - wdt / 2 + 0.15,
+                      CC.PLATE_T + CC.ANT_SLIT_FLOOR + 0.05))
+        worst_slit = max(worst_slit, common_vol(cc, probe))
+    out.append({"check": "calicheck_slit_gauges_open", "value": round(worst_slit, 4),
+                "pass": worst_slit < VOLUME_TOL})
+
+    board = holder.place_simhat().translate(cq.Vector(
+        CC.BAY_OX - P.simhat_cx(), CC.BAY_OY - M.simhat_pcb_l / 2,
+        CC.PAD_TOP - P.SIMHAT_SUPPORT_H))
+    v = common_vol(cc, board)
+    out.append({"check": "calicheck_bay_seated_board", "value": round(v, 4),
+                "note": ("board in PRODUCTION orientation (flipped, relay down) "
+                         "at the bay support height"),
+                "pass": abs(v) < VOLUME_TOL})
+
+    out.append({"check": "calicheck_est_mass_g",
+                "value": round(cc.Volume() * 1.24 / 1000, 1),
+                "pass": cc.Volume() * 1.24 / 1000 < 22})
+    return out
+
+
+def _z_cylindrical_faces(solid):
+    from OCP.BRepAdaptor import BRepAdaptor_Surface
+    from OCP.GeomAbs import GeomAbs_SurfaceType
+    from OCP.TopAbs import TopAbs_FACE
+    from OCP.TopExp import TopExp_Explorer
+    out = []
+    exp = TopExp_Explorer(solid.wrapped, TopAbs_FACE)
+    while exp.More():
+        face = cq.Face(exp.Current())
+        try:
+            ad = BRepAdaptor_Surface(face.wrapped)
+            if ad.GetType() == GeomAbs_SurfaceType.GeomAbs_Cylinder:
+                cyl = ad.Cylinder()
+                ax = cyl.Axis().Direction()
+                if abs(ax.Z()) > 0.99 and 0.5 < cyl.Radius() < 0.9:
+                    out.append({"radius": round(cyl.Radius(), 3)})
+        except Exception:
+            pass
+        exp.Next()
+    return out
+
+
 def main():
     report = {"parameters_of_record": {}}
     checks = []
@@ -449,6 +527,10 @@ def main():
         lifted = a76t.translate(cq.Vector(0, 0, 30))
         checks.append({"check": "a7670_lift_free", "value": round(common_vol(carrier, lifted), 5),
                        "pass": abs(common_vol(carrier, lifted)) < VOLUME_TOL})
+
+    print("== calibration mini-coupon ==")
+    for c in calicheck_checks():
+        checks.append(c)
 
     print("== gridfinity fit-check tray ==")
     for c in fitcheck_tray_checks():

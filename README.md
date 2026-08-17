@@ -65,13 +65,15 @@ printing.**
 
 | Variant | File | Print height | Purpose |
 |---|---|---|---|
-| **Gridfinity fit-check tray** | `exports/lilygo_fitcheck_tray_gridfinity.3mf` | 33 mm pins / 7 mm body, **~15 min** | FIRST PRINT: gauge pins verify the A7670 hole pattern (drop the board over them, battery installed OK), fences gauge the SimHat outline, channel gauges the 110×20 antenna. Then clips onto any Gridfinity 3×4 baseplate as a real desk tray |
+| **Calibration mini-coupon** | `exports/lilygo_calicheck_mini.3mf` | ~28 mm local, ~21 g, **~15 min** | **FIRST PRINT**: M1.6 pilot-hole ladder, SimHat thickness stair, antenna width slits, real snap-clip bay — calibrates every printer-dependent number before anything bigger |
+| **Gridfinity fit-check tray** | `exports/lilygo_fitcheck_tray_gridfinity.3mf` | 33 mm pins / 7 mm body, ~17 g | second print: gauge pins verify the A7670 hole pattern with battery installed; SimHat outline + fence gauges; antenna channel; then clips onto any Gridfinity 3×4 baseplate |
 | Full carrier | `exports/lilygo_a7670_simhat_carrier.stl` | ~40 mm | production holder |
 | Low-profile template | `exports/lilygo_a7670_simhat_carrier_lowprofile.stl` | **9 mm** | batteryless screw-fit + cage-outline check (relay/holder hang through the open frame); wall-mountable via M3 ear slots. Build: `CARRIER_PROFILE=low python scripts/build.py` |
-| Snap coupon | `exports/simhat_clip_test.stl` | ~35 mm bay | pick XY clearance 0.20–0.50 |
+| Snap coupon | `exports/simhat_clip_test.stl` | ~35 mm bay | pick XY clearance 0.20–0.50 (superseded for feel by the mini-coupon bay, still useful for clearance sweep) |
 | Sections | `exports/sections/*.stl` | varies | iterate one region cheaply (A7670 plate / SimHat cage / antenna tray); volume-partition of the full carrier |
 
-Print order: **Gridfinity tray (~15 min) → coupon → full carrier.**
+Print order: **calicheck mini (~15 min) → Gridfinity tray → coupon (optional) → full carrier.**
+Design intent + audit table: `docs/design_spec.md`.
 
 ## Port access (validated)
 

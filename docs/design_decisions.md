@@ -178,6 +178,31 @@ measured STEP component islands.
   channel initially crossed the gauge pins; boards shifted −14 mm and the
   channel moved to the +Y end. Relative gauge geometry unchanged.
 
+## Mounting-ecosystem research (v0.4)
+
+- **Gridfinity (42 mm)**: adopted for the fit-check tray. Python library
+  `cq-gridfinity` (michaelgale, CadQuery-native) exists; we keep the
+  ~40-line spec-exact base (boolean-validated against the canonical
+  constants) — no new dependency, same geometry. Revisit the library if
+  we ever generate baseplates/bins.
+- **DIN-35 rail**: the classic shed/solar pattern (all charge controllers
+  DIN-mount). Deferred: the unit's stated homes are a waterproof box or a
+  wall box, both served by the M3 slotted ears/tabs + VHB pads. If the
+  shed cabinet turns out DIN-rail-equipped, a clip-on ear pair is a
+  parameter-level addition (TH35 top-hat profile, ~2 printed hooks),
+  not a redesign.
+- **19" rack / honeycomb wall**: rejected — wrong scale for a 133 mm
+  carrier / wall-storage ecosystem is for tools, not wired electronics.
+
+## Calibration strategy (v0.4)
+
+Printer-dependent numbers (self-tap pilot Ø, PCB thickness, sticker
+width, snap feel) are calibrated on a ~21 g throwaway coupon BEFORE the
+17 g fit tray or the full carrier — see `docs/print_settings.md`. The
+coupon's clip bay uses the production flip orientation and the shared
+`_clip_arm_pts` profile, so what you feel there is what the carrier
+does.
+
 ## Trade-offs accepted
 
 - SimHat must slide 3.6 mm toward the clips during removal — pads are
