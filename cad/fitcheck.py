@@ -120,23 +120,29 @@ def _simhat_features() -> list[cq.Shape]:
 
 
 def _antenna_features() -> list[cq.Shape]:
+    """Under-battery channel gauge: flat spine floor + two guide rails at
+    the true channel width + stop at the true +Y position, mirroring the
+    carrier's ANT_POS=under_battery channel (scaled to the tray layout)."""
+    cx = P.a7670_cx()
     boards_top_y = M.a7670_pcb_l / 2 + SHIFT_Y
-    ch_len = P.ANT_SLIDE + 2 * P.ANT_SIDE_CLEAR + P.ANT_STOP_T
-    y_c = boards_top_y + 2.0 + ch_len / 2
-    x_lo = P.ANT_X_C - P.ANT_W / 2 - P.ANT_SIDE_CLEAR
-    x_hi = P.ANT_X_C + P.ANT_W / 2 + P.ANT_SIDE_CLEAR
-    solids = [_web(P.ANT_X_C, y_c,
-                   P.ANT_W + 2 * P.ANT_SIDE_CLEAR + 2 * P.ANT_WALL_T + 1.0,
-                   ch_len + 1.0)]
-    for xi, side in ((x_lo, -1), (x_hi, 1)):
+    stop_face = boards_top_y - 2.0
+    entry_y = -FOOTPRINT_Y / 2 + 5.0
+    half = P.ANT_W / 2 + P.ANT_SIDE_CLEAR
+    solids = [_web(cx, (entry_y + stop_face) / 2,
+                   2 * half + 2 * P.ANT_GUIDE_T + 2.0,
+                   stop_face - entry_y)]
+    for side in (-1, 1):
         solids.append(cq.Workplane("XY")
-                      .center(xi + side * P.ANT_WALL_T / 2, y_c)
-                      .rect(P.ANT_WALL_T, ch_len)
-                      .extrude(1.6).translate((0, 0, WEB_Z1)).val())
+                      .center(cx + side * (half + P.ANT_GUIDE_T / 2),
+                              (entry_y + stop_face) / 2)
+                      .rect(P.ANT_GUIDE_T, stop_face - entry_y)
+                      .extrude(P.ANT_GUIDE_H)
+                      .translate((0, 0, WEB_Z1)).val())
     solids.append(cq.Workplane("XY")
-                  .center(P.ANT_X_C, y_c - ch_len / 2 + P.ANT_STOP_T / 2)
-                  .rect(x_hi - x_lo + 2 * P.ANT_WALL_T, P.ANT_STOP_T)
-                  .extrude(1.6).translate((0, 0, WEB_Z1)).val())
+                  .center(cx, stop_face + P.ANT_GUIDE_T / 2)
+                  .rect(2 * half + 2 * P.ANT_GUIDE_T + 2.0, P.ANT_GUIDE_T)
+                  .extrude(P.ANT_GUIDE_H)
+                  .translate((0, 0, WEB_Z1)).val())
     return solids
 
 

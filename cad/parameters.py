@@ -51,7 +51,11 @@ class Measured:
     # T-SimHat PCB (STEP), board-local coords x[-16.5,16.5], y[-94.8,0]
     simhat_pcb_w = 33.0
     simhat_pcb_l = 94.8
-    simhat_pcb_t = 1.0              # STEP slab; VERIFY with calipers (may be 1.6)
+    simhat_pcb_t = 1.25             # PHYSICAL (coupon stair: free in 1.4,
+                                    # tight in 1.2). STEP models 1.0 = bare
+                                    # laminate without mask/soldermask. The
+                                    # coupon bay's 1.2mm slot gripped the
+                                    # 1.25mm board "perfectly firm".
 
     # T-SimHat STEP component zones, STEP-native (x, y); y=0 is the end that
     # faces the snap clips on the carrier. Derived from component solids.
@@ -96,9 +100,9 @@ FRAME_MARGIN = 6.5                  # rail setback from board edges
 OUTER_CORNER_R = 6.0                # rounded external corners
 RIB_PITCH = 38.0                    # max unsupported span between cross ribs
 
-# 16 mm wiring channel: room for SMA plugs (~10 mm) facing each other across
-# the gap after the A7670 180-deg rotation, plus finger access.
-BOARD_GAP = 16.0                    # service gap between the two boards
+# 16 -> 20 mm wiring channel: easier fingers + SMA plug clearance between
+# the boards; USB-C is on the A7670 -Y end (points AWAY from the SimHat).
+BOARD_GAP = 20.0                    # service gap between the two boards
 
 # ---------------------------------------------------------------------------
 # A7670 section (board component-up on 4 screw standoffs)
@@ -176,24 +180,29 @@ SIMHAT_FENCE_ENGAGE_H = 4.0         # wall height above PCB underside
 
 TIE_SLOT_W = 3.6                    # cable tie width clearance
 TIE_SLOT_L = 7.0                    # tie loop length clearance
-TIE_SLOTS = [                       # (x, y) through gap rails, long axis along Y
-    (7.0, -42.0), (7.0, -14.0), (7.0, 14.0), (7.0, 42.0),
-    (-7.0, -42.0), (-7.0, -14.0), (-7.0, 14.0), (-7.0, 42.0),
+# Slots live ON the gap rails: x = +/-(gap/2 + 0.4 + RAIL_W/2), computed
+# here from BOARD_GAP so they follow the rails when the gap changes.
+_gap_rail_x = BOARD_GAP / 2 + 0.4 + RAIL_W / 2
+TIE_SLOTS = [
+    (_gap_rail_x, -42.0), (_gap_rail_x, -14.0),
+    (_gap_rail_x, 14.0), (_gap_rail_x, 42.0),
+    (-_gap_rail_x, -42.0), (-_gap_rail_x, -14.0),
+    (-_gap_rail_x, 14.0), (-_gap_rail_x, 42.0),
 ]
 
 # ---------------------------------------------------------------------------
 # Enclosure mounting interface (parametric ears)
 # ---------------------------------------------------------------------------
 
-EARS = ({"a7670-far": (+1, +1), "simhat-far": (-1, +1)}
-        if PROFILE == "full"
-        else {"a7670-near": (+1, -1), "a7670-far": (+1, +1),
-              "simhat-near": (-1, -1), "simhat-far": (-1, +1)})
-# Full profile: the two -Y mounting points live on the antenna-tray stop
-# wall as slotted tabs (the corner ears would block the 110 mm-wide tray
-# mouth). Low profile (no tray) uses all four corner ears.
-ANT_STOP_TAB_X = (-35.0, 35.0)      # tab centers on the tray stop wall
-ANT_STOP_TAB_EXT = 9.0              # how far tabs reach beyond the stop
+EARS = {                            # corner -> (dx, dy) direction of ear;
+    # full profile uses 4 corners when the antenna is under the battery
+    # (no tray mouth to avoid); end_tray swaps the two -Y corners for
+    # stop-wall tabs via holder._ear_geometry()
+    "a7670-near": (+1, -1),
+    "a7670-far": (+1, +1),
+    "simhat-near": (-1, -1),
+    "simhat-far": (-1, +1),
+}
 EAR_EXT = 11.0                      # how far ear flange reaches beyond outer rail
 EAR_W = 16.0                        # ear width
 EAR_T = BASE_T                      # ear thickness (flush with base)
@@ -202,24 +211,40 @@ TAPE_PAD_SIZE = 24.0                # flat VHB landing zones (kept hole-free)
 TAPE_PADS = [("a7670-mid", 0.0), ("simhat-mid", 0.0)]
 
 # ---------------------------------------------------------------------------
-# LTE sticker antenna slide-in tray (-Y end; sticker lies ALONG X, slides
-# in along its SHORT dimension). User-measured: ~110 x 20 mm sticker
-# (aliexpress 32870641099 full-band 698-2690), ~10-15 cm coax.
-# CALIPER the sticker and adjust ANT_W (long dim) / ANT_SLIDE (short dim)
-# if yours differs.
+# LTE sticker antenna position + channel geometry.
+# User-measured: ~110 x 20 mm sticker, coax pigtail enters ~20 mm into one
+# end (that end goes in LAST, at the mouth), 10-15 cm coax.
+#
+# ANT_POS = "under_battery" (default): sticker slides flat UNDER the A7670
+#   on a continuous base strip (z 3.2) in the 1.3 mm gap below the 18650
+#   holder (battery bottom z 4.5). Side guides only - top fully open.
+#   Footprint shrinks ~34 mm in Y (no end appendix). RF trade-off: directly
+#   under a battery+PCB costs typically 3-10 dB (Antenova/Digi guidance);
+#   accepted for a shed relay inside a plastic enclosure.
+# ANT_POS = "end_tray": the v0.3 slide-in tray appended beyond the -Y rail.
 # ---------------------------------------------------------------------------
 
-ANT_ENABLED = PROFILE == "full"
-ANT_SLIDE = 20.0          # sticker dimension along slide direction (short dim)
-ANT_W = 110.0             # sticker dimension lying along X (long dim)
-ANT_X_C = 0.0             # tray center X (spans the gap + both board zones)
-ANT_SIDE_CLEAR = 0.5      # per-side clearance between sticker and channel walls
-ANT_FLOOR_T = 1.2         # tray floor thickness
-ANT_WALL_T = 2.4          # channel wall thickness
-ANT_WALL_H = 4.5          # channel wall height above plate
-ANT_STOP_T = 2.4          # end-stop wall thickness
-ANT_ENTRY_CHAMFER = 1.5   # lead-in flare on channel mouths
-ANT_COAX_NOTCH_W = 5.0    # coax pass-through notch in the -Y ring rail
+ANT_POS = "under_battery"
+ANT_SLIDE = 110.0        # sticker long dimension (along Y when under_battery)
+ANT_W = 20.0             # sticker width (across the channel)
+ANT_X_C = None           # under_battery: centered on the A7670 (auto)
+ANT_SIDE_CLEAR = 0.6     # lateral clearance per side (coupon: fits 19.8-20.2)
+ANT_CABLE_ENTRY = 20.0   # pigtail-inside-sticker length; sits in the mouth
+ANT_GUIDE_SLOPE_DEG = 80.0   # inner guide faces lean out 10 deg from vertical
+ANT_GUIDE_H = 4.0        # guide height above base (shield/pin ceiling 10.0)
+ANT_GUIDE_T = 2.4        # guide base thickness
+ANT_STOP_Y = 52.5        # stop block inner face (+Y end of channel)
+ANT_FLOOR_T = 3.2        # continuous strip under the channel (flat sliding)
+ANT_COAX_NOTCH_W = 5.0   # end_tray only: coax pass-through in the -Y rail
+
+# end_tray geometry (legacy, kept as the alternative position)
+ANT_TRAY_EXT = 24.0      # how far the end tray reaches beyond the -Y rail
+ANT_TRAY_WALL_H = 4.5
+ANT_TRAY_WALL_T = 2.4
+ANT_TRAY_STOP_T = 2.4
+ANT_TRAY_ENTRY_CHAMFER = 1.5
+ANT_STOP_TAB_X = (-35.0, 35.0)
+ANT_STOP_TAB_EXT = 9.0
 ANT_CABLE_L = 120.0       # coax length estimate (doc/coil-planning param)
 
 # ---------------------------------------------------------------------------
@@ -273,4 +298,4 @@ if _os.environ.get("CARRIER_PROFILE") == "low" and PROFILE == "full":
     A7670_STANDOFF_H = 9.0
     SIMHAT_SUPPORT_H = 9.0
     SIMHAT_CLIPS_ENABLED = False
-    ANT_ENABLED = False
+    ANT_POS = "none"

@@ -224,19 +224,48 @@ def battery_keepout_check(carrier):
 
 
 def antenna_checks(carrier):
-    """Tray slide path clear; seated sticker clear of carrier; sticker flat."""
-    g = holder._antenna_tray_geometry()
+    """Slide path clear, seated sticker clear of carrier, sticker vs the
+    18650 keep-out box (under_battery), sticker stays flat."""
+    g = holder.antenna_geometry()
+    if g["pos"] == "under_battery":
+        z_lo, z_hi = P.ANT_FLOOR_T + 0.05, P.ANT_FLOOR_T + 0.35
+        sticker = cq.Solid.makeBox(
+            P.ANT_W, P.ANT_SLIDE, z_hi - z_lo,
+            cq.Vector(g["cx"] - P.ANT_W / 2, g["stop_y"] - P.ANT_SLIDE, z_lo))
+        slide = cq.Solid.makeBox(
+            P.ANT_W, g["slide_len"], z_hi - z_lo,
+            cq.Vector(g["cx"] - P.ANT_W / 2, g["entry_y"], z_lo))
+        x0, y0 = holder._a7670_local_to_carrier(
+            (M.a7670_pcb_w - P.A7670_BATTERY_KEEP_W) / 2,
+            (M.a7670_pcb_l - P.A7670_BATTERY_KEEP_L) / 2)
+        pts = [holder._a7670_local_to_carrier(
+            x, y) for x in (x0, x0 + P.A7670_BATTERY_KEEP_W)
+            for y in (y0, y0 + P.A7670_BATTERY_KEEP_L)]
+        xs, ys = [p[0] for p in pts], [p[1] for p in pts]
+        battery = cq.Solid.makeBox(
+            max(xs) - min(xs), max(ys) - min(ys), 19.5,
+            cq.Vector(min(xs), min(ys), P.A7670_STANDOFF_H - 20.5))
+        return {
+            "pos": "under_battery",
+            "slide_path_interference_mm3": round(common_vol(carrier, slide), 4),
+            "seated_sticker_interference_mm3": round(common_vol(carrier, sticker), 4),
+            "battery_overlap_mm3": round(common_vol(sticker, battery), 4),
+            "sticker_plane": "flat on base strip under battery (1.3mm gap)",
+            "channel_len_mm": round(g["slide_len"], 1),
+        }
     slide = cq.Solid.makeBox(
-        P.ANT_W - 2.0, abs(g["entry_y"] - g["far_y"]) - P.ANT_STOP_T, 1.5,
-        cq.Vector(P.ANT_X_C - P.ANT_W / 2 + 1.0,
-                  g["far_y"] + P.ANT_STOP_T, P.ANT_FLOOR_T + 0.1))
+        P.ANT_W - 2.0, abs(g["entry_y"] - g["far_y"]) - P.ANT_TRAY_STOP_T, 1.5,
+        cq.Vector(g["cx"] - P.ANT_W / 2 + 1.0,
+                  g["far_y"] + P.ANT_TRAY_STOP_T, P.ANT_FLOOR_T + 0.1))
     sticker = cq.Solid.makeBox(
         P.ANT_W, P.ANT_SLIDE, 0.35,
-        cq.Vector(P.ANT_X_C - P.ANT_W / 2, g["far_y"] + P.ANT_STOP_T + 0.3,
+        cq.Vector(g["cx"] - P.ANT_W / 2, g["far_y"] + P.ANT_TRAY_STOP_T + 0.3,
                   P.ANT_FLOOR_T))
     return {
+        "pos": "end_tray",
         "slide_path_interference_mm3": round(common_vol(carrier, slide), 4),
         "seated_sticker_interference_mm3": round(common_vol(carrier, sticker), 4),
+        "battery_overlap_mm3": 0.0,
         "sticker_plane": "flat, horizontal, on tray floor",
         "tray_extends_to_y": round(g["far_y"], 2),
     }
@@ -284,15 +313,16 @@ def fitcheck_tray_checks():
     out.append({"check": "fitcheck_simhat_relay_down_rest",
                 "value": round(v_sh, 4), "pass": abs(v_sh) < VOLUME_TOL})
 
-    ch_len = P.ANT_SLIDE + 2 * P.ANT_SIDE_CLEAR + P.ANT_STOP_T
-    y_c = 55.27 + dy + 2.0 + ch_len / 2
-    stop_face = y_c - ch_len / 2 + P.ANT_STOP_T
-    seated = cq.Solid.makeBox(P.ANT_W, P.ANT_SLIDE, 0.3,
-                              cq.Vector(P.ANT_X_C - P.ANT_W / 2, stop_face,
-                                        web_top))
-    path = cq.Solid.makeBox(P.ANT_W, P.ANT_SLIDE + 12, 0.3,
-                            cq.Vector(P.ANT_X_C - P.ANT_W / 2, stop_face,
-                                      web_top))
+    stop_face = M.a7670_pcb_l / 2 + fitcheck.SHIFT_Y - 2.0
+    entry_y = -fitcheck.FOOTPRINT_Y / 2 + 5.0
+    cx_a = P.a7670_cx()
+    seated = cq.Solid.makeBox(
+        P.ANT_W, P.ANT_SLIDE, 0.3,
+        cq.Vector(cx_a - P.ANT_W / 2, stop_face - P.ANT_SLIDE,
+                  fitcheck.WEB_Z1))
+    path = cq.Solid.makeBox(
+        P.ANT_W, stop_face - entry_y, 0.3,
+        cq.Vector(cx_a - P.ANT_W / 2, entry_y, fitcheck.WEB_Z1))
     v_seat = common_vol(tray, seated)
     v_path = common_vol(tray, path)
     out.append({"check": "fitcheck_antenna_seated", "value": round(v_seat, 4),
@@ -561,14 +591,15 @@ def main():
                    "pass": sec_ok and abs(v_sum - v_total) / v_total < 0.005})
     report["sections"] = list(sections)
 
-    if P.ANT_ENABLED:
-        print("== antenna tray ==")
+    if P.ANT_POS in ("under_battery", "end_tray"):
+        print("== antenna ==")
         ant = antenna_checks(carrier)
         checks.append({
-            "check": "antenna_tray",
+            "check": "antenna_channel",
             "value": ant,
             "pass": (ant["slide_path_interference_mm3"] < VOLUME_TOL
-                     and ant["seated_sticker_interference_mm3"] < VOLUME_TOL),
+                     and ant["seated_sticker_interference_mm3"] < VOLUME_TOL
+                     and ant.get("battery_overlap_mm3", 0.0) < VOLUME_TOL),
         })
         report["antenna"] = ant
 

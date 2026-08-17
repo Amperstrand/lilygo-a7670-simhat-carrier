@@ -16,6 +16,8 @@ facing the release tabs). Carrier Y = simhat_pcb_l/2 - v.
 
 from __future__ import annotations
 
+import math
+
 import cadquery as cq
 from OCP.BRepAlgoAPI import BRepAlgoAPI_Common, BRepAlgoAPI_Cut
 
@@ -133,6 +135,12 @@ def build_base():
                                 -gap_ch, y + P.RAIL_W / 2, 0, P.BASE_T))
             solids.append(_rect(gap_ch, y - P.RAIL_W / 2,
                                 x_hi - P.RAIL_W, y + P.RAIL_W / 2, 0, P.BASE_T))
+        for (_, v) in P.SIMHAT_FENCES:
+            yf = sh_y(v)
+            solids.append(_rect(x_lo + P.RAIL_W, yf - P.RAIL_W / 2,
+                                -gap_ch, yf + P.RAIL_W / 2, 0, P.BASE_T))
+            solids.append(_rect(gap_ch, yf - P.RAIL_W / 2,
+                                x_hi - P.RAIL_W, yf + P.RAIL_W / 2, 0, P.BASE_T))
         return cq.Workplane("XY").newObject(solids).combine()
 
     for y in (-53.5, -28.0, 0.0, 28.0, 53.5):
@@ -332,13 +340,15 @@ def build_simhat_fences():
 
 def build_tape_pads():
     solids = [
-        _rect(P.a7670_cx() - P.TAPE_PAD_SIZE / 2, -P.TAPE_PAD_SIZE / 2,
-              P.a7670_cx() + P.TAPE_PAD_SIZE / 2, P.TAPE_PAD_SIZE / 2,
-              0, P.BASE_T),
         _rect(P.simhat_cx() - P.TAPE_PAD_SIZE / 2, -P.TAPE_PAD_SIZE / 2,
               P.simhat_cx() + P.TAPE_PAD_SIZE / 2, P.TAPE_PAD_SIZE / 2,
               0, P.BASE_T),
     ]
+    if P.ANT_POS != "under_battery":
+        solids.insert(0, _rect(P.a7670_cx() - P.TAPE_PAD_SIZE / 2,
+                               -P.TAPE_PAD_SIZE / 2,
+                               P.a7670_cx() + P.TAPE_PAD_SIZE / 2,
+                               P.TAPE_PAD_SIZE / 2, 0, P.BASE_T))
     return cq.Workplane("XY").newObject(solids).combine()
 
 
@@ -355,14 +365,15 @@ def _ear_geometry():
             "slot_x": x_edge + sx * (P.EAR_EXT - 4.0),
             "slot_angle": 0,
         })
-    if P.ANT_ENABLED:
+    if P.ANT_POS == "end_tray" and P.PROFILE == "full":
         y0 = _antenna_tray_geometry()["far_y"]
+        out = [e for e in out if not e["name"].endswith("-near")]
         for i, tx in enumerate(P.ANT_STOP_TAB_X):
             out.append({
                 "name": f"antenna_stop_tab_{i}", "kind": "stop_tab", "sx": 0,
-                "x_edge": tx, "y_c": y0 - P.ANT_STOP_TAB_EXT / 2 + P.ANT_STOP_T / 2,
+                "x_edge": tx, "y_c": y0 - P.ANT_STOP_TAB_EXT / 2 + P.ANT_TRAY_STOP_T / 2,
                 "tip_x": tx, "slot_x": tx,
-                "slot_y": y0 - P.ANT_STOP_TAB_EXT / 2 + P.ANT_STOP_T / 2,
+                "slot_y": y0 - P.ANT_STOP_TAB_EXT / 2 + P.ANT_TRAY_STOP_T / 2,
                 "slot_angle": 90,
             })
     return out
@@ -403,59 +414,118 @@ def cut_tie_slots(carrier):
 
 
 # ---------------------------------------------------------------------------
-# LTE sticker antenna slide-in tray (-Y end, appendage beyond ring rail)
+# LTE sticker antenna channels (ANT_POS: under_battery | end_tray)
 # ---------------------------------------------------------------------------
 
-def _antenna_tray_geometry():
+def antenna_geometry():
+    """Canonical channel coordinates for the active ANT_POS."""
+    if P.ANT_POS == "under_battery":
+        _, y_lo, _, _ = _frame_extents()
+        entry_y = y_lo + P.RAIL_W              # inner face of the -Y end rail
+        stop_y = P.ANT_STOP_Y
+        cx = P.a7670_cx()
+        half = P.ANT_W / 2 + P.ANT_SIDE_CLEAR
+        return {"pos": "under_battery", "entry_y": entry_y, "stop_y": stop_y,
+                "cx": cx, "ch_half": half,
+                "slide_len": stop_y - entry_y}
     x_lo, y_lo, _, _ = _frame_extents()
-    entry_y = y_lo                     # channels start at the outer frame line
-    far_y = y_lo - (P.ANT_SLIDE + P.ANT_STOP_T + 0.6)
-    ch_half = P.ANT_W / 2 + P.ANT_SIDE_CLEAR
-    return {
-        "entry_y": entry_y, "far_y": far_y,
-        "ch_x_lo": P.ANT_X_C - ch_half, "ch_x_hi": P.ANT_X_C + ch_half,
-    }
+    entry_y = y_lo
+    far_y = y_lo - (P.ANT_SLIDE + P.ANT_TRAY_STOP_T + 0.6)
+    cx = P.ANT_X_C if P.ANT_X_C is not None else 0.0
+    half = P.ANT_W / 2 + P.ANT_SIDE_CLEAR
+    return {"pos": "end_tray", "entry_y": entry_y, "far_y": far_y,
+            "cx": cx, "ch_half": half,
+            "ch_x_lo": cx - half, "ch_x_hi": cx + half}
+
+
+def _antenna_tray_geometry():
+    g = antenna_geometry()
+    return {"entry_y": g["entry_y"], "far_y": g["far_y"],
+            "ch_x_lo": g["ch_x_lo"], "ch_x_hi": g["ch_x_hi"]}
+
+
+def build_antenna_underdeck():
+    """Sticker slides flat UNDER the A7670 in the 1.3 mm gap below the
+    18650 holder: continuous floor strip, two open-top guides whose inner
+    faces lean out ANT_GUIDE_SLOPE_DEG (self-centering funnel), +Y stop.
+    The cable-entry end of the sticker stays in the -Y mouth (beyond the
+    battery footprint, open above) so the pigtail loops out freely."""
+    g = antenna_geometry()
+    cx, half = g["cx"], g["ch_half"]
+    y0, y1 = g["entry_y"], g["stop_y"]
+    h = P.ANT_GUIDE_H
+    lean = h / math.tan(math.radians(P.ANT_GUIDE_SLOPE_DEG))
+    solids = []
+
+    floor = _rect(cx - half - P.ANT_GUIDE_T - 2.0, y0,
+                  cx + half + P.ANT_GUIDE_T + 2.0, y1,
+                  0, P.ANT_FLOOR_T)
+
+    for side in (-1, 1):
+        xi = cx + side * half
+        xo = xi + side * P.ANT_GUIDE_T
+        pts = [(xi, y0), (xi + side * lean, y1),
+               (xo + side * lean, y1), (xo, y0)]
+        solids.append(cq.Workplane("XY").polyline(pts).close()
+                      .extrude(P.ANT_FLOOR_T + h)
+                      .translate((0, 0, P.ANT_FLOOR_T)).val())
+
+    stop = _rect(cx - half - P.ANT_GUIDE_T - 2.0, y1,
+                 cx + half + P.ANT_GUIDE_T + 2.0, y1 + P.ANT_GUIDE_T,
+                 P.ANT_FLOOR_T, h)
+    solids.append(stop)
+    solids.append(floor)
+    return cq.Workplane("XY").newObject(solids).combine()
 
 
 def build_antenna_tray():
-    """Floor + two flared channel walls + end stop. The sticker slides in
-    along -Y on the floor between the walls; wall mouths flare outward at
-    the entry so a slightly misaligned sticker self-guides into place."""
-    g = _antenna_tray_geometry()
+    """end_tray alternative: floor + flared walls + stop beyond the -Y rail."""
+    g = antenna_geometry()
     y0, y1 = g["far_y"], g["entry_y"]
-    f = P.ANT_ENTRY_CHAMFER
+    f = P.ANT_TRAY_ENTRY_CHAMFER
+    cx = g["cx"]
+    half = g["ch_half"]
     solids = []
 
-    floor = _rect(P.ANT_X_C - P.ANT_W / 2 - P.ANT_WALL_T - 2.0, y0,
-                  P.ANT_X_C + P.ANT_W / 2 + P.ANT_WALL_T + 2.0, y1 + f + 1.0,
+    floor = _rect(cx - half - P.ANT_TRAY_WALL_T - 2.0, y0,
+                  cx + half + P.ANT_TRAY_WALL_T + 2.0, y1 + f + 1.0,
                   0, P.ANT_FLOOR_T)
 
     for xi, side in ((g["ch_x_lo"], -1), (g["ch_x_hi"], 1)):
         pts = [(xi, y0), (xi, y1), (xi + side * f, y1),
-               (xi + side * f, y1 + f), (xi + side * P.ANT_WALL_T, y1 + f),
-               (xi + side * P.ANT_WALL_T, y0)]
+               (xi + side * f, y1 + f), (xi + side * P.ANT_TRAY_WALL_T, y1 + f),
+               (xi + side * P.ANT_TRAY_WALL_T, y0)]
         solids.append(cq.Workplane("XY").polyline(pts).close()
-                      .extrude(P.ANT_WALL_H).val())
+                      .extrude(P.ANT_TRAY_WALL_H).val())
 
-    stop = _rect(P.ANT_X_C - P.ANT_W / 2 - P.ANT_WALL_T - 2.0, y0,
-                 P.ANT_X_C + P.ANT_W / 2 + P.ANT_WALL_T + 2.0,
-                 y0 + P.ANT_STOP_T, 0, P.ANT_WALL_H)
+    stop = _rect(cx - half - P.ANT_TRAY_WALL_T - 2.0, y0,
+                 cx + half + P.ANT_TRAY_WALL_T + 2.0,
+                 y0 + P.ANT_TRAY_STOP_T, 0, P.ANT_TRAY_WALL_H)
     solids.append(stop)
 
     for tx in P.ANT_STOP_TAB_X:
         solids.append(_rect(tx - P.EAR_W / 2, y0 - P.ANT_STOP_TAB_EXT,
-                            tx + P.EAR_W / 2, y0 + P.ANT_STOP_T,
+                            tx + P.EAR_W / 2, y0 + P.ANT_TRAY_STOP_T,
                             0, P.EAR_T))
 
     return cq.Workplane("XY").newObject([floor] + solids).combine()
 
 
+def build_antenna():
+    if P.ANT_POS == "under_battery":
+        return build_antenna_underdeck()
+    if P.ANT_POS == "end_tray":
+        return build_antenna_tray()
+    return cq.Workplane("XY").box(0.001, 0.001, 0.001)
+
+
 def cut_coax_notch(carrier):
-    if not P.ANT_ENABLED:
+    if P.ANT_POS != "end_tray":
         return carrier
     _, y_lo, _, _ = _frame_extents()
-    notch = _rect(P.ANT_X_C - P.ANT_COAX_NOTCH_W / 2, y_lo - 1.0,
-                  P.ANT_X_C + P.ANT_COAX_NOTCH_W / 2, y_lo + P.RAIL_W + 0.6,
+    cx = antenna_geometry()["cx"]
+    notch = _rect(cx - P.ANT_COAX_NOTCH_W / 2, y_lo - 1.0,
+                  cx + P.ANT_COAX_NOTCH_W / 2, y_lo + P.RAIL_W + 0.6,
                   0, 3.0)
     return carrier.cut(notch)
 
@@ -473,8 +543,8 @@ def build_carrier(clip_deflect=0.0):
     if P.PROFILE == "full":
         parts.append(build_tape_pads())
     parts.append(build_ears())
-    if P.ANT_ENABLED:
-        parts.append(build_antenna_tray())
+    if P.ANT_POS not in ("none",) and P.PROFILE == "full":
+        parts.append(build_antenna())
     for part in parts:
         carrier = carrier.union(part, tol=1e-4)
     carrier = cut_screw_pilots(carrier)
@@ -496,13 +566,12 @@ def build_assembly():
 
 
 def build_sections(carrier=None):
-    """Split the finished carrier into three independently printable,
-    exactly partitioning sections (volume sum equals the whole):
-    A7670 plate (x>=0), SimHat cage (x<=0), and the -Y strip carrying the
-    antenna tray. Intended for cheap per-section iteration, not reassembly."""
+    """Split the finished carrier into independently printable, exactly
+    partitioning sections (volume sum equals the whole): A7670 plate and
+    SimHat cage split at x=0 spanning full Y; with ANT_POS=end_tray the -Y
+    strip becomes a third tray section instead. Per-region iteration only."""
     if carrier is None:
         carrier = build_carrier().val()
-    split_y = _frame_extents()[1] + 2 * P.RAIL_W
 
     def keep(box_origin, box_dx, box_dy):
         box = cq.Solid.makeBox(box_dx, box_dy, 80,
@@ -510,13 +579,21 @@ def build_sections(carrier=None):
         return cq.Shape.cast(BRepAlgoAPI_Common(
             carrier.wrapped, box.wrapped).Shape())
 
+    if P.ANT_POS == "end_tray" and P.PROFILE == "full":
+        split_y = _frame_extents()[1] + 2 * P.RAIL_W
+        return {
+            "a7670_section": cq.Workplane("XY").newObject(
+                [keep((0.0, split_y), 150, 200)]),
+            "simhat_cage_section": cq.Workplane("XY").newObject(
+                [keep((-150.0, split_y), 150, 200)]),
+            "antenna_tray_section": cq.Workplane("XY").newObject(
+                [keep((-150.0, -150.0), 300, 150 + split_y)]),
+        }
     return {
         "a7670_section": cq.Workplane("XY").newObject(
-            [keep((0.0, split_y), 150, 200)]),
+            [keep((0.0, -150.0), 150, 300)]),
         "simhat_cage_section": cq.Workplane("XY").newObject(
-            [keep((-150.0, split_y), 150, 200)]),
-        "antenna_tray_section": cq.Workplane("XY").newObject(
-            [keep((-150.0, -150.0), 300, 150 + split_y)]),
+            [keep((-150.0, -150.0), 150, 300)]),
     }
 
 

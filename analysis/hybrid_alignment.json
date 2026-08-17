@@ -1,0 +1,43 @@
+{
+  "photos": {
+    "front": {
+      "crop_box": [
+        22,
+        55,
+        967,
+        987
+      ],
+      "full_size": [
+        1000,
+        1000
+      ],
+      "crop_px": [
+        945,
+        932
+      ],
+      "aspect_w_over_h": 1.0139
+    },
+    "back": {
+      "crop_box": [
+        27,
+        115,
+        483,
+        859
+      ],
+      "full_size": [
+        1000,
+        1000
+      ],
+      "crop_px": [
+        456,
+        744
+      ],
+      "aspect_w_over_h": 0.6129
+    }
+  },
+  "target_aspect_w_over_h": 0.3481,
+  "aspect_delta": {
+    "front": 0.6658,
+    "back": 0.2648
+  }
+}

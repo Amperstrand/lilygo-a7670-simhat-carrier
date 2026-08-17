@@ -124,6 +124,26 @@ the next board-carrier project. Review this file before extending the CAD.
     bottoms) — only one-ended small regions are failures. Bed-zone layers
     (<0.35 mm) are on the plate; skip them.
 
+25. **A cylinder scan finds only round holes. PCB cutouts can be oval or
+    slotted** — the T-SimHat's two cutouts (13.9×12.6 oval inside the relay
+    footprint, 10.9×1.9 slot by the terminal) were missed by every z-axis
+    cylinder filter and only surfaced when the user felt a coupon pad poke
+    through one. Always run a mid-slab cross-section and enumerate
+    innerWires: that is the complete hole inventory.
+26. **STEP slab thickness can be the bare laminate, not the finished
+    board.** T-SimHat STEP models 1.0 mm; the physical board with mask
+    measures ~1.25 (coupon stair: free in 1.4, tight in 1.2). A coupon
+    thickness stair is the arbiter — and note a ~0.05 mm interference in
+    a hook slot reads as "perfectly firm", a valid design feel, but model
+    the measured thickness and keep clearances explicit.
+27. **Product-page photo carousels are primary reference material.** The
+    four LILYGO photos confirmed the relay model (OMRON G5LE-14, not the
+    G5LA a smaller image suggested), terminal wire-entry direction (from
+    the board end face — must stay open in the carrier), both cutouts,
+    and the silkscreen rev (XY-SIM-Tup 2022-4-12 V1.0 = the STEP rev).
+    Download at full width; vision on downscaled images misreads part
+    numbers — cross-check model markings across multiple photos.
+
 ## Design rules specific to this carrier
 
 - A7670 holes are Ø1.73 → M1.6 only. Standoff height is battery-driven

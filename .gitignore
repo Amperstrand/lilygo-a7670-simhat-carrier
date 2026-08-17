@@ -10,3 +10,6 @@ vendor/
 
 # Large intermediates not tracked
 tmp/
+
+# Rendered video is local-only (served on LAN, never committed)
+*.mp4
