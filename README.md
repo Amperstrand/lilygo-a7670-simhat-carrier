@@ -38,7 +38,7 @@ tray at the far end. Full carrier 133 × 157.5 mm.*
 |---|---|---|
 | T-A7670X PCB | 33.071 × 110.54 × 1.2 mm | STEP cross-section + DXF dim `33.071` |
 | T-A7670X mounting holes | 4 × Ø1.73 mm, 27.71 × 105.59 mm grid | DXF hole-callout dims, cross-checked vs STEP cylinders |
-| T-A7670X mounting | **screwless snap plugs** (christmas-tree; `A7670_MOUNT="screws"` restores M1.6 pilots) | Ø1.70 STEP holes, true centers measured off placed geometry |
+| T-A7670X mounting | **M1.6 screws into printed pilots** (default after the v0.3 print; `A7670_MOUNT="snap_plugs"` restores the screwless christmas-tree plugs) | Ø1.70 STEP holes, true centers measured off placed geometry |
 | T-A7670X battery | 18650 + holder under board → 25 mm standoffs | user hardware + product docs |
 | T-SimHat PCB | 33.0 × 94.8 × **1.0 mm** | STEP cross-section (verify with calipers: some batches 1.6) |
 | T-SimHat mounting holes | **none** (hence snap-in cage) | STEP |

@@ -87,11 +87,10 @@ PROFILE = "full"
 # Fasteners
 # ---------------------------------------------------------------------------
 
-# Screwless mounting (user has no M1.6 screws): "pine-tree" snap plugs
-# grow from each standoff top THROUGH the PCB hole (Ø1.73) and flare to a
-# collar above the board. Pattern proven in print-in-place snap standoffs
-# (printables/yeggi pcbmount, snap-fit plugs through drill holes).
-A7670_MOUNT = "snap_plugs"            # "snap_plugs" | "screws"
+# Mounting: "screws" is the default after the v0.3 print (user report:
+# snap plugs did not hold reliably; screws are deterministic). "snap_plugs"
+# stays available as the screwless variant.
+A7670_MOUNT = "screws"                # "snap_plugs" | "screws"
 PLUG_SHAFT_D = 1.10                   # clears the Ø1.35 STEP drill 0.125/side
 PLUG_FIN_DS = (1.55, 1.65)            # stacked retention fins above the PCB;
                                       # each passes the ~Ø1.4 plated hole with
@@ -161,7 +160,8 @@ SIMHAT_LIP_ENGAGE = 2.6             # how far lip ledge reaches over PCB top
 SIMHAT_LIP_T = 2.4                  # lip ledge thickness
 
 # snap clips (near end corners; XY-plane flexure, bending about Z)
-SIMHAT_HOOK_ENGAGE = 1.0            # ledge reach past PCB edge face
+SIMHAT_HOOK_ENGAGE = 1.3            # ledge reach past PCB edge face
+                                     # (1.0 printed loose per v0.3 feedback)
 SIMHAT_HOOK_T = 2.2                 # hook ledge vertical thickness
 SIMHAT_HOOK_REACH_V = 2.4           # ledge reach onto PCB top (in v)
 SIMHAT_HOOK_LEAD_CHAMFER = 0.8   # plan-view ramp on hook inner corner; turns
@@ -186,10 +186,25 @@ SIMHAT_ARM_ROOT_GUSSET = 1.6        # plan-view triangular gusset at the arm
                                     # (printed stress relief in lieu of an
                                     # OCC fillet, which fails on these prisms)
 
-# XY locating fences along long edges, (side, v) side=-1 left/+1 right
-SIMHAT_FENCES = [(-1, 45.0), (1, 16.0), (1, 74.0)]
+# XY locating fences: (side, v_center, half_len, bite). The board slides
+# +-3.6 mm in v during insert/removal, so every edge-FLUSH part (relay
+# v 6.5..29.2, CAN/RS485 v 37..49.4, header sockets v 54..94.7 -- all
+# exactly u=16.5) sweeps through any fence window it can reach. A biting
+# face (SIMHAT_FENCE_BITE inside the edge plane) therefore needs a window
+# with 3.6 mm sweep margin to the next flush part on BOTH sides -- which
+# only exists on -u (nearest flush part there is CAN/RS485 at v 37):
+#   -u: v 4.5..16.5, bite=True (friction grip, sweep margin 16.9 mm)
+#   +u: v 30.2..36.0, bite=False (locator only; between relay and
+#       CAN/RS485 at seat, 0.3 clearance lets flush parts pass on slide)
+SIMHAT_FENCES = [(-1, 10.5, 6.0, True), (1, 33.1, 2.9, False)]
 SIMHAT_FENCE_T = 2.4
+SIMHAT_FENCE_BITE = 0.5   # fence face intrudes past the nominal edge
+                           # position by (BITE - XY_CLEAR) = 0.2 mm/side:
+                           # user-requested friction bite against the PCB
 SIMHAT_FENCE_ENGAGE_H = 4.0         # wall height above PCB underside
+SIMHAT_END_PLAY = 0.10    # board end faces vs lip wall / clip arm faces
+                           # (was the PCB_XY_CLEAR 0.3 -- printed loose,
+                           # board rattled in v; 0.1 snugs both ends)
 
 # ---------------------------------------------------------------------------
 # Wiring / strain relief
@@ -202,9 +217,9 @@ TIE_SLOT_L = 7.0                    # tie loop length clearance
 _gap_rail_x = BOARD_GAP / 2 + 0.4 + RAIL_W / 2
 TIE_SLOTS = [
     (_gap_rail_x, -42.0), (_gap_rail_x, -14.0),
-    (_gap_rail_x, 14.0), (_gap_rail_x, 42.0),
+    (_gap_rail_x, 21.0), (_gap_rail_x, 42.0),
     (-_gap_rail_x, -42.0), (-_gap_rail_x, -14.0),
-    (-_gap_rail_x, 14.0), (-_gap_rail_x, 42.0),
+    (-_gap_rail_x, 21.0), (-_gap_rail_x, 42.0),
 ]
 
 # ---------------------------------------------------------------------------

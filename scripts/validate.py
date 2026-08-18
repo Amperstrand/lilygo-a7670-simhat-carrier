@@ -342,7 +342,9 @@ def fitcheck_tray_checks():
     out.append({"check": "fitcheck_a7670_stacking_pin_rest",
                 "value": round(v_pinrest, 4), "pass": v_pinrest < 1.0})
     out.append({"check": "fitcheck_simhat_relay_down_rest",
-                "value": round(v_sh, 4), "pass": abs(v_sh) < VOLUME_TOL})
+                "value": round(v_sh, 4),
+                "intended_fence_bite_mm3": round(holder.fence_bite_mm3(), 4),
+                "pass": 0 <= v_sh - holder.fence_bite_mm3() < VOLUME_TOL})
 
     stop_face = M.a7670_pcb_l / 2 + fitcheck.SHIFT_Y - 2.0
     entry_y = -fitcheck.FOOTPRINT_Y / 2 + 5.0
@@ -543,11 +545,14 @@ def main():
         a76 = holder.place_a7670()
         a76t = a7670_trimmed()
         sh = holder.place_simhat()
+        bite = holder.fence_bite_mm3()
         iv_sh = common_vol(carrier, sh)
         iv_a76t = common_vol(carrier, a76t)
         iv_a76_full = common_vol(carrier, a76)
-        checks.append({"check": "seated_simhat_interference", "value": round(iv_sh, 5),
-                       "pass": abs(iv_sh) < VOLUME_TOL})
+        checks.append({"check": "seated_simhat_interference",
+                       "value": round(iv_sh, 5),
+                       "intended_fence_bite_mm3": round(bite, 5),
+                       "pass": 0 <= iv_sh - bite < VOLUME_TOL})
         checks.append({"check": "seated_a7670_interference_no_stacking_pins",
                        "value": round(iv_a76t, 5), "pass": abs(iv_a76t) < VOLUME_TOL})
         report["a7670_full_model_overlap_mm3"] = round(iv_a76_full, 4)
@@ -578,8 +583,11 @@ def main():
             "note": ("Distances are to component bounding boxes. Values of "
                      f"{P.SIMHAT_PCB_XY_CLEAR} mm equal the designed XY edge "
                      "clearance (fence/lip vs edge-mounted parts); zero solid "
-                     "overlap against real reference geometry is required."),
-            "pass": worst >= 0.25 and abs(sh_overlap) < VOLUME_TOL and abs(a76_overlap) < VOLUME_TOL,
+                     "overlap against real reference geometry is required "
+                     "(fence friction bite accounted separately)."),
+            "pass": worst >= 0.25
+                    and 0 <= sh_overlap - holder.fence_bite_mm3() < VOLUME_TOL
+                    and abs(a76_overlap) < VOLUME_TOL,
         })
         report["component_clearances"] = comps
 
@@ -598,6 +606,13 @@ def main():
     checks.append({"check": "connector_service_envelopes", "value": envs,
                    "pass": env_ok})
     report["service_envelopes"] = envs
+
+    print("== simhat connector mating envelopes ==")
+    from cad import connectors as CONN
+    mates = CONN.mating_conflicts(carrier)
+    checks.append({"check": "simhat_connector_mating_clear", "value": mates,
+                   "pass": all(m["interference_mm3"] < VOLUME_TOL for m in mates)})
+    report["simhat_mating_envelopes"] = mates
 
     if P.PROFILE == "full":
         print("== battery keep-out ==")
@@ -638,8 +653,10 @@ def main():
     if P.SIMHAT_CLIPS_ENABLED:
         print("== simhat removal simulation ==")
         stages, _ = simhat_removal_stages(carrier)
-        ok = all(s["interference_mm3"] < VOLUME_TOL for s in stages)
-        checks.append({"check": "simhat_toolless_removal", "value": stages, "pass": ok})
+        bite = holder.fence_bite_mm3()
+        ok = all(s["interference_mm3"] - bite < VOLUME_TOL for s in stages)
+        checks.append({"check": "simhat_toolless_removal", "value": stages,
+                       "intended_fence_bite_mm3": round(bite, 5), "pass": ok})
         report["simhat_removal"] = stages
 
     if P.PROFILE == "full":

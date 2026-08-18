@@ -216,6 +216,43 @@ the next board-carrier project. Review this file before extending the CAD.
     fins BY DESIGN. The render-correctness criterion is not "zero
     intersection" but "intersections exactly equal the intended contact
     features" - verify by arithmetic (n features x cross-section).
+39. **Connector mating envelopes must be auto-derived, not named by hand**
+    (TurboCase pattern; `cad/connectors.py`). Any measured part within
+    1.5 mm of a board edge gets a side-exit envelope reaching 8 mm past
+    it; validate.py requires zero carrier material inside. This caught
+    the v0.3 print bug "fence covers P1" as 340 + 49 mm^3 boolean
+    collisions the render never showed. Exclusion classes matter:
+    vol < 3 mm^3 (solder tails), tall UP-facing sockets (top entry,
+    covered by header_jumpers), tall DOWN-facing parts >= 8 mm (relay,
+    screw terminal - nothing mates sideways into them). The green
+    terminal's wires exit the v=0 END face -> end-exit envelope, which
+    the clip anchors must also respect.
+40. **The slide-sweep law for edge features.** A snap-caged board
+    translates several mm along its slide axis during insert/removal
+    (here 3.6 mm in v). Every part FLUSH with a board edge (u exactly
+    16.5: relay, CAN/RS485 housings, header sockets) sweeps through any
+    fence window within reach. A friction-bite fence face (inside the
+    edge plane by the bite) therefore needs sweep margin to the next
+    flush part on BOTH sides - on the T-SimHat only the -u window
+    qualifies; the +u side gets a non-biting locator fence instead.
+    Symptom if violated: removal-stage boolean interference that does
+    not exist at seat.
+41. **Intended-contact volumes must be computed in the check's terms.**
+    The seated boolean measures against the placed manufacturer STEP
+    (1.0 mm slab); the physical board is 1.25 mm (caliper/coupon). A
+    bite-accounting helper that used the caliper number silently
+    under-gates the check. Rule: whichever solid the boolean intersects
+    is whichever thickness the allowance must use.
+42. **v0.3 print feedback (first physical print).** Snap plugs did not
+    hold -> A7670_MOUNT default flipped to screws (plugs stay as an
+    optional variant, calicheck still gauges them). Board rattled ->
+    one biting fence + END_PLAY 0.1 (was 0.3) + hook engage 1.3 (was
+    1.0). Oval-hole retention is a confirmed no-go (relay overhang);
+    a rigid finger through the 10.9x1.9 slot blocks the one-way slide
+    install - both rejections are boolean-provable, keep them out until
+    a sprung XY-flexure design exists. Structure that depends on fence
+    positions (low-profile cross-rails) is a hidden coupling - give the
+    frame its own rail set.
 
 ## Design rules specific to this carrier
 

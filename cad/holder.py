@@ -130,12 +130,12 @@ def build_base():
                             55.0, 0, P.BASE_T))
 
     if P.PROFILE == "low":
-        for y in (-53.5, 53.5):
+        for y in (-53.5, -28.0, 0.0, 28.0, 53.5):
             solids.append(_rect(x_lo + P.RAIL_W, y - P.RAIL_W / 2,
                                 -gap_ch, y + P.RAIL_W / 2, 0, P.BASE_T))
             solids.append(_rect(gap_ch, y - P.RAIL_W / 2,
                                 x_hi - P.RAIL_W, y + P.RAIL_W / 2, 0, P.BASE_T))
-        for (_, v) in P.SIMHAT_FENCES:
+        for (_, v, _, _) in P.SIMHAT_FENCES:
             yf = sh_y(v)
             solids.append(_rect(x_lo + P.RAIL_W, yf - P.RAIL_W / 2,
                                 -gap_ch, yf + P.RAIL_W / 2, 0, P.BASE_T))
@@ -244,7 +244,7 @@ def _clip_slab_top():
 def _clip_geometry(clear, side):
     """Shared clip coordinates in board-local (u, v)."""
     half = M.simhat_pcb_w / 2 + clear
-    v_l0 = clear
+    v_l0 = min(clear, P.SIMHAT_END_PLAY)
     v_tip = clear + P.SIMHAT_HOOK_REACH_V
     v_root = v_tip - P.SIMHAT_ARM_LEN
     return {
@@ -340,7 +340,7 @@ def build_simhat_clips(clear=None, deflect=0.0):
 
 
 def build_simhat_lip():
-    c = P.SIMHAT_PCB_XY_CLEAR
+    c = P.SIMHAT_END_PLAY
     ledge_top = simhat_pcb_top_z() + P.SIMHAT_PCB_T_CLEAR + P.SIMHAT_LIP_T
     y_end = sh_y(M.simhat_pcb_l)
     solids = []
@@ -354,24 +354,33 @@ def build_simhat_lip():
 
 
 def build_simhat_fences():
-    c = P.SIMHAT_PCB_XY_CLEAR
-    half = M.simhat_pcb_w / 2 + c
+    half = M.simhat_pcb_w / 2 + P.SIMHAT_PCB_XY_CLEAR
     top = P.SIMHAT_SUPPORT_H + P.SIMHAT_FENCE_ENGAGE_H
     x_lo, _, x_hi, _ = _frame_extents()
     gap_ch = P.BOARD_GAP / 2 + 0.4
     solids = []
-    for (side, v) in P.SIMHAT_FENCES:
-        u = side * (half + P.SIMHAT_FENCE_T / 2)
-        wall = _rect(sh_x(u) - P.SIMHAT_FENCE_T / 2, sh_y(v) - 6.0,
-                     sh_x(u) + P.SIMHAT_FENCE_T / 2, sh_y(v) + 6.0,
+    for (side, v, v_half, bite) in P.SIMHAT_FENCES:
+        push = P.SIMHAT_FENCE_BITE if bite else 0.0
+        u = side * (half - push + P.SIMHAT_FENCE_T / 2)
+        wall = _rect(sh_x(u) - P.SIMHAT_FENCE_T / 2, sh_y(v + v_half),
+                     sh_x(u) + P.SIMHAT_FENCE_T / 2, sh_y(v - v_half),
                      P.BASE_T, top - P.BASE_T)
         foot_x1 = -gap_ch if side > 0 else x_lo + P.RAIL_W
         foot = _rect(min(sh_x(u) - P.SIMHAT_FENCE_T / 2, foot_x1),
-                     sh_y(v) - 6.0,
+                     sh_y(v + v_half),
                      max(sh_x(u) + P.SIMHAT_FENCE_T / 2, foot_x1),
-                     sh_y(v) + 6.0, 0, P.BASE_T)
+                     sh_y(v - v_half), 0, P.BASE_T)
         solids.append(wall.fuse(foot))
     return cq.Workplane("XY").newObject(solids).combine()
+
+
+def fence_bite_mm3():
+    """Intended fence/PCB overlap from biting fences (friction fit), in
+    STEP-slab terms -- the seated check measures against the placed
+    manufacturer STEP (1.0 mm slab), not the caliper-corrected 1.25."""
+    bite = max(0.0, P.SIMHAT_FENCE_BITE - P.SIMHAT_PCB_XY_CLEAR)
+    slab_t = M.simhat["pcb_slab"]["z_top"] - M.simhat["pcb_slab"]["z_bottom"]
+    return bite * slab_t * sum(2 * vh for _, _, vh, b in P.SIMHAT_FENCES if b)
 
 
 # ---------------------------------------------------------------------------
@@ -692,7 +701,7 @@ def _coupon_bay(ox, oy, clear, index):
                             P.BASE_T, P.SIMHAT_SUPPORT_H - P.BASE_T))
 
     for side in (-1, 1):
-        u = side * (half + P.SIMHAT_FENCE_T / 2)
+        u = side * (half - P.SIMHAT_FENCE_BITE + P.SIMHAT_FENCE_T / 2)
         solids.append(_rect(ox + u - P.SIMHAT_FENCE_T / 2, oy - 6.0,
                             ox + u + P.SIMHAT_FENCE_T / 2, oy + 6.0,
                             P.BASE_T,

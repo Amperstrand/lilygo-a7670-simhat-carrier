@@ -109,11 +109,12 @@ def _simhat_features() -> list[cq.Shape]:
                    M.simhat_pcb_w + 2 * 0.75,
                    M.simhat_pcb_l + 5.0)]
     half = M.simhat_pcb_w / 2 + P.SIMHAT_PCB_XY_CLEAR
-    for (side, v) in P.SIMHAT_FENCES:
-        u = side * (half + P.SIMHAT_FENCE_T / 2)
+    for (side, v, v_half, bite) in P.SIMHAT_FENCES:
+        push = P.SIMHAT_FENCE_BITE if bite else 0.0
+        u = side * (half - push + P.SIMHAT_FENCE_T / 2)
         solids.append(cq.Workplane("XY")
                       .center(holder.sh_x(u), holder.sh_y(v) + SHIFT_Y)
-                      .rect(P.SIMHAT_FENCE_T, 12.0)
+                      .rect(P.SIMHAT_FENCE_T, 2 * v_half)
                       .extrude(FENCE_TOP_Z - WEB_Z1)
                       .translate((0, 0, WEB_Z1)).val())
     return solids
