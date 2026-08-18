@@ -135,13 +135,44 @@ def component_clearances(carrier):
 
 def check_holes(carrier):
     results = []
-    pilot_h = P.A7670_STANDOFF_H - 1.5
-    for i, (hx, hy) in enumerate(holder.a7670_holes_carrier()):
-        probe = (cq.Workplane("XY").moveTo(hx, hy).circle(0.60)
-                 .extrude(pilot_h).translate((0, 0, P.A7670_STANDOFF_H - pilot_h)).val())
-        frac = common_vol(probe, carrier) / vol(probe)
-        results.append({"feature": f"M1.6_pilot_{i}", "open_fraction": round(frac, 4),
-                        "pass": frac < 0.05})
+    if P.A7670_MOUNT == "screws":
+        pilot_h = P.A7670_STANDOFF_H - 1.5
+        for i, (hx, hy) in enumerate(holder.a7670_holes_carrier()):
+            probe = (cq.Workplane("XY").moveTo(hx, hy).circle(0.60)
+                     .extrude(pilot_h)
+                     .translate((0, 0, P.A7670_STANDOFF_H - pilot_h)).val())
+            frac = common_vol(probe, carrier) / vol(probe)
+            results.append({"feature": f"M1.6_pilot_{i}", "open_fraction": round(frac, 4),
+                            "pass": frac < 0.05})
+    else:
+        # snap plugs: annulus around the shaft (the board-hole band) must
+        # be free of carrier material; fins must exist above the board
+        z0 = P.A7670_STANDOFF_H + 0.05
+        for i, (hx, hy) in enumerate(holder.a7670_holes_carrier()):
+            outer = (cq.Workplane("XY").moveTo(hx, hy)
+                     .circle(0.72).extrude(M.a7670_pcb_t - 0.1)
+                     .translate((0, 0, z0)).val())
+            inner = (cq.Workplane("XY").moveTo(hx, hy)
+                     .circle(P.PLUG_SHAFT_D / 2 + 0.05)
+                     .extrude(M.a7670_pcb_t - 0.1)
+                     .translate((0, 0, z0)).val())
+            annulus = cq.Shape.cast(
+                BRepAlgoAPI_Cut(outer.wrapped, inner.wrapped).Shape())
+            frac = common_vol(annulus, carrier) / vol(annulus)
+            results.append({"feature": f"snap_plug_hole_band_clear_{i}",
+                            "blocked_fraction": round(frac, 4),
+                            "pass": frac < 0.05})
+            fin2_ring_z = (P.A7670_STANDOFF_H + M.a7670_pcb_t + 0.15
+                           + (P.PLUG_FIN_LEAD + P.PLUG_FIN_H + P.PLUG_FIN_PITCH)
+                           + P.PLUG_FIN_LEAD)
+            fin = (cq.Workplane("XY").moveTo(hx, hy)
+                   .circle(P.PLUG_FIN_DS[-1] / 2 - 0.1)
+                   .extrude(P.PLUG_FIN_H - 0.1)
+                   .translate((0, 0, fin2_ring_z + 0.05)).val())
+            filled = common_vol(fin, carrier) / vol(fin)
+            results.append({"feature": f"snap_plug_fins_{i}",
+                            "filled_fraction": round(filled, 4),
+                            "pass": filled > 0.5})
     for e in holder._ear_geometry():
         y = e.get("slot_y", e["y_c"])
         probe = (cq.Workplane("XY").moveTo(e["slot_x"], y)

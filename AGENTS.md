@@ -196,6 +196,27 @@ the next board-carrier project. Review this file before extending the CAD.
     relay overhang (18.25 mm below PCB), which makes it useless as a
     support anyway.
 
+36. **DXF DIMENSION defpoints are callout anchors, NOT hole centers.** On
+    the A7670 they sit ~(+0.31, -0.22) mm off the true STEP cylinder
+    centers - invisible for Ø1.6 clearance screws, fatal for Ø1.1 snap
+    plugs. The boolean seated-interference check caught it (4 shards,
+    perfectly consistent offset). Rule: when a feature must FIT a hole
+    (plugs, pins, press-fits), measure centers off the placed solid
+    (BRepAdaptor cylinders, inverse-mapped), never off dimension
+    callouts; document the four measured values as authoritative.
+37. **Screwless PCB mount = christmas-tree snap plugs** (commercial
+    board-lock pattern): thin shaft (Ø1.1 clears the Ø1.35-1.7 drill),
+    2-3 stacked tapered fins above the board (each fin passes the plated
+    hole with <=0.15 mm/finger flex), cross-slots make 4 fingers.
+    Fins live ONLY above the PCB plane -> boolean seated checks stay
+    clean by construction. Probe pattern: annulus (hole band minus
+    shaft) must be carrier-free; fin ring must exist above the board.
+38. **Photo planes at PCB faces always intersect intended contacts.**
+    A texture plane at the board face crosses support pads/bosses/plug
+    fins BY DESIGN. The render-correctness criterion is not "zero
+    intersection" but "intersections exactly equal the intended contact
+    features" - verify by arithmetic (n features x cross-section).
+
 ## Design rules specific to this carrier
 
 - A7670 holes are Ø1.73 → M1.6 only. Standoff height is battery-driven

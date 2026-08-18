@@ -38,14 +38,18 @@ class Measured:
     a7670_pcb_l = 110.541           # STEP outline dy
     a7670_pcb_t = 1.2               # STEP slab thickness
 
-    # A7670 mounting holes: DXF-dimensioned Ø1.7296 at 4 corners
-    # (STEP shows Ø1.70 cylinders at the same centers - same feature)
-    a7670_hole_d = 1.7296
-    a7670_holes_rel = [             # (x, y) relative to PCB bbox min corner
-        (267.462 - a7670_pcb_x0, 115.388 - a7670_pcb_y0),   # near-left
-        (295.199 - a7670_pcb_x0, 115.438 - a7670_pcb_y0),   # near-right
-        (295.199 - a7670_pcb_x0, 220.975 - a7670_pcb_y0),   # far-right
-        (267.487 - a7670_pcb_x0, 220.975 - a7670_pcb_y0),   # far-left
+    # A7670 mounting holes, board-local: measured directly off the placed
+    # manufacturer STEP (Ø1.70 corner cylinders, inverse-mapped). The DXF
+    # Ø1.7296 DIMENSION defpoints and the analysis JSON candidates are
+    # callout anchors offset ~(+0.31,-0.22) from the true centers - the
+    # boolean interference check caught the discrepancy when snap plugs
+    # were placed on the DXF positions. These four values are
+    # authoritative; grid 27.71 x 105.56.
+    a7670_holes_rel = [
+        (2.896, 2.036),     # near-left  (clip end)
+        (30.633, 2.087),    # near-right
+        (2.922, 107.624),   # far-left   (USB end)
+        (30.633, 107.624),  # far-right
     ]
 
     # T-SimHat PCB (STEP), board-local coords x[-16.5,16.5], y[-94.8,0]
@@ -83,12 +87,25 @@ PROFILE = "full"
 # Fasteners
 # ---------------------------------------------------------------------------
 
-A7670_SCREW = "M1.6"                # PCB hole Ø1.73 (DXF) -> M1.6 passes w/ clearance
-A7670_PILOT_D = 1.30                # self-tap pilot for M1.6 in PETG
-A7670_STANDOFF_OD = 4.6             # >= 1.6mm wall around pilot
+# Screwless mounting (user has no M1.6 screws): "pine-tree" snap plugs
+# grow from each standoff top THROUGH the PCB hole (Ø1.73) and flare to a
+# collar above the board. Pattern proven in print-in-place snap standoffs
+# (printables/yeggi pcbmount, snap-fit plugs through drill holes).
+A7670_MOUNT = "snap_plugs"            # "snap_plugs" | "screws"
+PLUG_SHAFT_D = 1.10                   # clears the Ø1.35 STEP drill 0.125/side
+PLUG_FIN_DS = (1.55, 1.65)            # stacked retention fins above the PCB;
+                                      # each passes the ~Ø1.4 plated hole with
+                                      # <=0.125mm/finger flex (christmas-tree
+                                      # board-lock pattern)
+PLUG_FIN_H = 0.35                     # fin ring height
+PLUG_FIN_PITCH = 0.35                 # fin vertical spacing
+PLUG_FIN_LEAD = 0.25                  # 45-deg-ish lead-in per fin
+PLUG_SLOT_W = 0.7                     # cross-slot width -> 4 fingers
+A7670_STANDOFF_OD = 4.6               # boss footprint under each plug
+A7670_PILOT_D = 1.30                  # screws mode: self-tap pilot
 ENCLOSURE_SCREW = "M3"
-EAR_SLOT_W = 3.4                    # M3 clearance slot width
-EAR_SLOT_L = 7.5                    # slot length = adjustable position range
+EAR_SLOT_W = 3.4                      # M3 clearance slot width
+EAR_SLOT_L = 7.5                      # slot length = adjustable position range
 
 # ---------------------------------------------------------------------------
 # Base frame
@@ -256,7 +273,7 @@ ANT_CABLE_L = 120.0       # coax length estimate (doc/coil-planning param)
 # ---------------------------------------------------------------------------
 
 SERVICE_ENVELOPES_A7670 = {
-    "usb_c_plug":       (13.0, 101.0, 31.0, 113.0, 0.0, 6.0),
+    "usb_c_plug":       (8.0, 101.0, 27.0, 113.0, 0.0, 6.0),
     "sma_antenna_conn": (27.0, 30.0, 40.0, 55.0, -1.0, 5.0),
     "sim_tray_swap":    (10.0, 80.0, 40.0, 98.0, 1.0, 11.0),
     "battery_jst":      (8.0, 32.0, 20.0, 52.0, 0.0, 8.0),

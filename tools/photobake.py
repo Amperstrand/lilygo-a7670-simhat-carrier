@@ -137,20 +137,27 @@ def bake_face(face):
 
 
 def plane_placement(plane):
-    """Carrier-frame rectangle + z for each named placement."""
+    """Carrier-frame rectangle + z for each named placement. Planes sit at
+    the PCB LAMINATE faces (slab planes), never at whole-part bbox extremes
+    - hanging relays/battery holders would put the texture deep inside
+    other features."""
+    from cad import parameters as P
+    off = 0.15
     if plane["board"] == "simhat":
         sh = holder.place_simhat()
         bb = sh.BoundingBox()
         cx, cy = (bb.xmin + bb.xmax) / 2, (bb.ymin + bb.ymax) / 2
         w, h = M.simhat_pcb_w, M.simhat_pcb_l
-        z = bb.zmin - 0.05 if plane["face"] == "down" else bb.zmax + 0.05
+        z = (P.SIMHAT_SUPPORT_H - off if plane["face"] == "down"
+             else P.SIMHAT_SUPPORT_H + M.simhat_pcb_t + off)
         return cx, cy, z, w, h
     a = holder.place_a7670()
     bb = a.BoundingBox()
     cx = (bb.xmin + bb.xmax) / 2
     cy = (bb.ymin + bb.ymax) / 2
     w, h = M.a7670_pcb_w, M.a7670_pcb_l
-    z = bb.zmax + 0.05 if plane["face"] == "up" else bb.zmin + 0.05
+    z = (P.A7670_STANDOFF_H - off if plane["face"] == "down"
+         else P.A7670_STANDOFF_H + M.a7670_pcb_t + off)
     return cx, cy, z, w, h
 
 

@@ -46,16 +46,19 @@ far end of the carrier, flat on the tray floor.
 
 Orientation note: the board mounts **rotated 180°** (`A7670_ROT_180`) so
 its pin headers face the SimHat sockets across the wiring channel —
-jumpers stay ~15–25 mm.
+jumpers stay ~15–25 mm. Mounting is **screwless by default**: four
+christmas-tree snap plugs (no screws needed).
 
 1. Fit the 18650 into the board's under-side holder first (if used).
-2. Lower the board onto the 4 standoff bosses — the battery + holder
-   occupy the open center strip between the bosses; the 25 mm standoffs
-   give ~1.5 mm air below the holder. No holder? Set `A7670_STANDOFF_H = 13`
-   and rebuild for a lower profile.
-3. USB-C (clip-end), SIM tray, buttons, battery JST and both SMA jacks
-   (facing the wiring channel) all stay accessible; drive 4 × M1.6 screws
-   snug — they self-tap the printed pilots.
+2. Lower the board **straight down** over the four plugs near the
+   clip-end and USB-end corners; the plug fins flex through the PCB
+   holes and click above the board. Press each corner until seated.
+3. Removal: pull the board straight up firmly (all four plugs release);
+   a spudger under an edge helps. `A7670_MOUNT = "screws"` in
+   `cad/parameters.py` restores the M1.6-pilot variant if you later
+   want screws.
+4. USB-C (away from the SimHat), SIM tray, buttons, battery JST and
+   both SMA jacks stay accessible.
 
 ## Wire the boards
 

@@ -156,6 +156,40 @@ def build_base():
 # A7670 standoffs (M1.6 into printed pilots)
 # ---------------------------------------------------------------------------
 
+def _plug_solid(hx, hy):
+    """Christmas-tree snap plug: thin shaft through the PCB hole, stacked
+    tapered fins above the board (each fin passes the plated hole with
+    small finger flex, like commercial plastic board-locks), cross-slotted
+    into 4 fingers."""
+    pcb_top = P.A7670_STANDOFF_H + M.a7670_pcb_t
+    r_s = P.PLUG_SHAFT_D / 2
+    z_tip = pcb_top + P.PLUG_FIN_PITCH * len(P.PLUG_FIN_DS) + P.PLUG_FIN_H + 0.3
+    plug = (cq.Workplane("XY", origin=(0, 0, P.A7670_STANDOFF_H - 0.4))
+            .moveTo(hx, hy).circle(r_s)
+            .extrude(z_tip - P.A7670_STANDOFF_H + 0.4).val())
+    z = pcb_top + 0.15
+    for fin_d in P.PLUG_FIN_DS:
+        r_f = fin_d / 2
+        cone = (cq.Workplane("XZ", origin=(hx, hy, 0))
+                .moveTo(0, 0).lineTo(0, P.PLUG_FIN_LEAD)
+                .lineTo(r_f - r_s, P.PLUG_FIN_LEAD).close()
+                .revolve(360, (0, 0), (0, 1))
+                .translate((0, 0, z)).val())
+        ring = (cq.Workplane("XY", origin=(0, 0, z + P.PLUG_FIN_LEAD))
+                .moveTo(hx, hy).circle(r_f)
+                .extrude(P.PLUG_FIN_H).val())
+        plug = plug.fuse(cone).fuse(ring)
+        z += P.PLUG_FIN_LEAD + P.PLUG_FIN_H + P.PLUG_FIN_PITCH
+    for ang in (0, 90):
+        slot = (cq.Workplane("XY", origin=(0, 0, pcb_top - 0.1))
+                .center(hx, hy)
+                .rect(max(P.PLUG_FIN_DS) + 2, P.PLUG_SLOT_W)
+                .extrude(z_tip - pcb_top + 0.2)
+                .rotate(cq.Vector(hx, hy, 0), cq.Vector(0, 0, 1), ang).val())
+        plug = cq.Shape.cast(BRepAlgoAPI_Cut(plug.wrapped, slot.wrapped).Shape())
+    return plug
+
+
 def build_standoffs():
     solids = []
     for (hx, hy) in a7670_holes_carrier():
@@ -164,11 +198,17 @@ def build_standoffs():
                 .extrude(P.A7670_STANDOFF_H - P.BASE_T)
                 .translate((0, 0, P.BASE_T)).val())
         foot = _rect(hx - 5, hy - 5, hx + 5, hy + 5, 0, P.BASE_T)
-        solids.append(boss.fuse(foot))
+        parts = [boss, foot]
+        if P.A7670_MOUNT == "snap_plugs":
+            parts.append(_plug_solid(hx, hy))
+        solids.append(parts[0].fuse(parts[1]).fuse(*parts[2:]) if len(parts) > 2
+                      else boss.fuse(foot))
     return cq.Workplane("XY").newObject(solids).combine()
 
 
 def cut_screw_pilots(carrier):
+    if P.A7670_MOUNT != "screws":
+        return carrier
     pilot_depth = P.A7670_STANDOFF_H - 1.5   # blind pilot, 1.5mm floor above z=0
     for (hx, hy) in a7670_holes_carrier():
         cutter = (cq.Workplane("XY").moveTo(hx, hy)
