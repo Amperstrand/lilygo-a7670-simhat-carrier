@@ -144,7 +144,7 @@ def main():
     # Product photos have +Y_up board; on the carrier the board is flipped
     # about Y, which mirrors X -> flip_u aligns left/right features.
     low_face = plane_mesh(f["w"], f["h"], front, f["z_down"],
-                          f["cx"], f["cy"], flip_u=True)
+                          f["cx"], f["cy"], flip_u=globals().get("ORIENT_FLIPS",(True,False))[0])
     up_face = plane_mesh(f["w"], f["h"], back, f["z_up"],
                          f["cx"], f["cy"], flip_u=False)
     scene.add_geometry(low_face, node_name="simhat_front_photo")
@@ -236,8 +236,10 @@ def build_photo_scene():
         ren.AddActor(actor)
 
     f = simhat_faces()
-    for z, img, flip in ((f["z_down"], front_img_holder[0], True),
-                         (f["z_up"], back_img_holder[0], False)):
+    for z, img, flip in ((f["z_down"], front_img_holder[0],
+                         globals().get("ORIENT_FLIPS",(True,False))[0]),
+                        (f["z_up"], back_img_holder[0],
+                         globals().get("ORIENT_FLIPS",(True,False))[1])):
         pd = textured_plane(f["cx"], f["cy"], z, f["w"], f["h"], img, flip)
         mapper = vtk.vtkPolyDataMapper()
         mapper.SetInputData(pd)
@@ -331,12 +333,26 @@ def render_turntable(out_path, frames=240, fps=30, size=(1280, 800)):
 front_img_holder = []
 back_img_holder = []
 
+
+def _load_face_textures():
+    """Prefer fiducial-oriented textures from orient_photos.py; fall back
+    to raw crops (documented worse) when the /tmp artifacts are absent."""
+    down = "/tmp/opencode/tex_down.png"
+    up = "/tmp/opencode/tex_up.png"
+    if os.path.exists(down) and os.path.exists(up):
+        return Image.open(down), Image.open(up), False, False
+    f, _, _ = crop_dark_region(f"{PHOTO_DIR}/T-SimHat.jpg")
+    b, _, _ = crop_dark_region(f"{PHOTO_DIR}/H559_8.jpg",
+                               split_boards=True)
+    return f, b, True, False
+
+
 if __name__ == "__main__":
-    front_img, _, _ = crop_dark_region(f"{PHOTO_DIR}/T-SimHat.jpg")
-    back_img, _, _ = crop_dark_region(f"{PHOTO_DIR}/H559_8.jpg",
-                                      split_boards=True)
+    front_img, back_img, flip_d, flip_u = _load_face_textures()
     front_img_holder.append(front_img)
     back_img_holder.append(back_img)
+    ORIENT_FLIPS = (flip_d, flip_u)
     main()
     if "--video" in sys.argv:
-        render_turntable("exports/hybrid_turntable.mp4")
+        render_turntable("exports/hybrid_turntable.mp4", frames=300, fps=30,
+                         size=(1440, 900))

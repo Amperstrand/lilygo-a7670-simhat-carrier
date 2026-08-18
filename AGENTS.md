@@ -144,6 +144,28 @@ the next board-carrier project. Review this file before extending the CAD.
     Download at full width; vision on downscaled images misreads part
     numbers — cross-check model markings across multiple photos.
 
+28. **Marketing contact sheets are grids of MULTIPLE views — segment
+    before any analysis.** H559_8 contains 6 views; the center-bottom
+    cell itself holds two boards side by side. Threshold-based gap scans
+    must run per-region (weak gaps hide behind tall neighbors), and the
+    "largest dark region" must be taken per CELL, or the crop silently
+    blends two photos.
+29. **Black PCBs defeat luminance fiducials.** A relay on a black board
+    is invisible to dark-blob detection (dark centroid = board centroid,
+    exactly 0.5/0.5 — that signature means your fiducial is measuring the
+    board, not a part). Usable threshold fiducials on this class of
+    board: silver header sockets (huge pixel count, known v-band), green
+    terminal blocks (weak but present). Score orientation with silver
+    primary, green tiebreak, and verify by row-profile (100 % of silver
+    rows in the expected 40 % band).
+30. **Perspective-rectify photos before planar texture mapping.** A
+    4-point corner quad (extreme x+y / x-y points of the board mask) ->
+    lstsq homography -> Image.PERSPECTIVE to the true PCB aspect removes
+    marketing-shot foreshortening. Document the texture orientation
+    convention in one place (here: image top = far/socket end, left =
+    u-negative) and make every scorer use it — a cv measured from the
+    wrong edge silently inverts every target.
+
 ## Design rules specific to this carrier
 
 - A7670 holes are Ø1.73 → M1.6 only. Standoff height is battery-driven

@@ -1,0 +1,88 @@
+{
+  "down": {
+    "source": "T-SimHat.jpg (largest dark region)",
+    "perspective_corners_tl_tr_br_bl": [
+      [
+        184,
+        85
+      ],
+      [
+        446,
+        86
+      ],
+      [
+        442,
+        838
+      ],
+      [
+        252,
+        850
+      ]
+    ],
+    "chosen_transform": "",
+    "score": -1.455,
+    "landmarks_cu_cv_n": {
+      "green": [
+        0.48,
+        0.22,
+        1059
+      ],
+      "silver": [
+        0.59,
+        0.16,
+        112871
+      ],
+      "dark": [
+        0.49,
+        0.54,
+        1124183
+      ]
+    },
+    "target_aspect_w_over_h": 0.3481,
+    "rectified_px": [
+      660,
+      1896
+    ]
+  },
+  "up": {
+    "source": "H559_8 CB right half (under)",
+    "perspective_corners_tl_tr_br_bl": [
+      [
+        53,
+        21
+      ],
+      [
+        238,
+        22
+      ],
+      [
+        236,
+        563
+      ],
+      [
+        50,
+        562
+      ]
+    ],
+    "chosen_transform": "ROTATE_270",
+    "score": -1.248,
+    "landmarks_cu_cv_n": {
+      "green": null,
+      "silver": [
+        0.93,
+        0.14,
+        6903
+      ],
+      "dark": [
+        0.5,
+        0.5,
+        1243860
+      ]
+    },
+    "target_aspect_w_over_h": 0.3481,
+    "rectified_px": [
+      1896,
+      660
+    ]
+  }
+}
