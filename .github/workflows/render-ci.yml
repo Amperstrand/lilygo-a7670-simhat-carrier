@@ -18,7 +18,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install --quiet cadquery trimesh pyvista
+          pip install --quiet cadquery trimesh numpy pillow
 
       - name: Build carrier and generate renders
         # This regenerates exports/ and renders/ per scripts/build.py
