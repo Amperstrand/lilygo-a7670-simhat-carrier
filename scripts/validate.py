@@ -258,6 +258,45 @@ def antenna_checks(carrier):
     """Slide path clear, seated sticker clear of carrier, sticker vs the
     18650 keep-out box (under_battery), sticker stays flat."""
     g = holder.antenna_geometry()
+    if g["pos"] == "side_tray":
+        z0, z1 = P.ANT_FLOOR_T + 0.05, P.ANT_FLOOR_T + 0.35
+        sticker = cq.Solid.makeBox(
+            P.ANT_W, P.ANT_SLIDE, z1 - z0,
+            cq.Vector(g["band_x0"] + P.ANT_SIDE_CLEAR,
+                      g["stop_y"] - P.ANT_SLIDE, z0))
+        slide = cq.Solid.makeBox(
+            P.ANT_W, g["stop_y"] - g["mouth_y"] + 60.0, z1 - z0,
+            cq.Vector(g["band_x0"] + P.ANT_SIDE_CLEAR,
+                      g["mouth_y"] - 60.0, z0))
+        stop = cq.Solid.makeBox(
+            g["outer_x"] - g["x_hi"], P.ANT_SIDE_STOP_T - 0.2,
+            P.ANT_FLOOR_T + P.ANT_SIDE_WALL_H - 0.4,
+            cq.Vector(g["x_hi"] + 0.1, g["stop_y"] + 0.1, 0.2))
+        clips = []
+        for i, cy in enumerate(P.ANT_COAX_CLIP_YS):
+            post = cq.Solid.makeBox(
+                0.8, 3.6, P.ANT_COAX_CLIP_H - 0.5,
+                cq.Vector(g["x_hi"] - P.RAIL_W + 0.1, cy - 1.8,
+                          P.BASE_T + 0.2))
+            groove = cq.Solid.makeBox(
+                P.RAIL_W - 1.2, 3.0, P.ANT_COAX_CLIP_H - 0.4,
+                cq.Vector(g["x_hi"] - P.RAIL_W + 1.1, cy - 1.5,
+                          P.BASE_T + 0.1))
+            clips.append({
+                "clip": i, "y": cy,
+                "post_filled": round(common_vol(post, carrier) / vol(post), 4),
+                "groove_open": round(1 - common_vol(groove, carrier) / vol(groove), 4),
+            })
+        return {
+            "pos": "side_tray",
+            "slide_path_interference_mm3": round(common_vol(carrier, slide), 4),
+            "seated_sticker_interference_mm3": round(common_vol(carrier, sticker), 4),
+            "battery_overlap_mm3": 0.0,
+            "stop_filled_fraction": round(common_vol(stop, carrier) / vol(stop), 4),
+            "clips": clips,
+            "sticker_plane": "flat in the +X side tray, free air, coax over the board edge",
+            "channel_len_mm": round(g["slide_len"], 1),
+        }
     if g["pos"] == "under_battery":
         z_lo, z_hi = P.ANT_FLOOR_T + 0.05, P.ANT_FLOOR_T + 0.35
         sticker = cq.Solid.makeBox(
@@ -638,15 +677,20 @@ def main():
                    "pass": sec_ok and abs(v_sum - v_total) / v_total < 0.005})
     report["sections"] = list(sections)
 
-    if P.ANT_POS in ("under_battery", "end_tray"):
+    if P.ANT_POS in ("under_battery", "end_tray", "side_tray"):
         print("== antenna ==")
         ant = antenna_checks(carrier)
         checks.append({
             "check": "antenna_channel",
             "value": ant,
-            "pass": (ant["slide_path_interference_mm3"] < VOLUME_TOL
+            "pass": (ant.get("slide_path_interference_mm3",
+                             ant.get("dropin_path_interference_mm3", 0.0)) < VOLUME_TOL
                      and ant["seated_sticker_interference_mm3"] < VOLUME_TOL
-                     and ant.get("battery_overlap_mm3", 0.0) < VOLUME_TOL),
+                     and ant.get("battery_overlap_mm3", 0.0) < VOLUME_TOL
+                     and ant.get("stop_filled_fraction", 1.0) > 0.9
+                     and all(c.get("post_filled", c.get("posts_filled", 1.0)) > 0.9
+                             and c.get("groove_open", c.get("cable_gap_open", 1.0)) > 0.9
+                             for c in ant.get("clips", []))),
         })
         report["antenna"] = ant
 

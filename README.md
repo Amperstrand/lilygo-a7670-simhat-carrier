@@ -14,8 +14,9 @@ regenerable with one command.
 ![Contact sheet](https://github.com/Amperstrand/lilygo-a7670-simhat-carrier/blob/main/renders/contact_sheet.png)
 
 *T-SimHat (amber) flipped — relay down, headers up. T-A7670X (green) on
-25 mm standoffs (18650 + holder underneath). LTE sticker-antenna slide-in
-tray at the far end. Full carrier 133 × 157.5 mm.*
+25 mm standoffs (18650 + holder underneath). LTE sticker-antenna tray on
+the right edge (free air, coax clips on the frame rail). Full carrier
+162 × 127.5 mm.*
 
 ## Explore in 3D
 
@@ -23,8 +24,7 @@ tray at the far end. Full carrier 133 × 157.5 mm.*
   built-in 3D viewer you can rotate: [carrier](exports/lilygo_a7670_simhat_carrier.stl),
   [low-profile template](exports/lilygo_a7670_simhat_carrier_lowprofile.stl),
   [clip coupon](exports/simhat_clip_test.stl), [A7670 section](exports/sections/a7670_section.stl),
-  [SimHat cage section](exports/sections/simhat_cage_section.stl),
-  [antenna tray section](exports/sections/antenna_tray_section.stl).
+  [SimHat cage section](exports/sections/simhat_cage_section.stl).
 - **Download & spin anywhere**: [assembly GLB](exports/lilygo_a7670_simhat_assembly.glb)
   and [carrier GLB](exports/lilygo_a7670_simhat_carrier.glb) open in Windows
   3D Viewer, macOS Preview, Blender, https://gltf-viewer.donmccurdy.com.
@@ -50,17 +50,19 @@ tray at the far end. Full carrier 133 × 157.5 mm.*
 The A7670X is mounted rotated 180° (`A7670_ROT_180`) so its pin-header
 rails land at the same end as the SimHat's up-facing sockets: jumpers
 cross the 16 mm wiring channel at ~15–25 mm instead of ~120 mm, and the
-SMA antenna jacks face the channel for a clean coax run to the tray.
+SMA antenna jacks sit a ~6 mm coax hop from the side-tray clips.
 
-## Antenna tray
+## Antenna side tray
 
-The bundled full-band LTE sticker (~110 × 20 mm, SMA coax, three punched
-holes) lies flat in a slide-in tray at the carrier's far end: floor keeps
-it flat, flared channel walls locate it, end stop + friction retain it
-(adhesive optional), and a coax notch passes the cable through the frame
-rail to the modem's SMA jacks — which face the wiring channel after the
-board rotation. **Caliper your sticker and set `ANT_W`/`ANT_SLIDE` before
-printing.**
+The bundled full-band LTE sticker (~110 × 20 mm, SMA coax) slides into an
+open tray on the +X frame edge, **between the two +X M3 ear slots** — free
+air instead of under the 18650, so routing the coax up is trivial: it
+drops into grooved posts on the tray's inner wall and runs along the
+frame edge to the SMA jacks. Position was chosen by elimination, each
+option boolean- or envelope-disproven: mid-channel (cage hardware cuts
+the clear width to 17.3 mm vs 21.2 needed), a shelf over the SimHat
+(blocks its removal lift), an end tray (237 mm vs the 175 mm bed).
+**Caliper your sticker and set `ANT_W`/`ANT_SLIDE` before printing.**
 
 ## Print variants (all parametric)
 
@@ -68,24 +70,31 @@ printing.**
 |---|---|---|---|
 | **Calibration mini-coupon** | `exports/lilygo_calicheck_mini.3mf` | ~28 mm local, ~21 g, **~15 min** | **FIRST PRINT**: M1.6 pilot-hole ladder, SimHat thickness stair, antenna width slits, real snap-clip bay — calibrates every printer-dependent number before anything bigger |
 | **Gridfinity fit-check tray** | `exports/lilygo_fitcheck_tray_gridfinity.3mf` | 33 mm pins / 7 mm body, ~17 g | second print: gauge pins verify the A7670 hole pattern with battery installed; SimHat outline + fence gauges; antenna channel; then clips onto any Gridfinity 3×4 baseplate |
-| Full carrier | `exports/lilygo_a7670_simhat_carrier.stl` | ~40 mm | production holder |
+| Full carrier | `exports/lilygo_a7670_simhat_carrier.stl` | ~34 mm, ~51 g | production holder (M1.6 screws, snap-caged SimHat, +X antenna tray) |
 | Low-profile template | `exports/lilygo_a7670_simhat_carrier_lowprofile.stl` | **9 mm** | batteryless screw-fit + cage-outline check (relay/holder hang through the open frame); wall-mountable via M3 ear slots. Build: `CARRIER_PROFILE=low python scripts/build.py` |
 | Snap coupon | `exports/simhat_clip_test.stl` | ~35 mm bay | pick XY clearance 0.20–0.50 (superseded for feel by the mini-coupon bay, still useful for clearance sweep) |
 | Sections | `exports/sections/*.stl` | varies | iterate one region cheaply (A7670 plate / SimHat cage / antenna tray); volume-partition of the full carrier |
 
-Print order: **calicheck mini (~15 min) → Gridfinity tray → coupon (optional) → full carrier.**
+Print order: **full carrier** (one calibration pass already done; reprint the
+calicheck mini only if you change `SIMHAT_PCB_XY_CLEAR` or the fence bite).
 Design intent + audit table: `docs/design_spec.md`.
 
 ## Port access (validated)
 
 Keep-clear service envelopes with zero printed-material interference:
 USB-C plug, both SMA antenna connectors, SIM-tray swap zone, battery JST,
-SimHat jumper-socket zone, relay/terminal cavity, and the 18650 battery
-keep-out under the A7670X — see `analysis/interference_report.json`.
+SimHat jumper-socket zone, relay/terminal cavity, the 18650 battery
+keep-out under the A7670X, and auto-derived SimHat side/end-exit mating
+envelopes (P1/P2, CAN/RS485 housings, terminal wire entry) — see
+`analysis/interference_report.json` and `cad/connectors.py`.
 
 ## Status
 
-`v0.3.0-validated` — all 34 validation checks pass; CI pipeline ensures renders stay fresh; carrier 22g PETG (was 40g); physically test-printed calicheck mini recommended before full print.
+`v0.4.0-validated` — 35/35 checks (full) + 28/28 (low) pass. v0.3 print
+feedback addressed: M1.6 screws default, biting fence + snug end play
+(rattle), fences off P1/CAN (mating-envelope enforced), antenna in the
++X side tray with coax clips. Carrier ~51 g PETG, 162 × 127.5 mm
+(A1-mini safe).
 
 ## How the T-SimHat is held
 

@@ -407,6 +407,8 @@ def _ear_geometry():
     out = []
     for name, (sx, sy) in P.EARS.items():
         x_edge = x_hi if sx > 0 else x_lo
+        if sx > 0 and P.ANT_POS == "side_tray" and P.PROFILE == "full":
+            x_edge = antenna_geometry()["outer_x"] - 1.0
         y_c = sy * (y_half - P.EAR_W / 2 + 2.0)
         out.append({
             "name": name, "kind": "corner", "sx": sx, "x_edge": x_edge,
@@ -468,6 +470,17 @@ def cut_tie_slots(carrier):
 
 def antenna_geometry():
     """Canonical channel coordinates for the active ANT_POS."""
+    if P.ANT_POS == "side_tray":
+        x_hi = _frame_extents()[2]
+        band_x0 = x_hi + P.ANT_SIDE_WALL_T
+        band_x1 = band_x0 + P.ANT_W + 2 * P.ANT_SIDE_CLEAR
+        outer_x = band_x1 + P.ANT_SIDE_WALL_T
+        return {"pos": "side_tray", "x_hi": x_hi, "band_x0": band_x0,
+                "band_x1": band_x1, "outer_x": outer_x,
+                "stop_y": P.ANT_SIDE_STOP_Y,
+                "mouth_y": -P.frame_y_half(),
+                "floor_y_half": P.frame_y_half() + 2.0,
+                "slide_len": P.ANT_SLIDE}
     if P.ANT_POS == "under_battery":
         _, y_lo, _, _ = _frame_extents()
         entry_y = y_lo + P.RAIL_W              # inner face of the -Y end rail
@@ -529,6 +542,40 @@ def build_antenna_underdeck():
     return cq.Workplane("XY").newObject(solids).combine()
 
 
+def build_antenna_sidetray():
+    """Open slide-in tray on the +X frame edge: floor lapped 1.6 mm into
+    the outer ring rail, inner + outer walls with a chamfered -Y mouth,
+    +Y stop, and coax guide posts on the ring-rail top beside the inner
+    wall (cable drops into the groove between post and wall, runs along
+    the frame edge to the SMA jacks). The two +X mounting ears move onto
+    the tray's outer wall via _ear_geometry()."""
+    g = antenna_geometry()
+    y0, y1 = g["mouth_y"], g["stop_y"] + P.ANT_SIDE_STOP_T
+    fy = g["floor_y_half"]
+    f = P.ANT_SIDE_ENTRY_CHAMFER
+    solids = [_rect(g["x_hi"] - 1.6, -fy, g["outer_x"], fy, 0, P.ANT_FLOOR_T)]
+
+    xi0, xi1 = g["x_hi"], g["band_x0"]
+    inner_pts = [(xi1, y0), (xi1, y1), (xi0, y1), (xi0, y0 + f),
+                 (xi1 - f, y0)]
+    xo0, xo1 = g["band_x1"], g["outer_x"]
+    outer_pts = [(xo0, y0), (xo0, y1), (xo1, y1), (xo1, y0 + f),
+                 (xo0 + f, y0)]
+    for pts in (inner_pts, outer_pts):
+        solids.append(cq.Workplane("XY")
+                      .polyline([(x, y) for x, y in pts]).close()
+                      .extrude(P.ANT_FLOOR_T + P.ANT_SIDE_WALL_H).val())
+
+    solids.append(_rect(xi0, g["stop_y"], xo1, y1,
+                        0, P.ANT_FLOOR_T + P.ANT_SIDE_WALL_H))
+
+    for cy in P.ANT_COAX_CLIP_YS:
+        solids.append(_rect(g["x_hi"] - P.RAIL_W, cy - 2.0,
+                            g["x_hi"] - P.RAIL_W + 1.0, cy + 2.0,
+                            P.BASE_T - 0.3, P.ANT_COAX_CLIP_H + 0.3))
+    return cq.Workplane("XY").newObject(solids).combine()
+
+
 def build_antenna_tray():
     """end_tray alternative: floor + flared walls + stop beyond the -Y rail."""
     g = antenna_geometry()
@@ -563,6 +610,8 @@ def build_antenna_tray():
 
 
 def build_antenna():
+    if P.ANT_POS == "side_tray":
+        return build_antenna_sidetray()
     if P.ANT_POS == "under_battery":
         return build_antenna_underdeck()
     if P.ANT_POS == "end_tray":

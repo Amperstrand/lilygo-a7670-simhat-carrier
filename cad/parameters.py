@@ -247,21 +247,45 @@ TAPE_PADS = [("a7670-mid", 0.0), ("simhat-mid", 0.0)]
 # User-measured: ~110 x 20 mm sticker, coax pigtail enters ~20 mm into one
 # end (that end goes in LAST, at the mouth), 10-15 cm coax.
 #
-# ANT_POS = "under_battery" (default): sticker slides flat UNDER the A7670
-#   on a continuous base strip (z 3.2) in the 1.3 mm gap below the 18650
-#   holder (battery bottom z 4.5). Side guides only - top fully open.
-#   Footprint shrinks ~34 mm in Y (no end appendix). RF trade-off: directly
-#   under a battery+PCB costs typically 3-10 dB (Antenova/Digi guidance);
-#   accepted for a shed relay inside a plastic enclosure.
-# ANT_POS = "end_tray": the v0.3 slide-in tray appended beyond the -Y rail.
-# ---------------------------------------------------------------------------
+# ANT_POS = "side_tray" (v0.4 default): sticker slides into an open tray
+#   on the +X (A7670 outer) edge -- free air instead of under the 18650,
+#   and the coax hops ~6 mm from the SMA jacks over the board edge into
+#   drop-in clips on the tray's inner wall ("route the wire up", v0.3
+#   print feedback). The tray sits between the two relocated +X ear
+#   screw holes. Position chosen by elimination, boolean/envelope-proven:
+#   mid-channel impossible (SimHat +u clip hardware x -9.7..-3.7 and the
+#   +u locator fence x -9.7..-7.3 cut the 20.8 mm channel to 17.3 mm vs
+#   21.2 needed); a shelf over the SimHat blocks its +30 mm removal lift
+#   (board spans z 34.8..62.1 vs shelf 41..44.2); end trays need 237 mm
+#   vs the 175 mm bed.
+# ANT_POS = "under_battery": sticker slides UNDER the A7670 in the 1.3 mm
+#   gap below the 18650 holder (kept as alternative; hard cable routing
+#   per v0.3 print feedback).
+# ANT_POS = "end_tray": v0.3 slide-in tray beyond the -Y rail (exceeds
+#   the A1 mini bed at ANT_SLIDE=110; kept for shorter antennas).
 
-ANT_POS = "under_battery"
-ANT_SLIDE = 110.0        # sticker long dimension (along Y when under_battery)
-ANT_W = 20.0             # sticker width (across the channel)
+ANT_POS = "side_tray"
+ANT_SLIDE = 110.0        # sticker long dimension (along Y in the tray)
+ANT_W = 20.0             # sticker width (across the tray)
 ANT_X_C = None           # under_battery: centered on the A7670 (auto)
 ANT_SIDE_CLEAR = 0.6     # lateral clearance per side (coupon: fits 19.8-20.2)
 ANT_CABLE_ENTRY = 20.0   # pigtail-inside-sticker length; sits in the mouth
+
+# side_tray geometry. Inner wall inner face = the frame's outer rail line;
+# tray band = ANT_W + 2 x ANT_SIDE_CLEAR between 2.4 mm walls; +Y stop;
+# chamfered -Y mouth; walls and stop rise ANT_SIDE_WALL_H above the floor.
+ANT_SIDE_WALL_T = 2.4
+ANT_SIDE_WALL_H = 3.2
+ANT_SIDE_STOP_T = 2.4
+ANT_SIDE_ENTRY_CHAMFER = 1.5
+ANT_SIDE_STOP_Y = 50.6   # stop inner face (+Y); ears at y 47.8..63.8 start
+                         # beyond the tray's outer edge, x-disjoint
+# Drop-in coax clip posts on the inner tray wall top, cable captured
+# between post pairs (2.4 mm gap) running along Y. -30 sits on the
+# SMA-to-mouth run; 8 sits below the SMA service envelope (carrier
+# y 0.3..15.3). Both clear of the stop wall (50.6) and mouth chamfer.
+ANT_COAX_CLIP_YS = (-30.0, 8.0)
+ANT_COAX_CLIP_H = 3.2    # post height above the wall top
 ANT_GUIDE_SLOPE_DEG = 80.0   # inner guide faces lean out 10 deg from vertical
 ANT_GUIDE_H = 2.5        # guide height (sticker only needs edge capture;
                          # shed-box build -> shorter = faster, less plastic)

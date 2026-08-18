@@ -253,6 +253,21 @@ the next board-carrier project. Review this file before extending the CAD.
     a sprung XY-flexure design exists. Structure that depends on fence
     positions (low-profile cross-rails) is a hidden coupling - give the
     frame its own rail set.
+43. **Eliminate antenna positions with envelopes before modeling them.**
+    The v0.4 relocation was decided by four cheap probes, not by
+    building-and-failing: (a) a mid-channel sticker died on measured
+    CLEAR width - cage hardware (clip arms x -9.7..-3.7, locator fence
+    x -9.7..-7.3) cuts the nominal 20.8 mm channel to 17.3 in their
+    y-bands vs 21.2 needed; never compute a channel from frame rails
+    alone, subtract every appendage that intrudes at seat height;
+    (b) a shelf over a snap-caged board dies on its own removal lift
+    (+30 mm) - the lift envelope vetoes any overhang; (c) an end tray
+    dies on the 175 mm bed at ANT_SLIDE=110 (237 mm total); (d) the
+    side tray on the outer frame edge wins by being x-disjoint from
+    both boards' removal paths, free-air for RF, and a 6 mm coax hop
+    from the SMA jacks. Corollary: ears must follow appendages - with
+    the tray on +X, both +X ears re-root onto the tray's outer wall
+    (else they print inside the tray band).
 
 ## Design rules specific to this carrier
 
