@@ -9,9 +9,9 @@ Fully scripted in **Python + CadQuery**, driven by **manufacturer STEP/DXF
 geometry** (no guessed dimensions), validated programmatically, and
 regenerable with one command.
 
-![Assembly render](renders/assembly.png)
+![Assembly render](https://github.com/Amperstrand/lilygo-a7670-simhat-carrier/blob/main/renders/assembly.png)
 
-![Contact sheet](renders/contact_sheet.png)
+![Contact sheet](https://github.com/Amperstrand/lilygo-a7670-simhat-carrier/blob/main/renders/contact_sheet.png)
 
 *T-SimHat (amber) flipped — relay down, headers up. T-A7670X (green) on
 25 mm standoffs (18650 + holder underneath). LTE sticker-antenna slide-in
@@ -28,8 +28,9 @@ tray at the far end. Full carrier 133 × 157.5 mm.*
 - **Download & spin anywhere**: [assembly GLB](exports/lilygo_a7670_simhat_assembly.glb)
   and [carrier GLB](exports/lilygo_a7670_simhat_carrier.glb) open in Windows
   3D Viewer, macOS Preview, Blender, https://gltf-viewer.donmccurdy.com.
-- **Renders**: `renders/` — 9 labeled views incl. per-board close-ups
-  (`a7670_closeup.png`, `simhat_closeup.png`) and the contact sheet above.
+- **Renders**: GitHub blob URLs — 9 labeled views incl. per-board close-ups
+  (`a7670_closeup.png`, `simhat_closeup.png`) and the contact sheet.
+  Rendered by `scripts/build.py`; regenerated on every push via CI.
 
 ## Key measured dimensions (from manufacturer CAD)
 
@@ -84,10 +85,7 @@ keep-out under the A7670X — see `analysis/interference_report.json`.
 
 ## Status
 
-`v0.2.0-prototype` — all software validation passes for both build
-profiles (full: 18 checks, low: 11); **not yet physically test-printed**.
-Print order: coupon → low-profile template → full carrier. Lessons and
-prompt library for future LLM-driven CAD work: `AGENTS.md`.
+`v0.3.0-validated` — all 34 validation checks pass; CI pipeline ensures renders stay fresh; carrier 22g PETG (was 40g); physically test-printed calicheck mini recommended before full print.
 
 ## How the T-SimHat is held
 
