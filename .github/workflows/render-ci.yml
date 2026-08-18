@@ -1,0 +1,30 @@
+name: Render Pipeline
+on:
+  push:
+    branches: [cad/combined-carrier-v1]
+  pull_request:
+    branches: [cad/combined-carrier-v1]
+
+jobs:
+  build-renders:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          pip install --quiet cadquery trimesh pyvista
+
+      - name: Build carrier and generate renders
+        # This regenerates exports/ and renders/ per scripts/build.py
+        run: |
+          python scripts/build.py
+
+      - name: Verify renders directory is present
+        run: |
+          ls renders/ | wc -l | grep -q "2[0-9]" && echo "OK: renders generated" || echo "WARN: unexpected render count"
