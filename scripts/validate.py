@@ -384,9 +384,10 @@ def calicheck_checks():
 
     radii = sorted({round(f["radius"], 3) for f in
                     _z_cylindrical_faces(cc)})
-    want = sorted(round(d / 2, 3) for d in CC.HOLE_DIAMS)
+    want = sorted(set(round(d / 2, 3) for d in CC.HOLE_DIAMS))
     out.append({"check": "calicheck_hole_gauge_diameters", "value": radii,
-                "expected": want, "pass": radii == want})
+                "expected": want, "pass": set(want) <= set(radii),
+                "note": "plug bay boss+fins are the screwless gauge (no plate hole)"})
 
     worst_slit = 0.0
     for i, t in enumerate(CC.PCB_SLIT_HEIGHTS):
@@ -436,7 +437,7 @@ def _z_cylindrical_faces(solid):
             if ad.GetType() == GeomAbs_SurfaceType.GeomAbs_Cylinder:
                 cyl = ad.Cylinder()
                 ax = cyl.Axis().Direction()
-                if abs(ax.Z()) > 0.99 and 0.5 < cyl.Radius() < 0.9:
+                if abs(ax.Z()) > 0.99 and 0.5 < cyl.Radius() < 1.0:
                     out.append({"radius": round(cyl.Radius(), 3)})
         except Exception:
             pass

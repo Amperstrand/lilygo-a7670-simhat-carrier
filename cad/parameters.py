@@ -248,10 +248,14 @@ ANT_X_C = None           # under_battery: centered on the A7670 (auto)
 ANT_SIDE_CLEAR = 0.6     # lateral clearance per side (coupon: fits 19.8-20.2)
 ANT_CABLE_ENTRY = 20.0   # pigtail-inside-sticker length; sits in the mouth
 ANT_GUIDE_SLOPE_DEG = 80.0   # inner guide faces lean out 10 deg from vertical
-ANT_GUIDE_H = 4.0        # guide height above base (shield/pin ceiling 10.0)
+ANT_GUIDE_H = 2.5        # guide height (sticker only needs edge capture;
+                         # shed-box build -> shorter = faster, less plastic)
 ANT_GUIDE_T = 2.4        # guide base thickness
 ANT_STOP_Y = 52.5        # stop block inner face (+Y end of channel)
-ANT_FLOOR_T = 3.2        # continuous strip under the channel (flat sliding)
+ANT_FLOOR_T = 3.2        # base strip height under the channel
+ANT_CENTER_RAIL_W = 3.0  # sparse floor: center rail + end ties instead of a
+                         # solid 110x26 slab (sticker is stiff enough to
+                         # slide on a rail; saves ~7 g and print time)
 ANT_COAX_NOTCH_W = 5.0   # end_tray only: coax pass-through in the -Y rail
 
 # end_tray geometry (legacy, kept as the alternative position)

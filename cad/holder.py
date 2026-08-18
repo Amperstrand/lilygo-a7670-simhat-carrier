@@ -486,10 +486,11 @@ def _antenna_tray_geometry():
 
 def build_antenna_underdeck():
     """Sticker slides flat UNDER the A7670 in the 1.3 mm gap below the
-    18650 holder: continuous floor strip, two open-top guides whose inner
-    faces lean out ANT_GUIDE_SLOPE_DEG (self-centering funnel), +Y stop.
-    The cable-entry end of the sticker stays in the -Y mouth (beyond the
-    battery footprint, open above) so the pigtail loops out freely."""
+    18650 holder: sparse support (center rail + entry/stop ties on the
+    base strip), two short open-top guides whose inner faces lean out
+    ANT_GUIDE_SLOPE_DEG (self-centering funnel), +Y stop. The cable-entry
+    end of the sticker stays in the -Y mouth (beyond the battery
+    footprint, open above) so the pigtail loops out freely."""
     g = antenna_geometry()
     cx, half = g["cx"], g["ch_half"]
     y0, y1 = g["entry_y"], g["stop_y"]
@@ -497,9 +498,12 @@ def build_antenna_underdeck():
     lean = h / math.tan(math.radians(P.ANT_GUIDE_SLOPE_DEG))
     solids = []
 
-    floor = _rect(cx - half - P.ANT_GUIDE_T - 2.0, y0,
-                  cx + half + P.ANT_GUIDE_T + 2.0, y1,
-                  0, P.ANT_FLOOR_T)
+    span = cx - half - P.ANT_GUIDE_T - 2.0, cx + half + P.ANT_GUIDE_T + 2.0
+    solids.append(_rect(cx - P.ANT_CENTER_RAIL_W / 2, y0,
+                        cx + P.ANT_CENTER_RAIL_W / 2, y1, 0, P.ANT_FLOOR_T))
+    for ty in (y0 + 3.0, y1 - 3.0):
+        solids.append(_rect(span[0], ty - 1.5, span[1], ty + 1.5,
+                            0, P.ANT_FLOOR_T))
 
     for side in (-1, 1):
         xi = cx + side * half
@@ -507,14 +511,12 @@ def build_antenna_underdeck():
         pts = [(xi, y0), (xi + side * lean, y1),
                (xo + side * lean, y1), (xo, y0)]
         solids.append(cq.Workplane("XY").polyline(pts).close()
-                      .extrude(P.ANT_FLOOR_T + h)
-                      .translate((0, 0, P.ANT_FLOOR_T)).val())
+                      .extrude(0.3 + P.ANT_FLOOR_T + h)
+                      .translate((0, 0, P.ANT_FLOOR_T - 0.3)).val())
 
-    stop = _rect(cx - half - P.ANT_GUIDE_T - 2.0, y1,
-                 cx + half + P.ANT_GUIDE_T + 2.0, y1 + P.ANT_GUIDE_T,
-                 P.ANT_FLOOR_T, h)
+    stop = _rect(span[0], y1, span[1], y1 + P.ANT_GUIDE_T,
+                 P.ANT_FLOOR_T - 0.3, 0.3 + h)
     solids.append(stop)
-    solids.append(floor)
     return cq.Workplane("XY").newObject(solids).combine()
 
 

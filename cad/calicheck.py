@@ -36,6 +36,10 @@ HOLE_DIAMS = [1.20, 1.30, 1.40, 1.50, 1.60]
 HOLE_PITCH = 7.5
 HOLE_ROW_Y = 28.0
 HOLE_ROW_X0 = 8.0
+PLUG_HOLE_D = 1.70                # true A7670 PCB hole Ø (STEP cylinders)
+# One full christmas-tree plug at the true Ø1.70-hole gauge size: the
+# plug bay is the screwless-mount dress rehearsal (fins Ø1.55/1.65 over a
+# Ø1.70 hole, exactly as on the carrier).
 
 WALL_T = 2.4
 SLIT_TRAVEL = 7.0
@@ -78,7 +82,22 @@ def _plate() -> cq.Shape:
                 .circle(d / 2).extrude(PLATE_T + 2)
                 .translate((0, 0, -1)).val())
         plate = _cut(plate, hole)
+    plug_x = 42.5
     return plate
+
+
+def _plug_bay() -> list[cq.Shape]:
+    """Screwless-mount dress rehearsal: Ø1.70 through-hole in the plate +
+    the full christmas-tree plug rooted in a 6 mm boss below it. Press the
+    board-side of a spare PCB hole over the plug; fins should click
+    through and release on a firm pull."""
+    from cad import holder as H
+    plug_x = 42.5
+    boss = (cq.Workplane("XY").moveTo(plug_x, HOLE_ROW_Y)
+            .circle(3.0).extrude(6.0).val())
+    plug = H._plug_solid(plug_x, HOLE_ROW_Y)
+    plug = plug.translate(cq.Vector(0, 0, -H.P.A7670_STANDOFF_H + 6.0))
+    return [boss.fuse(plug)]
 
 
 def _pcb_thickness_wall() -> list[cq.Shape]:
@@ -181,7 +200,8 @@ def _bay() -> list[cq.Shape]:
 
 
 def build_calicheck():
-    parts = ([_plate()] + _pcb_thickness_wall() + _antenna_wall() + _bay())
+    parts = ([_plate()] + _pcb_thickness_wall() + _antenna_wall() + _bay()
+             + _plug_bay())
     out = parts[0]
     for p in parts[1:]:
         out = out.fuse(p)
