@@ -1,0 +1,60 @@
+{
+  "prefix": "lilygo",
+  "faces": [
+    {
+      "name": "simhat_down",
+      "source": {
+        "url": "https://lilygo.cc/cdn/shop/products/T-SimHat.jpg?v=1657769776&width=1206",
+        "cache": "T-SimHat.jpg",
+        "largest_dark": true
+      },
+      "aspect": [33.0, 94.8],
+      "plane": { "board": "simhat", "face": "down" },
+      "fiducials": {
+        "silver": [0.21, 0.5, 5.0, 2.0],
+        "green": [0.917, 0.174, 1.0, 1.0]
+      }
+    },
+    {
+      "name": "simhat_up",
+      "source": {
+        "url": "https://lilygo.cc/cdn/shop/products/H559_8.jpg?v=1657769774&width=1946",
+        "cache": "H559_8_full.jpg",
+        "preprocess": "crop cell (187,287,800,929) then right half",
+        "box": [493, 287, 800, 929]
+      },
+      "aspect": [33.0, 94.8],
+      "plane": { "board": "simhat", "face": "up" },
+      "fiducials": {
+        "silver": [0.22, 0.5, 5.0, 2.0]
+      }
+    },
+    {
+      "name": "a7670_top",
+      "source": {
+        "url": "https://lilygo.cc/cdn/shop/products/LILYGO-T-SIMA7670E_6.jpg?v=1669962736&width=1206",
+        "cache": "a7670_6.jpg",
+        "box": [174, 119, 412, 882]
+      },
+      "aspect": [33.071, 110.541],
+      "plane": { "board": "a7670", "face": "up" },
+      "fiducials_note": "USB-C silver block at the -Y end -> texture cv~0.95 bottom; SMA bodies mid upper area",
+      "fiducials": {
+        "silver": [0.75, 0.5, 3.0, 2.0]
+      }
+    },
+    {
+      "name": "a7670_bottom",
+      "source": {
+        "url": "https://lilygo.cc/cdn/shop/products/LILYGO-T-SIMA7670E_6.jpg?v=1669962736&width=1206",
+        "cache": "a7670_6.jpg",
+        "box": [574, 118, 828, 881]
+      },
+      "aspect": [33.071, 110.541],
+      "plane": { "board": "a7670", "face": "down" },
+      "fiducials": {
+        "silver": [0.5, 0.5, 2.0, 2.0]
+      }
+    }
+  ]
+}

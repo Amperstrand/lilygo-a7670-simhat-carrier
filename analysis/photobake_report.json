@@ -1,0 +1,236 @@
+{
+  "jobs": {
+    "prefix": "lilygo",
+    "faces": [
+      {
+        "name": "simhat_down",
+        "source": {
+          "url": "https://lilygo.cc/cdn/shop/products/T-SimHat.jpg?v=1657769776&width=1206",
+          "cache": "T-SimHat.jpg",
+          "largest_dark": true
+        },
+        "aspect": [
+          33.0,
+          94.8
+        ],
+        "plane": {
+          "board": "simhat",
+          "face": "down"
+        },
+        "fiducials": {
+          "silver": [
+            0.21,
+            0.5,
+            5.0,
+            2.0
+          ],
+          "green": [
+            0.917,
+            0.174,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      {
+        "name": "simhat_up",
+        "source": {
+          "url": "https://lilygo.cc/cdn/shop/products/H559_8.jpg?v=1657769774&width=1946",
+          "cache": "H559_8_full.jpg",
+          "preprocess": "crop cell (187,287,800,929) then right half",
+          "box": [
+            493,
+            287,
+            800,
+            929
+          ]
+        },
+        "aspect": [
+          33.0,
+          94.8
+        ],
+        "plane": {
+          "board": "simhat",
+          "face": "up"
+        },
+        "fiducials": {
+          "silver": [
+            0.22,
+            0.5,
+            5.0,
+            2.0
+          ]
+        }
+      },
+      {
+        "name": "a7670_top",
+        "source": {
+          "url": "https://lilygo.cc/cdn/shop/products/LILYGO-T-SIMA7670E_6.jpg?v=1669962736&width=1206",
+          "cache": "a7670_6.jpg",
+          "box": [
+            174,
+            119,
+            412,
+            882
+          ]
+        },
+        "aspect": [
+          33.071,
+          110.541
+        ],
+        "plane": {
+          "board": "a7670",
+          "face": "up"
+        },
+        "fiducials_note": "USB-C silver block at the -Y end -> texture cv~0.95 bottom; SMA bodies mid upper area",
+        "fiducials": {
+          "silver": [
+            0.75,
+            0.5,
+            3.0,
+            2.0
+          ]
+        }
+      },
+      {
+        "name": "a7670_bottom",
+        "source": {
+          "url": "https://lilygo.cc/cdn/shop/products/LILYGO-T-SIMA7670E_6.jpg?v=1669962736&width=1206",
+          "cache": "a7670_6.jpg",
+          "box": [
+            574,
+            118,
+            828,
+            881
+          ]
+        },
+        "aspect": [
+          33.071,
+          110.541
+        ],
+        "plane": {
+          "board": "a7670",
+          "face": "down"
+        },
+        "fiducials": {
+          "silver": [
+            0.5,
+            0.5,
+            2.0,
+            2.0
+          ]
+        }
+      }
+    ]
+  },
+  "bakes": {
+    "simhat_down": {
+      "name": "simhat_down",
+      "transform": "",
+      "score": -1.455,
+      "landmarks_cu_cv_n": {
+        "green": [
+          0.48,
+          0.22,
+          1059
+        ],
+        "silver": [
+          0.59,
+          0.16,
+          112871
+        ],
+        "dark": [
+          0.49,
+          0.54,
+          1124183
+        ]
+      },
+      "plane": {
+        "board": "simhat",
+        "face": "down"
+      },
+      "texture": "/tmp/opencode/photobake/bake_simhat_down.png",
+      "u_mirror": true
+    },
+    "simhat_up": {
+      "name": "simhat_up",
+      "transform": "ROTATE_270",
+      "score": -1.176,
+      "landmarks_cu_cv_n": {
+        "green": null,
+        "silver": [
+          0.94,
+          0.16,
+          7405
+        ],
+        "dark": [
+          0.5,
+          0.5,
+          1243390
+        ]
+      },
+      "plane": {
+        "board": "simhat",
+        "face": "up"
+      },
+      "texture": "/tmp/opencode/photobake/bake_simhat_up.png",
+      "u_mirror": false
+    },
+    "a7670_top": {
+      "name": "a7670_top",
+      "transform": "FLIP_LEFT_RIGHT",
+      "score": -0.571,
+      "landmarks_cu_cv_n": {
+        "green": [
+          0.35,
+          0.79,
+          341
+        ],
+        "silver": [
+          0.52,
+          0.57,
+          507964
+        ],
+        "dark": [
+          0.52,
+          0.43,
+          452612
+        ]
+      },
+      "plane": {
+        "board": "a7670",
+        "face": "up"
+      },
+      "texture": "/tmp/opencode/photobake/bake_a7670_top.png",
+      "u_mirror": false
+    },
+    "a7670_bottom": {
+      "name": "a7670_bottom",
+      "transform": "",
+      "score": -0.208,
+      "landmarks_cu_cv_n": {
+        "green": [
+          0.67,
+          0.78,
+          144
+        ],
+        "silver": [
+          0.56,
+          0.55,
+          319223
+        ],
+        "dark": [
+          0.47,
+          0.4,
+          670748
+        ]
+      },
+      "plane": {
+        "board": "a7670",
+        "face": "down"
+      },
+      "texture": "/tmp/opencode/photobake/bake_a7670_bottom.png",
+      "u_mirror": true
+    }
+  }
+}

@@ -166,6 +166,36 @@ the next board-carrier project. Review this file before extending the CAD.
     u-negative) and make every scorer use it — a cv measured from the
     wrong edge silently inverts every target.
 
+31. **Photobake pattern (now a tool).** tools/photobake.py + a declarative
+    jobs JSON: per face {source(url/box/largest-dark), true aspect, plane
+    placement, fiducial targets} -> crop -> perspective-rectify -> pick 1
+    of 8 orientations by fiducial score -> textured plane at the CAD
+    position -> GLB + stills + turntable. Reusable for any future
+    enclosure/PCB work; the job file is the whole config.
+32. **Top-view-convention textures must be U-MIRRORED when baked onto a
+    down-facing plane.** Switching to oriented textures and dropping the
+    mirror produced exactly-mirrored photos on the underside — the user
+    caught it in the video ("wrong image in the wrong place"). The mirror
+    lives in the bake step, never in the convention.
+33. **Rectification needs margins.** Corner-detection homography
+    degenerates when the board mask already touches >=3 image edges
+    (pre-cropped): extremes collapse to the frame and the transform
+    becomes a stretch. Detect edge-touching and fall back to bbox-resize.
+    Symptom downstream: fiducial pixel counts collapse (112k -> 22k).
+34. **Photo luminance audits are theater on black PCBs.** A "dark pixels
+    = components" sampler reads 100% dark on black soldermask. Placement
+    truth comes from boolean checks vs real solids; photos are for human
+    visualization and (at most) silver/green fiducials.
+35. **User study converged with the validated design:** on this board the
+    only support-safe component-side zones are the center strip and near
+    the two PCB cutouts; header solder blocks both long edges (even under
+    the board). Current pads (center strip, u ±2.75) + end lip/clips sit
+    exactly in those zones — documented so a future redesign doesn't
+    "discover" this the hard way. The oval cutout INSIDE the relay
+    footprint stays a keep-out: any boss poking into it must clear the
+    relay overhang (18.25 mm below PCB), which makes it useless as a
+    support anyway.
+
 ## Design rules specific to this carrier
 
 - A7670 holes are Ø1.73 → M1.6 only. Standoff height is battery-driven
