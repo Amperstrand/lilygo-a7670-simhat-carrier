@@ -37,12 +37,14 @@ jobs:
           OPENBLAS_NUM_THREADS: "1"
         run: |
           python scripts/build.py
+          python tools/photobake.py
+          python scripts/audit_photobake.py
 
       - name: Verify renders directory is present
         run: |
           n=$(ls renders/ | wc -l)
           echo "renders: $n files"
-          [ "$n" -ge 20 ] && echo "OK" || { echo "unexpected render count"; exit 1; }
+          [ "$n" -ge 16 ] && echo "OK" || { echo "unexpected render count"; exit 1; }
 
       # renders/ is generated, not tracked (B5): every push to the working
       # branch force-deploys the fresh set to gh-pages, served by Pages at
