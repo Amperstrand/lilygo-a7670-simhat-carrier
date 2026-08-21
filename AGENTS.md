@@ -253,6 +253,46 @@ the next board-carrier project. Review this file before extending the CAD.
     a sprung XY-flexure design exists. Structure that depends on fence
     positions (low-profile cross-rails) is a hidden coupling - give the
     frame its own rail set.
+44. **Auto-derive EVERY board's mating envelopes, both orientations.**
+    connectors.py now derives the A7670 side-exit set the same way as the
+    SimHat set (check `connector_mating_clear`); hand-typed
+    SERVICE_ENVELOPES remain only for zones the solids cannot know
+    (SIM swap sweep, USB plug body). Two traps in the derivation: gate
+    envelopes ABOVE the PCB plane when the board mounts component-up
+    (standoff bosses legally poke ~0.4 mm past board edges at base
+    level), and honor ROT_180 by mapping through _a7670_local_to_carrier
+    (STEP edges are not carrier edges).
+45. **Photobake audits close the loop numerically (rule 34 made code).**
+    scripts/audit_photobake.py gates: plane rectangles recomputed from
+    the PLACED STEP slab faces (never hand formulas - the old
+    plane_placement mixed caliper vs STEP thickness, rule 41 class);
+    fiducial centroids vs CAD truth with a PER-FACE class map (gate only
+    classes unambiguous on that face: socket rails on the simhat up
+    face, green terminal on the relay face; silver on the relay face is
+    a MIX of CAN shells + pin tails -> advisory). It caught every
+    historical texture bug: the 99%-dark crop (box swallowed two boards
+    + bezel), the ghost underside in top views (two-sided planes -> wind
+    down faces -Z + backface culling), and would have caught the
+    mirrored-offset class. Fiducial truth comes from measured bboxes, so
+    the audit never depends on the same code it checks.
+46. **When no honest source passes, ship the honest fallback.** The
+    simhat relay face has no clean photo: every candidate failed audit
+    in a DIFFERENT way (severed dark mask -> fragment warp; two-boards-
+    squeezed -> fiducials pass but content wrong; variant board ->
+    centroid 0.10 off). Gaming the gate with the squeezed pair would
+    have re-shipped the user-reported bug. Shipped flat_dark (the board
+    is matte black, mounted flipped, face only visible from below) with
+    the decision recorded in the jobs file.
+47. **Generated assets belong on Pages, not in git** (B5): CI builds
+    renders, runs the photobake audit IN the pipeline (audit failure =
+    red X), then force-pushes renders/ as an orphan gh-pages branch;
+    README links the Pages URLs. Orphan-branch deploys from a job dir
+    (git init in renders/) - do NOT try to orphan-branch from the
+    working repo (that fiasco created a full-repo gh-pages copy once).
+    CI lessons that cost three red runs: VTK offscreen needs apt EGL/
+    OSMesa (exit 139), OCP needs OMP_NUM_THREADS=1, deps must be the
+    frozen requirements, and tools that cache downloads must create
+    their cache dir before a no-download path writes into it.
 43. **Eliminate antenna positions with envelopes before modeling them.**
     The v0.4 relocation was decided by four cheap probes, not by
     building-and-failing: (a) a mid-channel sticker died on measured
