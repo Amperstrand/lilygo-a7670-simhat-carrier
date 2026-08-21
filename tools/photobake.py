@@ -109,6 +109,7 @@ def fiducial_score(lm, targets):
 
 
 def bake_face(face):
+    os.makedirs(CACHE, exist_ok=True)
     if face["source"].get("style") == "flat_dark":
         w, h = face["aspect"]
         tex = Image.new("RGB", (int(w * 20), int(h * 20)), (26, 28, 32))
