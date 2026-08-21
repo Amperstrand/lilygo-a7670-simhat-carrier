@@ -109,6 +109,16 @@ def fiducial_score(lm, targets):
 
 
 def bake_face(face):
+    if face["source"].get("style") == "flat_dark":
+        w, h = face["aspect"]
+        tex = Image.new("RGB", (int(w * 20), int(h * 20)), (26, 28, 32))
+        out = os.path.join(CACHE, f"bake_{face['name']}.png")
+        tex.save(out)
+        return {
+            "name": face["name"], "transform": "flat_dark", "score": 0.0,
+            "landmarks_cu_cv_n": {}, "plane": face["plane"], "texture": out,
+            "u_mirror": face["plane"].get("face") == "down",
+        }
     img = source_image(face["source"])
     if face["source"].get("box"):
         img = img.crop(tuple(face["source"]["box"]))
@@ -190,6 +200,7 @@ def render(bakes, prefix, video=False):
 
     for b in bakes:
         cx, cy, z, w, h = plane_placement(b["plane"])
+        down = b["plane"].get("face") == "down"
         pd = vtk.vtkPolyData()
         pts = vtk.vtkPoints()
         for x, y in ((cx - w / 2, cy - h / 2), (cx + w / 2, cy - h / 2),
@@ -197,8 +208,12 @@ def render(bakes, prefix, video=False):
             pts.InsertNextPoint(x, y, z)
         pd.SetPoints(pts)
         arr = vtk.vtkCellArray()
-        arr.InsertNextCell(3, (0, 1, 2))
-        arr.InsertNextCell(3, (0, 2, 3))
+        # single-sided planes: down faces wound so the normal points -Z,
+        # up faces +Z; with backface culling each photo is visible only
+        # from its own side (kills the ghost underside in top views)
+        tri = ((0, 2, 1), (0, 3, 2)) if down else ((0, 1, 2), (0, 2, 3))
+        for t in tri:
+            arr.InsertNextCell(3, t)
         pd.SetPolys(arr)
         tc = vtk.vtkFloatArray()
         tc.SetNumberOfComponents(2)
@@ -222,6 +237,7 @@ def render(bakes, prefix, video=False):
         act = vtk.vtkActor()
         act.SetMapper(m)
         act.SetTexture(tex)
+        act.GetProperty().BackfaceCullingOn()
         ren.AddActor(act)
 
     bb = holder.build_carrier().val().BoundingBox()
@@ -262,9 +278,11 @@ def render(bakes, prefix, video=False):
     scene.add_geometry(cm, node_name="carrier")
     for b in bakes:
         cx, cy, z, w, h = plane_placement(b["plane"])
+        down = b["plane"].get("face") == "down"
         v = np.array([[cx - w / 2, cy - h / 2, z], [cx + w / 2, cy - h / 2, z],
                       [cx + w / 2, cy + h / 2, z], [cx - w / 2, cy + h / 2, z]])
-        f = np.array([[0, 1, 2], [0, 2, 3]])
+        f = np.array([[0, 2, 1], [0, 3, 2]]) if down \
+            else np.array([[0, 1, 2], [0, 2, 3]])
         uv = np.array([[1, 0], [0, 0], [0, 1], [1, 1]]) if b["u_mirror"] \
             else np.array([[0, 0], [1, 0], [1, 1], [0, 1]])
         mesh = trimesh.Trimesh(vertices=v, faces=f)

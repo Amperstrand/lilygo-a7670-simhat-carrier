@@ -1,0 +1,108 @@
+{
+ "faces": [
+  {
+   "name": "simhat_down",
+   "gates": [
+    {
+     "gate": "plane_drift",
+     "dz": 0.0,
+     "dcx": 0.0,
+     "dcy": 0.0,
+     "size_exact": true,
+     "pass": true
+    }
+   ],
+   "advisory": [],
+   "pass": true
+  },
+  {
+   "name": "simhat_up",
+   "gates": [
+    {
+     "gate": "plane_drift",
+     "dz": 0.25,
+     "dcx": 0.0,
+     "dcy": 0.0,
+     "size_exact": true,
+     "pass": true
+    },
+    {
+     "gate": "fiducial_silver",
+     "measured_cu_cv": [
+      0.521,
+      0.217
+     ],
+     "truth_cu_cv": [
+      0.5,
+      0.216
+     ],
+     "du": 0.021,
+     "dv": 0.001,
+     "n": 423052,
+     "pass": true
+    }
+   ],
+   "advisory": [
+    {
+     "note": "silver centroid (ungated on this board)",
+     "cu_cv": [
+      0.521,
+      0.217
+     ],
+     "n": 423052
+    }
+   ],
+   "pass": true
+  },
+  {
+   "name": "a7670_top",
+   "gates": [
+    {
+     "gate": "plane_drift",
+     "dz": 0.0,
+     "dcx": 0.0,
+     "dcy": 0.0,
+     "size_exact": true,
+     "pass": true
+    }
+   ],
+   "advisory": [
+    {
+     "note": "silver centroid (ungated on this board)",
+     "cu_cv": [
+      0.516,
+      0.571
+     ],
+     "n": 507964
+    }
+   ],
+   "pass": true
+  },
+  {
+   "name": "a7670_bottom",
+   "gates": [
+    {
+     "gate": "plane_drift",
+     "dz": 0.0,
+     "dcx": 0.0,
+     "dcy": 0.0,
+     "size_exact": true,
+     "pass": true
+    }
+   ],
+   "advisory": [
+    {
+     "note": "silver centroid (ungated on this board)",
+     "cu_cv": [
+      0.557,
+      0.547
+     ],
+     "n": 319223
+    }
+   ],
+   "pass": true
+  }
+ ],
+ "convention": "top=far(+Y), left=u_min; down faces U-mirrored",
+ "pass": true
+}
