@@ -1,4 +1,4 @@
-"""Connector mating-envelope registry for the T-SimHat cage.
+"""Connector mating-envelope registry for both held boards.
 
 TurboCase-pattern tooling (AGENTS.md 'connector registry'): every part on a
 held board that reaches close to a board edge is treated as a connector
@@ -8,7 +8,7 @@ board edge. validate.py requires zero printed material inside every
 envelope, which is what turns "fence wall covers P1" from a rendering
 eyeball job into a caught, boolean error.
 
-Rules, derived from the measured STEP solids (never hand-typed):
+SimHat rules, derived from the measured STEP solids (never hand-typed):
   - parts with volume < MIN_PART_VOL are solder tails / fiducials: ignored
   - up-facing (STEP below_pcb) parts taller than MAX_SIDE_EXIT_H are
     shrouded sockets that mate from the top (their plug zone is
@@ -17,6 +17,16 @@ Rules, derived from the measured STEP solids (never hand-typed):
     merged along v where runs are separated by < MERGE_GAP
   - parts within EDGE_NEAR of the v=0 / v=94.8 end faces -> end-exit
     envelope beyond the board end (covers the green-terminal wire entry)
+
+A7670 rules (board is component-up, screws from above):
+  - components_above_pcb parts within EDGE_NEAR of a PCB-outline edge get
+    a side-exit envelope reaching SIDE_MATE_DEPTH past that edge
+  - envelopes live ABOVE the PCB top plane only: plugs mate at connector
+    height, and z-gating above the board keeps the standoff bosses
+    (which legally poke ~0.4 mm past the board edge at the corners,
+    below the PCB) out of the envelopes
+  - STEP-native coords are mapped through _a7670_local_to_carrier so
+    A7670_ROT_180 is honored automatically
 """
 
 import cadquery as cq
@@ -133,17 +143,82 @@ def simhat_mating_envelopes():
 
 def mating_conflicts(carrier):
     """Enforced (hard) envelopes vs printed material, in mm^3."""
+    from OCP.BRepAlgoAPI import BRepAlgoAPI_Common
+    from OCP.GProp import GProp_GProps
+    from OCP.BRepGProp import BRepGProp
     out = []
-    for e in simhat_mating_envelopes():
+    for e in simhat_mating_envelopes() + a7670_mating_envelopes():
         if e["kind"] == "top_entry_socket":
             continue
-        from OCP.BRepAlgoAPI import BRepAlgoAPI_Common
-        from OCP.GProp import GProp_GProps
-        from OCP.BRepGProp import BRepGProp
         common = BRepAlgoAPI_Common(carrier.wrapped, e["solid"].wrapped)
         props = GProp_GProps()
         BRepGProp.VolumeProperties_s(common.Shape(), props)
         out.append({"envelope": e["name"], "kind": e["kind"],
                     "parts": e["parts"],
                     "interference_mm3": round(props.Mass(), 4)})
+    return out
+
+
+def a7670_mating_envelopes():
+    """Side-exit envelopes for the (component-up) A7670, auto-derived from
+    measured edge-reaching parts. Carrier coords via the ROT_180-aware
+    board-local mapping; z spans PCB-top to part-top + plug clearance so
+    base-level furniture (standoff bosses, rails, feet) never trips it."""
+    o = M.a7670["overall"]["bbox"]
+    pb = M.a7670["pcb_outline"]["bbox"]
+    edges = {
+        "W": ("xmin", pb["xmin"]),
+        "E": ("xmax", pb["xmax"]),
+        "S": ("ymin", pb["ymin"]),
+        "N": ("ymax", pb["ymax"]),
+    }
+    reaches = {k: [] for k in edges}
+    for idx, c in enumerate(M.a7670["components_above_pcb"]):
+        bb = c["bbox"]
+        if c["volume_mm3"] < MIN_PART_VOL:
+            continue
+        for edge, (axis, face) in edges.items():
+            gap = (bb[axis] - face) if axis.endswith("min") else (face - bb[axis])
+            if gap <= EDGE_NEAR:
+                reaches[edge].append((idx, bb))
+                break
+
+    def to_carrier(bb):
+        pts = [H._a7670_local_to_carrier(bb["xmin"] - o["xmin"],
+                                         bb["ymin"] - o["ymin"]),
+               H._a7670_local_to_carrier(bb["xmax"] - o["xmin"],
+                                         bb["ymax"] - o["ymin"])]
+        xs = [p[0] for p in pts]
+        ys = [p[1] for p in pts]
+        z0 = P.A7670_STANDOFF_H - M.a7670["pcb_slab"]["z_top"]
+        return min(xs), min(ys), max(xs), max(ys), z0 + bb["zmax"]
+
+    out = []
+    for edge, parts in reaches.items():
+        if not parts:
+            continue
+        names = ",".join(f"above[{i}]" for i, _ in parts)
+        x0s, y0s, x1s, y1s, zts = [], [], [], [], []
+        for _, bb in parts:
+            cx0, cy0, cx1, cy1, zt = to_carrier(bb)
+            x0s.append(cx0); y0s.append(cy0)
+            x1s.append(cx1); y1s.append(cy1); zts.append(zt)
+        bx0, by0 = min(x0s), min(y0s)
+        bx1, by1 = max(x1s), max(y1s)
+        if edge in ("W", "E"):
+            inner = bx0 if edge == "E" else bx1
+            outer = inner + SIDE_MATE_DEPTH if edge == "E" else inner - SIDE_MATE_DEPTH
+            lo_x, hi_x = sorted((inner, outer))
+            lo_y, hi_y = by0 - 0.5, by1 + 0.5
+        else:
+            inner = by0 if edge == "N" else by1
+            outer = inner + SIDE_MATE_DEPTH if edge == "N" else inner - SIDE_MATE_DEPTH
+            lo_y, hi_y = sorted((inner, outer))
+            lo_x, hi_x = bx0 - 0.5, bx1 + 0.5
+        z_lo = P.A7670_STANDOFF_H + M.a7670_pcb_t
+        z_hi = max(zts) + PLUG_CLEAR_Z
+        box = cq.Solid.makeBox(hi_x - lo_x, hi_y - lo_y, z_hi - z_lo,
+                               cq.Vector(lo_x, lo_y, z_lo))
+        out.append({"name": f"a7670_{edge}_exit",
+                    "kind": "side_exit", "parts": names, "solid": box})
     return out

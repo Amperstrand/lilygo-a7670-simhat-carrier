@@ -646,12 +646,12 @@ def main():
                    "pass": env_ok})
     report["service_envelopes"] = envs
 
-    print("== simhat connector mating envelopes ==")
+    print("== connector mating envelopes (both boards) ==")
     from cad import connectors as CONN
     mates = CONN.mating_conflicts(carrier)
-    checks.append({"check": "simhat_connector_mating_clear", "value": mates,
+    checks.append({"check": "connector_mating_clear", "value": mates,
                    "pass": all(m["interference_mm3"] < VOLUME_TOL for m in mates)})
-    report["simhat_mating_envelopes"] = mates
+    report["mating_envelopes"] = mates
 
     if P.PROFILE == "full":
         print("== battery keep-out ==")

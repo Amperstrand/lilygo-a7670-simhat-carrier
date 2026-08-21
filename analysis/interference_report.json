@@ -1883,7 +1883,7 @@
       "interference_mm3": 0.0
     }
   ],
-  "simhat_mating_envelopes": [
+  "mating_envelopes": [
     {
       "envelope": "simhat_-u_v19_32",
       "kind": "side_exit",
@@ -1918,6 +1918,24 @@
       "envelope": "simhat_v0_end_exit[1]",
       "kind": "end_exit",
       "parts": "above_pcb[1]",
+      "interference_mm3": 0.0
+    },
+    {
+      "envelope": "a7670_W_exit",
+      "kind": "side_exit",
+      "parts": "above[0],above[1],above[2],above[6]",
+      "interference_mm3": 0.0
+    },
+    {
+      "envelope": "a7670_E_exit",
+      "kind": "side_exit",
+      "parts": "above[3],above[8],above[22]",
+      "interference_mm3": 0.0
+    },
+    {
+      "envelope": "a7670_N_exit",
+      "kind": "side_exit",
+      "parts": "above[7]",
       "interference_mm3": 0.0
     }
   ],
@@ -2136,7 +2154,7 @@
       "pass": true
     },
     {
-      "check": "simhat_connector_mating_clear",
+      "check": "connector_mating_clear",
       "value": [
         {
           "envelope": "simhat_-u_v19_32",
@@ -2172,6 +2190,24 @@
           "envelope": "simhat_v0_end_exit[1]",
           "kind": "end_exit",
           "parts": "above_pcb[1]",
+          "interference_mm3": 0.0
+        },
+        {
+          "envelope": "a7670_W_exit",
+          "kind": "side_exit",
+          "parts": "above[0],above[1],above[2],above[6]",
+          "interference_mm3": 0.0
+        },
+        {
+          "envelope": "a7670_E_exit",
+          "kind": "side_exit",
+          "parts": "above[3],above[8],above[22]",
+          "interference_mm3": 0.0
+        },
+        {
+          "envelope": "a7670_N_exit",
+          "kind": "side_exit",
+          "parts": "above[7]",
           "interference_mm3": 0.0
         }
       ],
