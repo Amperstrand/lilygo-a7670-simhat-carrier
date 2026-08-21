@@ -239,6 +239,17 @@ EAR_EXT = 11.0                      # how far ear flange reaches beyond outer ra
 EAR_W = 16.0                        # ear width
 EAR_T = BASE_T                      # ear thickness (flush with base)
 EAR_SLOT_ANGLE = 0.0                # 0 = slot long axis along Y; 90 = along X
+# Corner-ear fastening: "slots" (default) = M3 clearance slots, screw into
+# the box wall / nut behind. "inserts" = brass M3x5 heat-set inserts
+# pressed into a boss on each corner ear (repeated assembly strips
+# self-tapped PETG long before it strips brass — ParametricCase lesson);
+# screw passes THROUGH the box wall into the insert. Fixed position (no
+# slot adjustability). Stop-wall tabs keep slots either way.
+EAR_MOUNT = "slots"                 # "slots" | "inserts"
+EAR_INSERT_D = 4.2                  # printed pocket Ø for M3x5x4.6 inserts
+EAR_INSERT_DEPTH = 4.6
+EAR_INSERT_BOSS_D = 8.0             # local thickening so the pocket is blind
+EAR_INSERT_BOSS_H = 2.4             # ear 3.2 + boss 2.4 = 5.6; floor 1.0
 TAPE_PAD_SIZE = 24.0                # flat VHB landing zones (kept hole-free)
 TAPE_PADS = [("a7670-mid", 0.0), ("simhat-mid", 0.0)]
 

@@ -61,3 +61,29 @@ jobs:
           git remote add origin \
             "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
           git push -q -f origin gh-pages
+
+  # B1: the repo's quality bar is boolean validation (AGENTS.md rule 2) —
+  # enforce it remotely, both profiles, not just locally.
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        profile: [full, low]
+    env:
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      CARRIER_PROFILE: ${{ matrix.profile }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies (frozen)
+        run: pip install --quiet -r requirements-frozen.txt
+
+      - name: Validate (${{ matrix.profile }})
+        run: python scripts/validate.py

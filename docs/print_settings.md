@@ -4,7 +4,23 @@ These are **conservative starting points, not universal truths**. Tune to
 your filament and printer. Both parts print **as oriented in the STL** —
 carrier base flat on the plate, no rotation, **no supports**.
 
-## PRINT THIS FIRST: calibration mini-coupon — `exports/lilygo_calicheck_mini.3mf`
+## v0.4 print order (post-calibration)
+
+One calibration pass is already done (v0.3 print). Default order now:
+
+1. **Full carrier** — `exports/lilygo_a7670_simhat_carrier.stl`
+   (~51 g, 4–5 h). 0.20 mm / 3 walls / 4 top–3 bottom / 12–15 % gyroid.
+   Enable thin-wall detection (fence walls and coax-clip posts have
+   single-perimeter regions).
+2. Reprint the **calibration mini-coupon**
+   (`exports/lilygo_calicheck_mini.3mf`, settings below) ONLY if you
+   changed `SIMHAT_PCB_XY_CLEAR`, `SIMHAT_FENCE_BITE`, or the clip
+   geometry — the screws default removed the pilot-hole question, and
+   the coupon never gauged the fence bite anyway.
+3. The Gridfinity fit-check tray remains useful as a desk-tray gauge for
+   the A7670 hole pattern with battery installed; optional.
+
+## Calibration mini-coupon (when needed) — `exports/lilygo_calicheck_mini.3mf`
 
 **~21 g, ~13-18 min, one plate, no supports, no brim.** Open the 3MF in
 Bambu Studio and slice at 0.28-0.32 mm / 2-3 walls / 5-10 % gyroid.

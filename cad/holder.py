@@ -436,11 +436,18 @@ def build_ears():
         if e["kind"] != "corner":
             continue
         body = _rect(min(e["x_edge"], e["tip_x"]), e["y_c"] - P.EAR_W / 2,
-                     max(e["x_edge"], e["tip_x"]), e["y_c"] + P.EAR_W / 2,
-                     0, P.EAR_T)
+                      max(e["x_edge"], e["tip_x"]), e["y_c"] + P.EAR_W / 2,
+                      0, P.EAR_T)
         cap = (cq.Workplane("XY").moveTo(e["tip_x"], e["y_c"])
                .circle(P.EAR_W / 2).extrude(P.EAR_T).val())
-        solids.append(body.fuse(cap))
+        parts = [body.fuse(cap)]
+        if P.EAR_MOUNT == "inserts":
+            boss = (cq.Workplane("XY").moveTo(e["slot_x"], e["y_c"])
+                    .circle(P.EAR_INSERT_BOSS_D / 2)
+                    .extrude(P.EAR_INSERT_BOSS_H)
+                    .translate((0, 0, P.EAR_T)).val())
+            parts.append(boss)
+        solids.append(parts[0].fuse(parts[1]) if len(parts) > 1 else parts[0])
     return cq.Workplane("XY").newObject(solids).combine()
 
 
@@ -453,6 +460,14 @@ def _slot_cutter(x, y, angle):
 def cut_ear_slots(carrier):
     for e in _ear_geometry():
         y = e.get("slot_y", e["y_c"])
+        if e["kind"] == "corner" and P.EAR_MOUNT == "inserts":
+            pocket = (cq.Workplane("XY").moveTo(e["slot_x"], y)
+                      .circle(P.EAR_INSERT_D / 2)
+                      .extrude(P.EAR_INSERT_DEPTH)
+                      .translate((0, 0, P.EAR_T + P.EAR_INSERT_BOSS_H
+                                  - P.EAR_INSERT_DEPTH)))
+            carrier = carrier.cut(pocket)
+            continue
         carrier = carrier.cut(_slot_cutter(e["slot_x"], y,
                                            e.get("slot_angle", 0)))
     return carrier

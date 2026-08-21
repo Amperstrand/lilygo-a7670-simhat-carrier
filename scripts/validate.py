@@ -175,12 +175,19 @@ def check_holes(carrier):
                             "pass": filled > 0.5})
     for e in holder._ear_geometry():
         y = e.get("slot_y", e["y_c"])
-        probe = (cq.Workplane("XY").moveTo(e["slot_x"], y)
-                 .slot2D(P.EAR_SLOT_L - 0.1, P.EAR_SLOT_W - 0.1,
-                         e.get("slot_angle", 0))
-                 .extrude(P.EAR_T).val())
+        if e["kind"] == "corner" and P.EAR_MOUNT == "inserts":
+            probe = (cq.Workplane("XY").moveTo(e["slot_x"], y)
+                     .circle(P.EAR_INSERT_D / 2 - 0.1)
+                     .extrude(P.EAR_INSERT_DEPTH - 0.2)
+                     .translate((0, 0, P.EAR_T + P.EAR_INSERT_BOSS_H
+                                 - P.EAR_INSERT_DEPTH + 0.1)).val())
+        else:
+            probe = (cq.Workplane("XY").moveTo(e["slot_x"], y)
+                     .slot2D(P.EAR_SLOT_L - 0.1, P.EAR_SLOT_W - 0.1,
+                             e.get("slot_angle", 0))
+                     .extrude(P.EAR_T).val())
         frac = common_vol(probe, carrier) / vol(probe)
-        results.append({"feature": f"M3_ear_slot_{e['name']}", "open_fraction": round(frac, 4),
+        results.append({"feature": f"ear_mount_{e['name']}", "open_fraction": round(frac, 4),
                         "pass": frac < 0.05})
     for i, (x, y) in enumerate(P.TIE_SLOTS):
         probe = (cq.Workplane("XY").moveTo(x, y)

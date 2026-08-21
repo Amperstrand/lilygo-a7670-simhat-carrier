@@ -27,18 +27,21 @@ pre-wiring is faster.
 
 ## Install the LTE sticker antenna (tool-less)
 
-The full-band sticker antenna (SMA coax) lives in the slide-in tray at the
-far end of the carrier, flat on the tray floor.
+The full-band sticker antenna (SMA coax) lives in the slide-in tray on the
++X (outer) edge of the A7670 half — free air, between the two +X mounting
+ears, coax a ~6 mm hop from the modem's SMA jacks (v0.4; the v0.3
+under-battery slot is still available as `ANT_POS = "under_battery"`).
 
 1. Before printing, caliper the sticker and set `ANT_SLIDE` (dimension
    along the slide direction = the sticker's SHORTER side) and `ANT_W` in
    `cad/parameters.py`, then rebuild — the tray, frame and envelope check
    all resize from those two numbers.
-2. Feed the coax through the notch in the frame rail, connector first,
-   from the tray side toward the boards.
-3. Slide the sticker into the channels (flared mouths self-guide it) until
-   it touches the end stop. It sits flat by construction; the adhesive
+2. Slide the sticker into the tray's chamfered mouth (-Y end) until it
+   touches the +Y stop. It sits flat on the tray floor; the adhesive
    backing is optional — sticking it down makes it permanent.
+3. Loop the coax over the frame edge and drop it into the two grooved
+   posts on the tray's inner wall; it runs along the frame to the SMA
+   jacks with no strain.
 4. Screw the SMA plug onto the modem's MAIN RF jack (either SMA if you
    also use GNSS). Route spare coax through the cable-tie slots.
 
@@ -46,17 +49,15 @@ far end of the carrier, flat on the tray floor.
 
 Orientation note: the board mounts **rotated 180°** (`A7670_ROT_180`) so
 its pin headers face the SimHat sockets across the wiring channel —
-jumpers stay ~15–25 mm. Mounting is **screwless by default**: four
-christmas-tree snap plugs (no screws needed).
+jumpers stay ~15–25 mm. Mounting is **M1.6 screws by default** (v0.4; the
+v0.3 snap plugs printed loose and are demoted to the optional
+`A7670_MOUNT = "snap_plugs"` variant).
 
 1. Fit the 18650 into the board's under-side holder first (if used).
-2. Lower the board **straight down** over the four plugs near the
-   clip-end and USB-end corners; the plug fins flex through the PCB
-   holes and click above the board. Press each corner until seated.
-3. Removal: pull the board straight up firmly (all four plugs release);
-   a spudger under an edge helps. `A7670_MOUNT = "screws"` in
-   `cad/parameters.py` restores the M1.6-pilot variant if you later
-   want screws.
+2. Lower the board **straight down** over the four standoffs near the
+   clip-end and USB-end corners; the bosses register the holes.
+3. Drive four M1.6×6 self-tappers into the printed Ø1.30 pilots. Snug,
+   not gorilla-tight — the pilots are the thread.
 4. USB-C (away from the SimHat), SIM tray, buttons, battery JST and
    both SMA jacks stay accessible.
 
