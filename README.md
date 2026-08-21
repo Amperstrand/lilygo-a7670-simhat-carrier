@@ -9,9 +9,9 @@ Fully scripted in **Python + CadQuery**, driven by **manufacturer STEP/DXF
 geometry** (no guessed dimensions), validated programmatically, and
 regenerable with one command.
 
-![Assembly render](https://github.com/Amperstrand/lilygo-a7670-simhat-carrier/blob/main/renders/assembly.png)
+![Assembly render](https://amperstrand.github.io/lilygo-a7670-simhat-carrier/assembly.png)
 
-![Contact sheet](https://github.com/Amperstrand/lilygo-a7670-simhat-carrier/blob/main/renders/contact_sheet.png)
+![Contact sheet](https://amperstrand.github.io/lilygo-a7670-simhat-carrier/contact_sheet.png)
 
 *T-SimHat (amber) flipped — relay down, headers up. T-A7670X (green) on
 25 mm standoffs (18650 + holder underneath). LTE sticker-antenna tray on
@@ -28,9 +28,14 @@ the right edge (free air, coax clips on the frame rail). Full carrier
 - **Download & spin anywhere**: [assembly GLB](exports/lilygo_a7670_simhat_assembly.glb)
   and [carrier GLB](exports/lilygo_a7670_simhat_carrier.glb) open in Windows
   3D Viewer, macOS Preview, Blender, https://gltf-viewer.donmccurdy.com.
-- **Renders**: GitHub blob URLs — 9 labeled views incl. per-board close-ups
-  (`a7670_closeup.png`, `simhat_closeup.png`) and the contact sheet.
-  Rendered by `scripts/build.py`; regenerated on every push via CI.
+- **Renders**: served from GitHub Pages (CI rebuilds and redeploys them on
+  every push — they are generated, not tracked): labeled views incl.
+  per-board close-ups (`a7670_closeup.png`, `simhat_closeup.png`) and the
+  contact sheet, at
+  `https://amperstrand.github.io/lilygo-a7670-simhat-carrier/<name>.png`.
+  Photo-textured hybrids are audited by `scripts/audit_photobake.py`
+  (plane placement from placed STEP solids + fiducial centroids vs CAD
+  truth).
 
 ## Key measured dimensions (from manufacturer CAD)
 

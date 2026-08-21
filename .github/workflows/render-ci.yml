@@ -8,6 +8,8 @@ on:
 jobs:
   build-renders:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
 
@@ -41,3 +43,19 @@ jobs:
           n=$(ls renders/ | wc -l)
           echo "renders: $n files"
           [ "$n" -ge 20 ] && echo "OK" || { echo "unexpected render count"; exit 1; }
+
+      # renders/ is generated, not tracked (B5): every push to the working
+      # branch force-deploys the fresh set to gh-pages, served by Pages at
+      # https://amperstrand.github.io/lilygo-a7670-simhat-carrier/<file>.png
+      - name: Deploy renders to GitHub Pages
+        if: github.event_name == 'push' && github.ref == 'refs/heads/cad/combined-carrier-v1'
+        run: |
+          cd renders
+          git init -q -b gh-pages .
+          git config user.name "render-ci"
+          git config user.email "ci@users.noreply.github.com"
+          git add -A
+          git commit -q -m "renders @ ${GITHUB_SHA}"
+          git remote add origin \
+            "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+          git push -q -f origin gh-pages
