@@ -16,15 +16,21 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install dependencies
+      - name: Install dependencies (frozen, matches the local .venv)
         run: |
-          pip install --quiet cadquery trimesh numpy pillow
+          pip install --quiet -r requirements-frozen.txt
 
       - name: Build carrier and generate renders
-        # This regenerates exports/ and renders/ per scripts/build.py
+        env:
+          # OCP/OpenCascade segfaults (exit 139) on CI runners when its
+          # thread pool races under constrained CPUs — pin to one thread
+          OMP_NUM_THREADS: "1"
+          OPENBLAS_NUM_THREADS: "1"
         run: |
           python scripts/build.py
 
       - name: Verify renders directory is present
         run: |
-          ls renders/ | wc -l | grep -q "2[0-9]" && echo "OK: renders generated" || echo "WARN: unexpected render count"
+          n=$(ls renders/ | wc -l)
+          echo "renders: $n files"
+          [ "$n" -ge 20 ] && echo "OK" || { echo "unexpected render count"; exit 1; }
