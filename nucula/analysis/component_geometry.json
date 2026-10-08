@@ -1,0 +1,9336 @@
+{
+ "R8": {
+  "ref": "R8",
+  "value": "10k",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   105.5,
+   90.0,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   104.77,
+   88.52,
+   106.23,
+   91.48
+  ],
+  "bbox_local_uv": [
+   54.77,
+   38.52,
+   56.23,
+   41.48
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     105.5,
+     90.825
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     105.5,
+     89.175
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C49": {
+  "ref": "C49",
+  "value": "1uF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   88.25,
+   119.0,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   87.27,
+   117.3,
+   89.23,
+   120.7
+  ],
+  "bbox_local_uv": [
+   37.27,
+   67.3,
+   39.23,
+   70.7
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     88.25,
+     119.95
+    ],
+    "size": [
+     1.0,
+     1.45
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     88.25,
+     118.05
+    ],
+    "size": [
+     1.0,
+     1.45
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C26": {
+  "ref": "C26",
+  "value": "12pF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   82.0,
+   65.1,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   80.52,
+   64.37,
+   83.48,
+   65.83
+  ],
+  "bbox_local_uv": [
+   30.52,
+   14.37,
+   33.48,
+   15.83
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     81.225,
+     65.1
+    ],
+    "size": [
+     0.9,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     82.775,
+     65.1
+    ],
+    "size": [
+     0.9,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C55": {
+  "ref": "C55",
+  "value": "100nF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   101.45,
+   119.6,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   99.97,
+   118.87,
+   102.93,
+   120.33
+  ],
+  "bbox_local_uv": [
+   49.97,
+   68.87,
+   52.93,
+   70.33
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     100.675,
+     119.6
+    ],
+    "size": [
+     0.9,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     102.225,
+     119.6
+    ],
+    "size": [
+     0.9,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "U7": {
+  "ref": "U7",
+  "value": "AP3012KTR-E1",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   54.5,
+   83.0,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   52.45,
+   81.3,
+   56.55,
+   84.7
+  ],
+  "bbox_local_uv": [
+   2.45,
+   31.3,
+   6.55,
+   34.7
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     53.3625,
+     82.05
+    ],
+    "size": [
+     1.325,
+     0.6
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     53.3625,
+     83.0
+    ],
+    "size": [
+     1.325,
+     0.6
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     53.3625,
+     83.95
+    ],
+    "size": [
+     1.325,
+     0.6
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     55.6375,
+     83.95
+    ],
+    "size": [
+     1.325,
+     0.6
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     55.6375,
+     82.05
+    ],
+    "size": [
+     1.325,
+     0.6
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C18": {
+  "ref": "C18",
+  "value": "100nF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   70.2,
+   74.0,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   69.47,
+   72.52,
+   70.93,
+   75.48
+  ],
+  "bbox_local_uv": [
+   19.47,
+   22.52,
+   20.93,
+   25.48
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     70.2,
+     74.775
+    ],
+    "size": [
+     0.9,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     70.2,
+     73.225
+    ],
+    "size": [
+     0.9,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "MB2": {
+  "ref": "MB2",
+  "value": "MouseBite_2Rows7_D0.60_P1.00_Inset_Gap2.00",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   98.0,
+   124.0,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   94.7,
+   122.4,
+   101.3,
+   125.6
+  ],
+  "bbox_local_uv": [
+   44.7,
+   72.4,
+   51.3,
+   75.6
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     95.0,
+     122.7
+    ],
+    "size": [
+     0.6,
+     0.6
+    ],
+    "drill": 0.6
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     95.0,
+     125.3
+    ],
+    "size": [
+     0.6,
+     0.6
+    ],
+    "drill": 0.6
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     96.0,
+     122.7
+    ],
+    "size": [
+     0.6,
+     0.6
+    ],
+    "drill": 0.6
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     96.0,
+     125.3
+    ],
+    "size": [
+     0.6,
+     0.6
+    ],
+    "drill": 0.6
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     97.0,
+     122.7
+    ],
+    "size": [
+     0.6,
+     0.6
+    ],
+    "drill": 0.6
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     97.0,
+     125.3
+    ],
+    "size": [
+     0.6,
+     0.6
+    ],
+    "drill": 0.6
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     98.0,
+     122.7
+    ],
+    "size": [
+     0.6,
+     0.6
+    ],
+    "drill": 0.6
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     98.0,
+     125.3
+    ],
+    "size": [
+     0.6,
+     0.6
+    ],
+    "drill": 0.6
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     99.0,
+     122.7
+    ],
+    "size": [
+     0.6,
+     0.6
+    ],
+    "drill": 0.6
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     99.0,
+     125.3
+    ],
+    "size": [
+     0.6,
+     0.6
+    ],
+    "drill": 0.6
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     100.0,
+     122.7
+    ],
+    "size": [
+     0.6,
+     0.6
+    ],
+    "drill": 0.6
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     100.0,
+     125.3
+    ],
+    "size": [
+     0.6,
+     0.6
+    ],
+    "drill": 0.6
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     101.0,
+     122.7
+    ],
+    "size": [
+     0.6,
+     0.6
+    ],
+    "drill": 0.6
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     101.0,
+     125.3
+    ],
+    "size": [
+     0.6,
+     0.6
+    ],
+    "drill": 0.6
+   }
+  ]
+ },
+ "U4": {
+  "ref": "U4",
+  "value": "TPD2E2U06QDCKRQ1",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   61.0,
+   112.0,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   59.55,
+   110.9,
+   62.45,
+   113.1
+  ],
+  "bbox_local_uv": [
+   9.55,
+   60.9,
+   12.45,
+   63.1
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     60.1125,
+     111.35
+    ],
+    "size": [
+     0.925,
+     0.45
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     60.1125,
+     112.65
+    ],
+    "size": [
+     0.925,
+     0.45
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     61.8875,
+     112.0
+    ],
+    "size": [
+     0.925,
+     0.45
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C10": {
+  "ref": "C10",
+  "value": "100nF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   103.75,
+   91.5,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   103.02,
+   90.02,
+   104.48,
+   92.98
+  ],
+  "bbox_local_uv": [
+   53.02,
+   40.02,
+   54.48,
+   42.98
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     103.75,
+     92.275
+    ],
+    "size": [
+     0.9,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     103.75,
+     90.725
+    ],
+    "size": [
+     0.9,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "D2": {
+  "ref": "D2",
+  "value": "B340A",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   68.25,
+   118.75,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   64.75,
+   117.0,
+   71.75,
+   120.5
+  ],
+  "bbox_local_uv": [
+   14.75,
+   67.0,
+   21.75,
+   70.5
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     66.25,
+     118.75
+    ],
+    "size": [
+     2.5,
+     1.8
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     70.25,
+     118.75
+    ],
+    "size": [
+     2.5,
+     1.8
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "J4": {
+  "ref": "J4",
+  "value": "MAIN LINK / OPTIONAL",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   74.92,
+   119.0,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   73.15,
+   117.23,
+   86.85,
+   120.77
+  ],
+  "bbox_local_uv": [
+   23.15,
+   67.23,
+   36.85,
+   70.77
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     74.92,
+     119.0
+    ],
+    "size": [
+     1.7,
+     1.7
+    ],
+    "drill": 1.0
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     77.46,
+     119.0
+    ],
+    "size": [
+     1.7,
+     1.7
+    ],
+    "drill": 1.0
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     80.0,
+     119.0
+    ],
+    "size": [
+     1.7,
+     1.7
+    ],
+    "drill": 1.0
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     82.54,
+     119.0
+    ],
+    "size": [
+     1.7,
+     1.7
+    ],
+    "drill": 1.0
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     85.08,
+     119.0
+    ],
+    "size": [
+     1.7,
+     1.7
+    ],
+    "drill": 1.0
+   }
+  ]
+ },
+ "C25": {
+  "ref": "C25",
+  "value": "100nF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   76.3,
+   80.5,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   74.82,
+   79.77,
+   77.78,
+   81.23
+  ],
+  "bbox_local_uv": [
+   24.82,
+   29.77,
+   27.78,
+   31.23
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     75.525,
+     80.5
+    ],
+    "size": [
+     0.9,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     77.075,
+     80.5
+    ],
+    "size": [
+     0.9,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "R29": {
+  "ref": "R29",
+  "value": "0R",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   70.3,
+   77.0,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   69.57,
+   75.52,
+   71.03,
+   78.48
+  ],
+  "bbox_local_uv": [
+   19.57,
+   25.52,
+   21.03,
+   28.48
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     70.3,
+     77.825
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     70.3,
+     76.175
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "R30": {
+  "ref": "R30",
+  "value": "1.8M",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   57.75,
+   83.0,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   56.8,
+   81.32,
+   58.7,
+   84.68
+  ],
+  "bbox_local_uv": [
+   6.8,
+   31.32,
+   8.7,
+   34.68
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     57.75,
+     83.9125
+    ],
+    "size": [
+     1.025,
+     1.4
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     57.75,
+     82.0875
+    ],
+    "size": [
+     1.025,
+     1.4
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C14": {
+  "ref": "C14",
+  "value": "100nF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   64.25,
+   110.75,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   63.52,
+   109.27,
+   64.98,
+   112.23
+  ],
+  "bbox_local_uv": [
+   13.52,
+   59.27,
+   14.98,
+   62.23
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     64.25,
+     111.525
+    ],
+    "size": [
+     0.9,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     64.25,
+     109.975
+    ],
+    "size": [
+     0.9,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C51": {
+  "ref": "C51",
+  "value": "100nF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   66.9,
+   141.5,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   65.42,
+   140.77,
+   68.38,
+   142.23
+  ],
+  "bbox_local_uv": [
+   15.42,
+   90.77,
+   18.38,
+   92.23
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     66.125,
+     141.5
+    ],
+    "size": [
+     0.9,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     67.675,
+     141.5
+    ],
+    "size": [
+     0.9,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C11": {
+  "ref": "C11",
+  "value": "100nF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   94.0,
+   93.5,
+   180.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   92.52,
+   92.77,
+   95.48,
+   94.23
+  ],
+  "bbox_local_uv": [
+   42.52,
+   42.77,
+   45.48,
+   44.23
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     94.775,
+     93.5
+    ],
+    "size": [
+     0.9,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     93.225,
+     93.5
+    ],
+    "size": [
+     0.9,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C22": {
+  "ref": "C22",
+  "value": "2.2uF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   85.3,
+   69.5,
+   180.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   83.6,
+   68.52,
+   87.0,
+   70.48
+  ],
+  "bbox_local_uv": [
+   33.6,
+   18.52,
+   37.0,
+   20.48
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     86.25,
+     69.5
+    ],
+    "size": [
+     1.0,
+     1.45
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     84.35,
+     69.5
+    ],
+    "size": [
+     1.0,
+     1.45
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "L2": {
+  "ref": "L2",
+  "value": "150nH",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   78.0,
+   75.55,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   76.17,
+   74.31,
+   79.83,
+   76.79
+  ],
+  "bbox_local_uv": [
+   26.17,
+   24.31,
+   29.83,
+   26.79
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     76.93,
+     75.55
+    ],
+    "size": [
+     1.02,
+     1.98
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     79.07,
+     75.55
+    ],
+    "size": [
+     1.02,
+     1.98
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C44": {
+  "ref": "C44",
+  "value": "4.7uF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   77.25,
+   115.25,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   76.27,
+   113.55,
+   78.23,
+   116.95
+  ],
+  "bbox_local_uv": [
+   26.27,
+   63.55,
+   28.23,
+   66.95
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     77.25,
+     116.2
+    ],
+    "size": [
+     1.0,
+     1.45
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     77.25,
+     114.3
+    ],
+    "size": [
+     1.0,
+     1.45
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C35": {
+  "ref": "C35",
+  "value": "DNP / TRIM",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   87.0,
+   83.5,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   85.12,
+   82.52,
+   88.88,
+   84.48
+  ],
+  "bbox_local_uv": [
+   35.12,
+   32.52,
+   38.88,
+   34.48
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     85.9625,
+     83.5
+    ],
+    "size": [
+     1.175,
+     1.45
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     88.0375,
+     83.5
+    ],
+    "size": [
+     1.175,
+     1.45
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C36": {
+  "ref": "C36",
+  "value": "100pF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   90.0,
+   78.4,
+   -90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   89.02,
+   76.52,
+   90.98,
+   80.28
+  ],
+  "bbox_local_uv": [
+   39.02,
+   26.52,
+   40.98,
+   30.28
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     90.0,
+     77.3625
+    ],
+    "size": [
+     1.175,
+     1.45
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     90.0,
+     79.4375
+    ],
+    "size": [
+     1.175,
+     1.45
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "R16": {
+  "ref": "R16",
+  "value": "470k",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   104.0,
+   120.0,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   103.27,
+   118.52,
+   104.73,
+   121.48
+  ],
+  "bbox_local_uv": [
+   53.27,
+   68.52,
+   54.73,
+   71.48
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     104.0,
+     120.825
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     104.0,
+     119.175
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C34": {
+  "ref": "C34",
+  "value": "DNP / TRIM",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   87.0,
+   77.5,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   85.12,
+   76.52,
+   88.88,
+   78.48
+  ],
+  "bbox_local_uv": [
+   35.12,
+   26.52,
+   38.88,
+   28.48
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     85.9625,
+     77.5
+    ],
+    "size": [
+     1.175,
+     1.45
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     88.0375,
+     77.5
+    ],
+    "size": [
+     1.175,
+     1.45
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "R17": {
+  "ref": "R17",
+  "value": "10k",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   89.75,
+   115.25,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   89.02,
+   113.77,
+   90.48,
+   116.73
+  ],
+  "bbox_local_uv": [
+   39.02,
+   63.77,
+   40.48,
+   66.73
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     89.75,
+     116.075
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     89.75,
+     114.425
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "J2": {
+  "ref": "J2",
+  "value": "JST-PH / 1S Li-ion",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   56.75,
+   100.9,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   52.0,
+   96.0,
+   60.5,
+   105.8
+  ],
+  "bbox_local_uv": [
+   2.0,
+   46.0,
+   10.5,
+   55.8
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     57.25,
+     101.9
+    ],
+    "size": [
+     1.0,
+     5.5
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     57.25,
+     99.9
+    ],
+    "size": [
+     1.0,
+     5.5
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     55.0,
+     104.3
+    ],
+    "size": [
+     1.6,
+     3.0
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     55.0,
+     97.5
+    ],
+    "size": [
+     1.6,
+     3.0
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "U10": {
+  "ref": "U10",
+  "value": "TS3USB30EDGSR",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   96.8,
+   120.6,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   93.67,
+   118.85,
+   99.93,
+   122.35
+  ],
+  "bbox_local_uv": [
+   43.67,
+   68.85,
+   49.93,
+   72.35
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     94.65,
+     119.6
+    ],
+    "size": [
+     1.45,
+     0.3
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     94.65,
+     120.1
+    ],
+    "size": [
+     1.45,
+     0.3
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     94.65,
+     120.6
+    ],
+    "size": [
+     1.45,
+     0.3
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     94.65,
+     121.1
+    ],
+    "size": [
+     1.45,
+     0.3
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     94.65,
+     121.6
+    ],
+    "size": [
+     1.45,
+     0.3
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     98.95,
+     121.6
+    ],
+    "size": [
+     1.45,
+     0.3
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     98.95,
+     121.1
+    ],
+    "size": [
+     1.45,
+     0.3
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     98.95,
+     120.6
+    ],
+    "size": [
+     1.45,
+     0.3
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     98.95,
+     120.1
+    ],
+    "size": [
+     1.45,
+     0.3
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     98.95,
+     119.6
+    ],
+    "size": [
+     1.45,
+     0.3
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C53": {
+  "ref": "C53",
+  "value": "33pF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   83.7,
+   78.4,
+   -90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   82.72,
+   76.52,
+   84.68,
+   80.28
+  ],
+  "bbox_local_uv": [
+   32.72,
+   26.52,
+   34.68,
+   30.28
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     83.7,
+     77.3625
+    ],
+    "size": [
+     1.175,
+     1.45
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     83.7,
+     79.4375
+    ],
+    "size": [
+     1.175,
+     1.45
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "R33": {
+  "ref": "R33",
+  "value": "100k",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   57.5,
+   68.0,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   56.77,
+   66.52,
+   58.23,
+   69.48
+  ],
+  "bbox_local_uv": [
+   6.77,
+   16.52,
+   8.23,
+   19.48
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     57.5,
+     68.825
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     57.5,
+     67.175
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "R38": {
+  "ref": "R38",
+  "value": "4.7k",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   68.5,
+   144.5,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   67.02,
+   143.77,
+   69.98,
+   145.23
+  ],
+  "bbox_local_uv": [
+   17.02,
+   93.77,
+   19.98,
+   95.23
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     67.675,
+     144.5
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     69.325,
+     144.5
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "U1": {
+  "ref": "U1",
+  "value": "TP4054-42-SOT25R",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   63.5,
+   101.5,
+   180.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   61.45,
+   99.8,
+   65.55,
+   103.2
+  ],
+  "bbox_local_uv": [
+   11.45,
+   49.8,
+   15.55,
+   53.2
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     64.6375,
+     102.45
+    ],
+    "size": [
+     1.325,
+     0.6
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     64.6375,
+     101.5
+    ],
+    "size": [
+     1.325,
+     0.6
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     64.6375,
+     100.55
+    ],
+    "size": [
+     1.325,
+     0.6
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     62.3625,
+     100.55
+    ],
+    "size": [
+     1.325,
+     0.6
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     62.3625,
+     102.45
+    ],
+    "size": [
+     1.325,
+     0.6
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "R28": {
+  "ref": "R28",
+  "value": "2.7R",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   92.0,
+   85.85,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   89.55,
+   84.72,
+   94.45,
+   86.98
+  ],
+  "bbox_local_uv": [
+   39.55,
+   34.72,
+   44.45,
+   36.98
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     90.45,
+     85.85
+    ],
+    "size": [
+     1.3,
+     1.75
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     93.55,
+     85.85
+    ],
+    "size": [
+     1.3,
+     1.75
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C2": {
+  "ref": "C2",
+  "value": "22uF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   63.0,
+   105.0,
+   180.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   60.7,
+   103.4,
+   65.3,
+   106.6
+  ],
+  "bbox_local_uv": [
+   10.7,
+   53.4,
+   15.3,
+   56.6
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     64.475,
+     105.0
+    ],
+    "size": [
+     1.15,
+     2.7
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     61.525,
+     105.0
+    ],
+    "size": [
+     1.15,
+     2.7
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "R36": {
+  "ref": "R36",
+  "value": "100k",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   89.75,
+   112.0,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   89.02,
+   110.52,
+   90.48,
+   113.48
+  ],
+  "bbox_local_uv": [
+   39.02,
+   60.52,
+   40.48,
+   63.48
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     89.75,
+     112.825
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     89.75,
+     111.175
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C5": {
+  "ref": "C5",
+  "value": "22uF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   72.5,
+   94.75,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   71.35,
+   92.375,
+   73.65,
+   97.125
+  ],
+  "bbox_local_uv": [
+   21.35,
+   42.375,
+   23.65,
+   47.125
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     72.5,
+     96.225
+    ],
+    "size": [
+     1.15,
+     1.8
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     72.5,
+     93.275
+    ],
+    "size": [
+     1.15,
+     1.8
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "R20": {
+  "ref": "R20",
+  "value": "2.2k",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   71.0,
+   114.75,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   70.27,
+   113.27,
+   71.73,
+   116.23
+  ],
+  "bbox_local_uv": [
+   20.27,
+   63.27,
+   21.73,
+   66.23
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     71.0,
+     115.575
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     71.0,
+     113.925
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C27": {
+  "ref": "C27",
+  "value": "15pF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   82.0,
+   70.1,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   80.52,
+   69.37,
+   83.48,
+   70.83
+  ],
+  "bbox_local_uv": [
+   30.52,
+   19.37,
+   33.48,
+   20.83
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     81.225,
+     70.1
+    ],
+    "size": [
+     0.9,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     82.775,
+     70.1
+    ],
+    "size": [
+     0.9,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "R25": {
+  "ref": "R25",
+  "value": "2.2k",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   78.0,
+   78.5,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   76.15,
+   77.55,
+   79.85,
+   79.45
+  ],
+  "bbox_local_uv": [
+   26.15,
+   27.55,
+   29.85,
+   29.45
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     77.0,
+     78.5
+    ],
+    "size": [
+     1.2,
+     1.4
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     79.0,
+     78.5
+    ],
+    "size": [
+     1.2,
+     1.4
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C45": {
+  "ref": "C45",
+  "value": "100nF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   67.0,
+   111.0,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   65.52,
+   110.27,
+   68.48,
+   111.73
+  ],
+  "bbox_local_uv": [
+   15.52,
+   60.27,
+   18.48,
+   61.73
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     66.225,
+     111.0
+    ],
+    "size": [
+     0.9,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     67.775,
+     111.0
+    ],
+    "size": [
+     0.9,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "SW1": {
+  "ref": "SW1",
+  "value": "RESET",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   106.5,
+   84.0,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   104.85,
+   81.45,
+   108.15,
+   86.55
+  ],
+  "bbox_local_uv": [
+   54.85,
+   31.45,
+   58.15,
+   36.55
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     106.5,
+     85.7
+    ],
+    "size": [
+     0.9,
+     1.7
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     106.5,
+     82.3
+    ],
+    "size": [
+     0.9,
+     1.7
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "Q5": {
+  "ref": "Q5",
+  "value": "BSS138",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   82.75,
+   113.5,
+   180.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   80.82,
+   111.8,
+   84.68,
+   115.2
+  ],
+  "bbox_local_uv": [
+   30.82,
+   61.8,
+   34.68,
+   65.2
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     83.6875,
+     114.45
+    ],
+    "size": [
+     1.475,
+     0.6
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     83.6875,
+     112.55
+    ],
+    "size": [
+     1.475,
+     0.6
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     81.8125,
+     113.5
+    ],
+    "size": [
+     1.475,
+     0.6
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "R21": {
+  "ref": "R21",
+  "value": "10k",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   67.2,
+   66.8,
+   180.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   65.72,
+   66.07,
+   68.68,
+   67.53
+  ],
+  "bbox_local_uv": [
+   15.72,
+   16.07,
+   18.68,
+   17.53
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     68.025,
+     66.8
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     66.375,
+     66.8
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "R18": {
+  "ref": "R18",
+  "value": "10k",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   88.75,
+   121.8,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   87.27,
+   121.07,
+   90.23,
+   122.53
+  ],
+  "bbox_local_uv": [
+   37.27,
+   71.07,
+   40.23,
+   72.53
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     87.925,
+     121.8
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     89.575,
+     121.8
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C52": {
+  "ref": "C52",
+  "value": "1uF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   66.9,
+   138.5,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   65.2,
+   137.52,
+   68.6,
+   139.48
+  ],
+  "bbox_local_uv": [
+   15.2,
+   87.52,
+   18.6,
+   89.48
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     65.95,
+     138.5
+    ],
+    "size": [
+     1.0,
+     1.45
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     67.85,
+     138.5
+    ],
+    "size": [
+     1.0,
+     1.45
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "L4": {
+  "ref": "L4",
+  "value": "10uH",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   54.5,
+   78.0,
+   180.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   52.05,
+   75.8,
+   56.95,
+   80.2
+  ],
+  "bbox_local_uv": [
+   2.05,
+   25.8,
+   6.95,
+   30.2
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     56.265,
+     78.0
+    ],
+    "size": [
+     0.87,
+     2.79
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     52.735,
+     78.0
+    ],
+    "size": [
+     0.87,
+     2.79
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C39": {
+  "ref": "C39",
+  "value": "DNP / TRIM",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   92.2,
+   82.6,
+   -90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   91.22,
+   80.72,
+   93.18,
+   84.48
+  ],
+  "bbox_local_uv": [
+   41.22,
+   30.72,
+   43.18,
+   34.48
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     92.2,
+     81.5625
+    ],
+    "size": [
+     1.175,
+     1.45
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     92.2,
+     83.6375
+    ],
+    "size": [
+     1.175,
+     1.45
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "U9": {
+  "ref": "U9",
+  "value": "MCP1700T-3002E/TT",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   86.75,
+   115.25,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   84.82,
+   113.55,
+   88.68,
+   116.95
+  ],
+  "bbox_local_uv": [
+   34.82,
+   63.55,
+   38.68,
+   66.95
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     85.8125,
+     114.3
+    ],
+    "size": [
+     1.475,
+     0.6
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     85.8125,
+     116.2
+    ],
+    "size": [
+     1.475,
+     0.6
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     87.6875,
+     115.25
+    ],
+    "size": [
+     1.475,
+     0.6
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "J3": {
+  "ref": "J3",
+  "value": "KEYBOARD / USER FIT",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   69.84,
+   157.5,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   68.07,
+   155.73,
+   91.93,
+   159.27
+  ],
+  "bbox_local_uv": [
+   18.07,
+   105.73,
+   41.93,
+   109.27
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     69.84,
+     157.5
+    ],
+    "size": [
+     1.7,
+     1.7
+    ],
+    "drill": 1.0
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     72.38,
+     157.5
+    ],
+    "size": [
+     1.7,
+     1.7
+    ],
+    "drill": 1.0
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     74.92,
+     157.5
+    ],
+    "size": [
+     1.7,
+     1.7
+    ],
+    "drill": 1.0
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     77.46,
+     157.5
+    ],
+    "size": [
+     1.7,
+     1.7
+    ],
+    "drill": 1.0
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     80.0,
+     157.5
+    ],
+    "size": [
+     1.7,
+     1.7
+    ],
+    "drill": 1.0
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     82.54,
+     157.5
+    ],
+    "size": [
+     1.7,
+     1.7
+    ],
+    "drill": 1.0
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     85.08,
+     157.5
+    ],
+    "size": [
+     1.7,
+     1.7
+    ],
+    "drill": 1.0
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     87.62,
+     157.5
+    ],
+    "size": [
+     1.7,
+     1.7
+    ],
+    "drill": 1.0
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     90.16,
+     157.5
+    ],
+    "size": [
+     1.7,
+     1.7
+    ],
+    "drill": 1.0
+   }
+  ]
+ },
+ "R35": {
+  "ref": "R35",
+  "value": "10k",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   89.75,
+   105.5,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   89.02,
+   104.02,
+   90.48,
+   106.98
+  ],
+  "bbox_local_uv": [
+   39.02,
+   54.02,
+   40.48,
+   56.98
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     89.75,
+     106.325
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     89.75,
+     104.675
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "R14": {
+  "ref": "R14",
+  "value": "100R",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   107.5,
+   87.5,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   106.02,
+   86.77,
+   108.98,
+   88.23
+  ],
+  "bbox_local_uv": [
+   56.02,
+   36.77,
+   58.98,
+   38.23
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     106.675,
+     87.5
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     108.325,
+     87.5
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C13": {
+  "ref": "C13",
+  "value": "100nF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   101.5,
+   121.25,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   100.02,
+   120.52,
+   102.98,
+   121.98
+  ],
+  "bbox_local_uv": [
+   50.02,
+   70.52,
+   52.98,
+   71.98
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     100.725,
+     121.25
+    ],
+    "size": [
+     0.9,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     102.275,
+     121.25
+    ],
+    "size": [
+     0.9,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C12": {
+  "ref": "C12",
+  "value": "1uF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   104.25,
+   87.5,
+   180.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   102.77,
+   86.77,
+   105.73,
+   88.23
+  ],
+  "bbox_local_uv": [
+   52.77,
+   36.77,
+   55.73,
+   38.23
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     105.025,
+     87.5
+    ],
+    "size": [
+     0.9,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     103.475,
+     87.5
+    ],
+    "size": [
+     0.9,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "R34": {
+  "ref": "R34",
+  "value": "100k",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   57.5,
+   64.0,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   56.77,
+   62.52,
+   58.23,
+   65.48
+  ],
+  "bbox_local_uv": [
+   6.77,
+   12.52,
+   8.23,
+   15.48
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     57.5,
+     64.825
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     57.5,
+     63.175
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "J1": {
+  "ref": "J1",
+  "value": "USB4105-GF-A-120",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   53.395,
+   111.89,
+   -90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   49.215,
+   106.42,
+   58.155,
+   117.36
+  ],
+  "bbox_local_uv": [
+   -0.785,
+   56.42,
+   8.155,
+   67.36
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     56.0,
+     109.0
+    ],
+    "size": [
+     0.65,
+     0.65
+    ],
+    "drill": 0.65
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     56.0,
+     114.78
+    ],
+    "size": [
+     0.65,
+     0.65
+    ],
+    "drill": 0.65
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     57.125,
+     108.69
+    ],
+    "size": [
+     0.6,
+     1.05
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     57.075,
+     109.49
+    ],
+    "size": [
+     0.6,
+     1.15
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     57.075,
+     110.64
+    ],
+    "size": [
+     0.3,
+     1.15
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     57.075,
+     111.64
+    ],
+    "size": [
+     0.3,
+     1.15
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     57.075,
+     112.14
+    ],
+    "size": [
+     0.3,
+     1.15
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     57.075,
+     113.14
+    ],
+    "size": [
+     0.3,
+     1.15
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     57.075,
+     114.29
+    ],
+    "size": [
+     0.6,
+     1.15
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     57.125,
+     115.09
+    ],
+    "size": [
+     0.6,
+     1.05
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     57.125,
+     115.09
+    ],
+    "size": [
+     0.6,
+     1.05
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     57.075,
+     114.29
+    ],
+    "size": [
+     0.6,
+     1.15
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     57.075,
+     113.64
+    ],
+    "size": [
+     0.3,
+     1.15
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     57.075,
+     112.64
+    ],
+    "size": [
+     0.3,
+     1.15
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     57.075,
+     111.14
+    ],
+    "size": [
+     0.3,
+     1.15
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     57.075,
+     110.14
+    ],
+    "size": [
+     0.3,
+     1.15
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     57.075,
+     109.49
+    ],
+    "size": [
+     0.6,
+     1.15
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     57.125,
+     108.69
+    ],
+    "size": [
+     0.6,
+     1.05
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     56.5,
+     107.57
+    ],
+    "size": [
+     1.3,
+     2.3
+    ],
+    "drill": 0.7
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     52.32,
+     107.57
+    ],
+    "size": [
+     1.3,
+     2.0
+    ],
+    "drill": 0.7
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     56.5,
+     116.21
+    ],
+    "size": [
+     1.3,
+     2.3
+    ],
+    "drill": 0.7
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     52.32,
+     116.21
+    ],
+    "size": [
+     1.3,
+     2.0
+    ],
+    "drill": 0.7
+   }
+  ]
+ },
+ "R11": {
+  "ref": "R11",
+  "value": "10k",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   89.75,
+   94.0,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   89.02,
+   92.52,
+   90.48,
+   95.48
+  ],
+  "bbox_local_uv": [
+   39.02,
+   42.52,
+   40.48,
+   45.48
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     89.75,
+     94.825
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     89.75,
+     93.175
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C29": {
+  "ref": "C29",
+  "value": "1nF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   74.0,
+   82.5,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   72.12,
+   81.52,
+   75.88,
+   83.48
+  ],
+  "bbox_local_uv": [
+   22.12,
+   31.52,
+   25.88,
+   33.48
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     72.9625,
+     82.5
+    ],
+    "size": [
+     1.175,
+     1.45
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     75.0375,
+     82.5
+    ],
+    "size": [
+     1.175,
+     1.45
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C43": {
+  "ref": "C43",
+  "value": "100nF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   70.15,
+   101.75,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   69.42,
+   100.27,
+   70.88,
+   103.23
+  ],
+  "bbox_local_uv": [
+   19.42,
+   50.27,
+   20.88,
+   53.23
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     70.15,
+     102.525
+    ],
+    "size": [
+     0.9,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     70.15,
+     100.975
+    ],
+    "size": [
+     0.9,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C24": {
+  "ref": "C24",
+  "value": "2.2uF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   83.0,
+   72.1,
+   180.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   81.3,
+   71.12,
+   84.7,
+   73.08
+  ],
+  "bbox_local_uv": [
+   31.3,
+   21.12,
+   34.7,
+   23.08
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     83.95,
+     72.1
+    ],
+    "size": [
+     1.0,
+     1.45
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     82.05,
+     72.1
+    ],
+    "size": [
+     1.0,
+     1.45
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "R15": {
+  "ref": "R15",
+  "value": "470k",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   102.5,
+   117.5,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   101.02,
+   116.77,
+   103.98,
+   118.23
+  ],
+  "bbox_local_uv": [
+   51.02,
+   66.77,
+   53.98,
+   68.23
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     101.675,
+     117.5
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     103.325,
+     117.5
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "R24": {
+  "ref": "R24",
+  "value": "100k",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   67.2,
+   62.8,
+   180.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   65.72,
+   62.07,
+   68.68,
+   63.53
+  ],
+  "bbox_local_uv": [
+   15.72,
+   12.07,
+   18.68,
+   13.53
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     68.025,
+     62.8
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     66.375,
+     62.8
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C21": {
+  "ref": "C21",
+  "value": "2.2uF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   79.5,
+   57.6,
+   -90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   78.52,
+   55.9,
+   80.48,
+   59.3
+  ],
+  "bbox_local_uv": [
+   28.52,
+   5.9,
+   30.48,
+   9.3
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     79.5,
+     56.65
+    ],
+    "size": [
+     1.0,
+     1.45
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     79.5,
+     58.55
+    ],
+    "size": [
+     1.0,
+     1.45
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "U6": {
+  "ref": "U6",
+  "value": "PN7160A1HN/C100E",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   75.9375,
+   63.55,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   72.3075,
+   59.92,
+   79.5675,
+   67.18
+  ],
+  "bbox_local_uv": [
+   22.308,
+   9.92,
+   29.567,
+   17.18
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     74.5675,
+     62.18
+    ],
+    "size": [
+     1.1,
+     1.1
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     74.5675,
+     63.55
+    ],
+    "size": [
+     1.1,
+     1.1
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     74.5675,
+     64.92
+    ],
+    "size": [
+     1.1,
+     1.1
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     75.9375,
+     62.18
+    ],
+    "size": [
+     1.1,
+     1.1
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     75.9375,
+     63.55
+    ],
+    "size": [
+     1.1,
+     1.1
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     75.9375,
+     64.92
+    ],
+    "size": [
+     1.1,
+     1.1
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     77.3075,
+     62.18
+    ],
+    "size": [
+     1.1,
+     1.1
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     77.3075,
+     63.55
+    ],
+    "size": [
+     1.1,
+     1.1
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     77.3075,
+     64.92
+    ],
+    "size": [
+     1.1,
+     1.1
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     73.0,
+     61.3
+    ],
+    "size": [
+     0.875,
+     0.25
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     73.0,
+     61.8
+    ],
+    "size": [
+     0.875,
+     0.25
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     73.0,
+     62.3
+    ],
+    "size": [
+     0.875,
+     0.25
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     73.0,
+     62.8
+    ],
+    "size": [
+     0.875,
+     0.25
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     73.0,
+     63.3
+    ],
+    "size": [
+     0.875,
+     0.25
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     73.0,
+     63.8
+    ],
+    "size": [
+     0.875,
+     0.25
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     73.0,
+     64.3
+    ],
+    "size": [
+     0.875,
+     0.25
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     73.0,
+     64.8
+    ],
+    "size": [
+     0.875,
+     0.25
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     73.0,
+     65.3
+    ],
+    "size": [
+     0.875,
+     0.25
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     73.0,
+     65.8
+    ],
+    "size": [
+     0.875,
+     0.25
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     73.6875,
+     66.4875
+    ],
+    "size": [
+     0.25,
+     0.875
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     74.1875,
+     66.4875
+    ],
+    "size": [
+     0.25,
+     0.875
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     74.6875,
+     66.4875
+    ],
+    "size": [
+     0.25,
+     0.875
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     75.1875,
+     66.4875
+    ],
+    "size": [
+     0.25,
+     0.875
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     75.6875,
+     66.4875
+    ],
+    "size": [
+     0.25,
+     0.875
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     76.1875,
+     66.4875
+    ],
+    "size": [
+     0.25,
+     0.875
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     76.6875,
+     66.4875
+    ],
+    "size": [
+     0.25,
+     0.875
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     77.1875,
+     66.4875
+    ],
+    "size": [
+     0.25,
+     0.875
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     77.6875,
+     66.4875
+    ],
+    "size": [
+     0.25,
+     0.875
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     78.1875,
+     66.4875
+    ],
+    "size": [
+     0.25,
+     0.875
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     78.875,
+     65.8
+    ],
+    "size": [
+     0.875,
+     0.25
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     78.875,
+     65.3
+    ],
+    "size": [
+     0.875,
+     0.25
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     78.875,
+     64.8
+    ],
+    "size": [
+     0.875,
+     0.25
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     78.875,
+     64.3
+    ],
+    "size": [
+     0.875,
+     0.25
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     78.875,
+     63.8
+    ],
+    "size": [
+     0.875,
+     0.25
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     78.875,
+     63.3
+    ],
+    "size": [
+     0.875,
+     0.25
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     78.875,
+     62.8
+    ],
+    "size": [
+     0.875,
+     0.25
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     78.875,
+     62.3
+    ],
+    "size": [
+     0.875,
+     0.25
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     78.875,
+     61.8
+    ],
+    "size": [
+     0.875,
+     0.25
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     78.875,
+     61.3
+    ],
+    "size": [
+     0.875,
+     0.25
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     78.1875,
+     60.6125
+    ],
+    "size": [
+     0.25,
+     0.875
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     77.6875,
+     60.6125
+    ],
+    "size": [
+     0.25,
+     0.875
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     77.1875,
+     60.6125
+    ],
+    "size": [
+     0.25,
+     0.875
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     76.6875,
+     60.6125
+    ],
+    "size": [
+     0.25,
+     0.875
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     76.1875,
+     60.6125
+    ],
+    "size": [
+     0.25,
+     0.875
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     75.6875,
+     60.6125
+    ],
+    "size": [
+     0.25,
+     0.875
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     75.1875,
+     60.6125
+    ],
+    "size": [
+     0.25,
+     0.875
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     74.6875,
+     60.6125
+    ],
+    "size": [
+     0.25,
+     0.875
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     74.1875,
+     60.6125
+    ],
+    "size": [
+     0.25,
+     0.875
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     73.6875,
+     60.6125
+    ],
+    "size": [
+     0.25,
+     0.875
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     75.9375,
+     63.55
+    ],
+    "size": [
+     4.1,
+     4.1
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "R19": {
+  "ref": "R19",
+  "value": "2.2k",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   75.25,
+   114.75,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   74.52,
+   113.27,
+   75.98,
+   116.23
+  ],
+  "bbox_local_uv": [
+   24.52,
+   63.27,
+   25.98,
+   66.23
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     75.25,
+     115.575
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     75.25,
+     113.925
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "R1": {
+  "ref": "R1",
+  "value": "5.1k",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   60.0,
+   108.75,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   58.52,
+   108.02,
+   61.48,
+   109.48
+  ],
+  "bbox_local_uv": [
+   8.52,
+   58.02,
+   11.48,
+   59.48
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     59.175,
+     108.75
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     60.825,
+     108.75
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "Q3": {
+  "ref": "Q3",
+  "value": "IRLML6402",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   54.5,
+   68.0,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   52.57,
+   66.3,
+   56.43,
+   69.7
+  ],
+  "bbox_local_uv": [
+   2.57,
+   16.3,
+   6.43,
+   19.7
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     53.5625,
+     67.05
+    ],
+    "size": [
+     1.475,
+     0.6
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     53.5625,
+     68.95
+    ],
+    "size": [
+     1.475,
+     0.6
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     55.4375,
+     68.0
+    ],
+    "size": [
+     1.475,
+     0.6
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "DS1": {
+  "ref": "DS1",
+  "value": "SSD1309 OLED / 24-pin",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   80.0,
+   108.85,
+   180.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   71.2,
+   103.6,
+   88.8,
+   111.6
+  ],
+  "bbox_local_uv": [
+   21.2,
+   53.6,
+   38.8,
+   61.6
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     85.75,
+     110.7
+    ],
+    "size": [
+     0.3,
+     1.3
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     85.25,
+     110.7
+    ],
+    "size": [
+     0.3,
+     1.3
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     84.75,
+     110.7
+    ],
+    "size": [
+     0.3,
+     1.3
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     84.25,
+     110.7
+    ],
+    "size": [
+     0.3,
+     1.3
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     83.75,
+     110.7
+    ],
+    "size": [
+     0.3,
+     1.3
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     83.25,
+     110.7
+    ],
+    "size": [
+     0.3,
+     1.3
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     82.75,
+     110.7
+    ],
+    "size": [
+     0.3,
+     1.3
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     82.25,
+     110.7
+    ],
+    "size": [
+     0.3,
+     1.3
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     81.75,
+     110.7
+    ],
+    "size": [
+     0.3,
+     1.3
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     81.25,
+     110.7
+    ],
+    "size": [
+     0.3,
+     1.3
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     80.75,
+     110.7
+    ],
+    "size": [
+     0.3,
+     1.3
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     80.25,
+     110.7
+    ],
+    "size": [
+     0.3,
+     1.3
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     79.75,
+     110.7
+    ],
+    "size": [
+     0.3,
+     1.3
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     79.25,
+     110.7
+    ],
+    "size": [
+     0.3,
+     1.3
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     78.75,
+     110.7
+    ],
+    "size": [
+     0.3,
+     1.3
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     78.25,
+     110.7
+    ],
+    "size": [
+     0.3,
+     1.3
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     77.75,
+     110.7
+    ],
+    "size": [
+     0.3,
+     1.3
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     77.25,
+     110.7
+    ],
+    "size": [
+     0.3,
+     1.3
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     76.75,
+     110.7
+    ],
+    "size": [
+     0.3,
+     1.3
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     76.25,
+     110.7
+    ],
+    "size": [
+     0.3,
+     1.3
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     75.75,
+     110.7
+    ],
+    "size": [
+     0.3,
+     1.3
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     75.25,
+     110.7
+    ],
+    "size": [
+     0.3,
+     1.3
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     74.75,
+     110.7
+    ],
+    "size": [
+     0.3,
+     1.3
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     74.25,
+     110.7
+    ],
+    "size": [
+     0.3,
+     1.3
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     87.65,
+     107.45
+    ],
+    "size": [
+     1.8,
+     2.2
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     72.35,
+     107.45
+    ],
+    "size": [
+     1.8,
+     2.2
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C37": {
+  "ref": "C37",
+  "value": "100pF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   90.0,
+   82.6,
+   -90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   89.02,
+   80.72,
+   90.98,
+   84.48
+  ],
+  "bbox_local_uv": [
+   39.02,
+   30.72,
+   40.98,
+   34.48
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     90.0,
+     81.5625
+    ],
+    "size": [
+     1.175,
+     1.45
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     90.0,
+     83.6375
+    ],
+    "size": [
+     1.175,
+     1.45
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "D1": {
+  "ref": "D1",
+  "value": "B340A",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   61.0,
+   119.25,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   57.5,
+   117.5,
+   64.5,
+   121.0
+  ],
+  "bbox_local_uv": [
+   7.5,
+   67.5,
+   14.5,
+   71.0
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     59.0,
+     119.25
+    ],
+    "size": [
+     2.5,
+     1.8
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     63.0,
+     119.25
+    ],
+    "size": [
+     2.5,
+     1.8
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "U8": {
+  "ref": "U8",
+  "value": "PCF8574T",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   60.15,
+   148.095,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   54.22,
+   142.695,
+   66.08,
+   153.495
+  ],
+  "bbox_local_uv": [
+   4.22,
+   92.695,
+   16.08,
+   103.495
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     55.5,
+     143.65
+    ],
+    "size": [
+     2.05,
+     0.6
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     55.5,
+     144.92
+    ],
+    "size": [
+     2.05,
+     0.6
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     55.5,
+     146.19
+    ],
+    "size": [
+     2.05,
+     0.6
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     55.5,
+     147.46
+    ],
+    "size": [
+     2.05,
+     0.6
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     55.5,
+     148.73
+    ],
+    "size": [
+     2.05,
+     0.6
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     55.5,
+     150.0
+    ],
+    "size": [
+     2.05,
+     0.6
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     55.5,
+     151.27
+    ],
+    "size": [
+     2.05,
+     0.6
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     55.5,
+     152.54
+    ],
+    "size": [
+     2.05,
+     0.6
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     64.8,
+     152.54
+    ],
+    "size": [
+     2.05,
+     0.6
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     64.8,
+     151.27
+    ],
+    "size": [
+     2.05,
+     0.6
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     64.8,
+     150.0
+    ],
+    "size": [
+     2.05,
+     0.6
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     64.8,
+     148.73
+    ],
+    "size": [
+     2.05,
+     0.6
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     64.8,
+     147.46
+    ],
+    "size": [
+     2.05,
+     0.6
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     64.8,
+     146.19
+    ],
+    "size": [
+     2.05,
+     0.6
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     64.8,
+     144.92
+    ],
+    "size": [
+     2.05,
+     0.6
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     64.8,
+     143.65
+    ],
+    "size": [
+     2.05,
+     0.6
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "L1": {
+  "ref": "L1",
+  "value": "2.2uH",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   75.6,
+   96.7,
+   180.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   73.8,
+   94.9,
+   77.4,
+   98.5
+  ],
+  "bbox_local_uv": [
+   23.8,
+   44.9,
+   27.4,
+   48.5
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     76.7,
+     96.7
+    ],
+    "size": [
+     0.8,
+     2.7
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     74.5,
+     96.7
+    ],
+    "size": [
+     0.8,
+     2.7
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C20": {
+  "ref": "C20",
+  "value": "100nF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   70.3,
+   80.5,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   69.57,
+   79.02,
+   71.03,
+   81.98
+  ],
+  "bbox_local_uv": [
+   19.57,
+   29.02,
+   21.03,
+   31.98
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     70.3,
+     81.275
+    ],
+    "size": [
+     0.9,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     70.3,
+     79.725
+    ],
+    "size": [
+     0.9,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C4": {
+  "ref": "C4",
+  "value": "22uF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   84.25,
+   94.7,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   82.65,
+   91.875,
+   85.85,
+   97.525
+  ],
+  "bbox_local_uv": [
+   32.65,
+   41.875,
+   35.85,
+   47.525
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     84.25,
+     96.175
+    ],
+    "size": [
+     1.15,
+     2.7
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     84.25,
+     93.225
+    ],
+    "size": [
+     1.15,
+     2.7
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "R10": {
+  "ref": "R10",
+  "value": "10k",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   91.5,
+   94.0,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   90.77,
+   92.52,
+   92.23,
+   95.48
+  ],
+  "bbox_local_uv": [
+   40.77,
+   42.52,
+   42.23,
+   45.48
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     91.5,
+     94.825
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     91.5,
+     93.175
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "R26": {
+  "ref": "R26",
+  "value": "2.2k",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   78.0,
+   82.5,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   76.15,
+   81.55,
+   79.85,
+   83.45
+  ],
+  "bbox_local_uv": [
+   26.15,
+   31.55,
+   29.85,
+   33.45
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     77.0,
+     82.5
+    ],
+    "size": [
+     1.2,
+     1.4
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     79.0,
+     82.5
+    ],
+    "size": [
+     1.2,
+     1.4
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "R2": {
+  "ref": "R2",
+  "value": "5.1k",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   60.0,
+   115.25,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   58.52,
+   114.52,
+   61.48,
+   115.98
+  ],
+  "bbox_local_uv": [
+   8.52,
+   64.52,
+   11.48,
+   65.98
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     59.175,
+     115.25
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     60.825,
+     115.25
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C23": {
+  "ref": "C23",
+  "value": "2.2uF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   75.0,
+   57.9,
+   -90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   74.02,
+   56.2,
+   75.98,
+   59.6
+  ],
+  "bbox_local_uv": [
+   24.02,
+   6.2,
+   25.98,
+   9.6
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     75.0,
+     56.95
+    ],
+    "size": [
+     1.0,
+     1.45
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     75.0,
+     58.85
+    ],
+    "size": [
+     1.0,
+     1.45
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "R3": {
+  "ref": "R3",
+  "value": "10k",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   66.5,
+   101.5,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   65.77,
+   100.02,
+   67.23,
+   102.98
+  ],
+  "bbox_local_uv": [
+   15.77,
+   50.02,
+   17.23,
+   52.98
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     66.5,
+     102.325
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     66.5,
+     100.675
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "U5": {
+  "ref": "U5",
+  "value": "TLV803EA30DBZR",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   97.75,
+   94.25,
+   180.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   95.82,
+   92.55,
+   99.68,
+   95.95
+  ],
+  "bbox_local_uv": [
+   45.82,
+   42.55,
+   49.68,
+   45.95
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     98.6875,
+     95.2
+    ],
+    "size": [
+     1.475,
+     0.6
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     98.6875,
+     93.3
+    ],
+    "size": [
+     1.475,
+     0.6
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     96.8125,
+     94.25
+    ],
+    "size": [
+     1.475,
+     0.6
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "R6": {
+  "ref": "R6",
+  "value": "220k",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   80.2,
+   97.5,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   78.72,
+   96.77,
+   81.68,
+   98.23
+  ],
+  "bbox_local_uv": [
+   28.72,
+   46.77,
+   31.68,
+   48.23
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     79.375,
+     97.5
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     81.025,
+     97.5
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "R12": {
+  "ref": "R12",
+  "value": "22R",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   95.0,
+   117.5,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   93.52,
+   116.77,
+   96.48,
+   118.23
+  ],
+  "bbox_local_uv": [
+   43.52,
+   66.77,
+   46.48,
+   68.23
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     94.175,
+     117.5
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     95.825,
+     117.5
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "U3": {
+  "ref": "U3",
+  "value": "ESP32-C3-WROOM-02-N4",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   97.9,
+   106.14,
+   -90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   90.75,
+   91.89,
+   116.25,
+   120.39
+  ],
+  "bbox_local_uv": [
+   40.75,
+   41.89,
+   66.25,
+   70.39
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     103.9,
+     97.39
+    ],
+    "size": [
+     1.5,
+     0.9
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     102.4,
+     97.39
+    ],
+    "size": [
+     1.5,
+     0.9
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     100.9,
+     97.39
+    ],
+    "size": [
+     1.5,
+     0.9
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     99.4,
+     97.39
+    ],
+    "size": [
+     1.5,
+     0.9
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     97.9,
+     97.39
+    ],
+    "size": [
+     1.5,
+     0.9
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     96.4,
+     97.39
+    ],
+    "size": [
+     1.5,
+     0.9
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     94.9,
+     97.39
+    ],
+    "size": [
+     1.5,
+     0.9
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     93.4,
+     97.39
+    ],
+    "size": [
+     1.5,
+     0.9
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     91.9,
+     97.39
+    ],
+    "size": [
+     1.5,
+     0.9
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     91.9,
+     114.89
+    ],
+    "size": [
+     1.5,
+     0.9
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     93.4,
+     114.89
+    ],
+    "size": [
+     1.5,
+     0.9
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     94.9,
+     114.89
+    ],
+    "size": [
+     1.5,
+     0.9
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     96.4,
+     114.89
+    ],
+    "size": [
+     1.5,
+     0.9
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     97.9,
+     114.89
+    ],
+    "size": [
+     1.5,
+     0.9
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     99.4,
+     114.89
+    ],
+    "size": [
+     1.5,
+     0.9
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     100.9,
+     114.89
+    ],
+    "size": [
+     1.5,
+     0.9
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     102.4,
+     114.89
+    ],
+    "size": [
+     1.5,
+     0.9
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     103.9,
+     114.89
+    ],
+    "size": [
+     1.5,
+     0.9
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     97.7,
+     107.1
+    ],
+    "size": [
+     2.9,
+     2.9
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C50": {
+  "ref": "C50",
+  "value": "2.2uF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   79.5,
+   115.25,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   78.52,
+   113.55,
+   80.48,
+   116.95
+  ],
+  "bbox_local_uv": [
+   28.52,
+   63.55,
+   30.48,
+   66.95
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     79.5,
+     116.2
+    ],
+    "size": [
+     1.0,
+     1.45
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     79.5,
+     114.3
+    ],
+    "size": [
+     1.0,
+     1.45
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "J5": {
+  "ref": "J5",
+  "value": "MODULE LINK / OPTIONAL",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   74.92,
+   130.0,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   73.15,
+   128.23,
+   86.85,
+   131.77
+  ],
+  "bbox_local_uv": [
+   23.15,
+   78.23,
+   36.85,
+   81.77
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     74.92,
+     130.0
+    ],
+    "size": [
+     1.7,
+     1.7
+    ],
+    "drill": 1.0
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     77.46,
+     130.0
+    ],
+    "size": [
+     1.7,
+     1.7
+    ],
+    "drill": 1.0
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     80.0,
+     130.0
+    ],
+    "size": [
+     1.7,
+     1.7
+    ],
+    "drill": 1.0
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     82.54,
+     130.0
+    ],
+    "size": [
+     1.7,
+     1.7
+    ],
+    "drill": 1.0
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     85.08,
+     130.0
+    ],
+    "size": [
+     1.7,
+     1.7
+    ],
+    "drill": 1.0
+   }
+  ]
+ },
+ "R39": {
+  "ref": "R39",
+  "value": "4.7k",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   68.5,
+   147.0,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   67.02,
+   146.27,
+   69.98,
+   147.73
+  ],
+  "bbox_local_uv": [
+   17.02,
+   96.27,
+   19.98,
+   97.73
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     67.675,
+     147.0
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     69.325,
+     147.0
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C1": {
+  "ref": "C1",
+  "value": "22uF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   63.0,
+   97.25,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   60.7,
+   95.65,
+   65.3,
+   98.85
+  ],
+  "bbox_local_uv": [
+   10.7,
+   45.65,
+   15.3,
+   48.85
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     61.525,
+     97.25
+    ],
+    "size": [
+     1.15,
+     2.7
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     64.475,
+     97.25
+    ],
+    "size": [
+     1.15,
+     2.7
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "SW2": {
+  "ref": "SW2",
+  "value": "BOOT",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   106.5,
+   79.0,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   104.85,
+   76.45,
+   108.15,
+   81.55
+  ],
+  "bbox_local_uv": [
+   54.85,
+   26.45,
+   58.15,
+   31.55
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     106.5,
+     80.7
+    ],
+    "size": [
+     0.9,
+     1.7
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     106.5,
+     77.3
+    ],
+    "size": [
+     0.9,
+     1.7
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C32": {
+  "ref": "C32",
+  "value": "68pF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   87.0,
+   75.15,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   85.12,
+   74.17,
+   88.88,
+   76.13
+  ],
+  "bbox_local_uv": [
+   35.12,
+   24.17,
+   38.88,
+   26.13
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     85.9625,
+     75.15
+    ],
+    "size": [
+     1.175,
+     1.45
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     88.0375,
+     75.15
+    ],
+    "size": [
+     1.175,
+     1.45
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "R23": {
+  "ref": "R23",
+  "value": "100k",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   67.2,
+   64.8,
+   180.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   65.72,
+   64.07,
+   68.68,
+   65.53
+  ],
+  "bbox_local_uv": [
+   15.72,
+   14.07,
+   18.68,
+   15.53
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     68.025,
+     64.8
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     66.375,
+     64.8
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "MB1": {
+  "ref": "MB1",
+  "value": "MouseBite_2Rows7_D0.60_P1.00_Inset_Gap2.00",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   62.0,
+   124.0,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   58.7,
+   122.4,
+   65.3,
+   125.6
+  ],
+  "bbox_local_uv": [
+   8.7,
+   72.4,
+   15.3,
+   75.6
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     59.0,
+     122.7
+    ],
+    "size": [
+     0.6,
+     0.6
+    ],
+    "drill": 0.6
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     59.0,
+     125.3
+    ],
+    "size": [
+     0.6,
+     0.6
+    ],
+    "drill": 0.6
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     60.0,
+     122.7
+    ],
+    "size": [
+     0.6,
+     0.6
+    ],
+    "drill": 0.6
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     60.0,
+     125.3
+    ],
+    "size": [
+     0.6,
+     0.6
+    ],
+    "drill": 0.6
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     61.0,
+     122.7
+    ],
+    "size": [
+     0.6,
+     0.6
+    ],
+    "drill": 0.6
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     61.0,
+     125.3
+    ],
+    "size": [
+     0.6,
+     0.6
+    ],
+    "drill": 0.6
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     62.0,
+     122.7
+    ],
+    "size": [
+     0.6,
+     0.6
+    ],
+    "drill": 0.6
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     62.0,
+     125.3
+    ],
+    "size": [
+     0.6,
+     0.6
+    ],
+    "drill": 0.6
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     63.0,
+     122.7
+    ],
+    "size": [
+     0.6,
+     0.6
+    ],
+    "drill": 0.6
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     63.0,
+     125.3
+    ],
+    "size": [
+     0.6,
+     0.6
+    ],
+    "drill": 0.6
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     64.0,
+     122.7
+    ],
+    "size": [
+     0.6,
+     0.6
+    ],
+    "drill": 0.6
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     64.0,
+     125.3
+    ],
+    "size": [
+     0.6,
+     0.6
+    ],
+    "drill": 0.6
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     65.0,
+     122.7
+    ],
+    "size": [
+     0.6,
+     0.6
+    ],
+    "drill": 0.6
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     65.0,
+     125.3
+    ],
+    "size": [
+     0.6,
+     0.6
+    ],
+    "drill": 0.6
+   }
+  ]
+ },
+ "R32": {
+  "ref": "R32",
+  "value": "910k",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   69.25,
+   114.0,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   68.52,
+   112.52,
+   69.98,
+   115.48
+  ],
+  "bbox_local_uv": [
+   18.52,
+   62.52,
+   19.98,
+   65.48
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     69.25,
+     114.825
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     69.25,
+     113.175
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "R4": {
+  "ref": "R4",
+  "value": "2.2k",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   68.25,
+   101.75,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   67.52,
+   100.27,
+   68.98,
+   103.23
+  ],
+  "bbox_local_uv": [
+   17.52,
+   50.27,
+   18.98,
+   53.23
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     68.25,
+     102.575
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     68.25,
+     100.925
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "R13": {
+  "ref": "R13",
+  "value": "22R",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   98.3,
+   117.5,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   96.82,
+   116.77,
+   99.78,
+   118.23
+  ],
+  "bbox_local_uv": [
+   46.82,
+   66.77,
+   49.78,
+   68.23
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     97.475,
+     117.5
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     99.125,
+     117.5
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C31": {
+  "ref": "C31",
+  "value": "330pF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   81.5,
+   82.6,
+   -90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   80.52,
+   80.72,
+   82.48,
+   84.48
+  ],
+  "bbox_local_uv": [
+   30.52,
+   30.72,
+   32.48,
+   34.48
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     81.5,
+     81.5625
+    ],
+    "size": [
+     1.175,
+     1.45
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     81.5,
+     83.6375
+    ],
+    "size": [
+     1.175,
+     1.45
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "L3": {
+  "ref": "L3",
+  "value": "150nH",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   78.0,
+   85.45,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   76.17,
+   84.21,
+   79.83,
+   86.69
+  ],
+  "bbox_local_uv": [
+   26.17,
+   34.21,
+   29.83,
+   36.69
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     76.93,
+     85.45
+    ],
+    "size": [
+     1.02,
+     1.98
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     79.07,
+     85.45
+    ],
+    "size": [
+     1.02,
+     1.98
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C16": {
+  "ref": "C16",
+  "value": "100nF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   70.5,
+   70.0,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   69.77,
+   68.52,
+   71.23,
+   71.48
+  ],
+  "bbox_local_uv": [
+   19.77,
+   18.52,
+   21.23,
+   21.48
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     70.5,
+     70.775
+    ],
+    "size": [
+     0.9,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     70.5,
+     69.225
+    ],
+    "size": [
+     0.9,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "D3": {
+  "ref": "D3",
+  "value": "CHARGE (red)",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   65.5,
+   94.0,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   64.77,
+   92.52,
+   66.23,
+   95.48
+  ],
+  "bbox_local_uv": [
+   14.77,
+   42.52,
+   16.23,
+   45.48
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     65.5,
+     94.7875
+    ],
+    "size": [
+     0.875,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     65.5,
+     93.2125
+    ],
+    "size": [
+     0.875,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C17": {
+  "ref": "C17",
+  "value": "10uF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   68.0,
+   73.8,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   66.85,
+   71.425,
+   69.15,
+   76.175
+  ],
+  "bbox_local_uv": [
+   16.85,
+   21.425,
+   19.15,
+   26.175
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     68.0,
+     75.275
+    ],
+    "size": [
+     1.15,
+     1.8
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     68.0,
+     72.325
+    ],
+    "size": [
+     1.15,
+     1.8
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C46": {
+  "ref": "C46",
+  "value": "4.7uF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   68.0,
+   108.25,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   65.7,
+   107.1,
+   70.3,
+   109.4
+  ],
+  "bbox_local_uv": [
+   15.7,
+   57.1,
+   20.3,
+   59.4
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     66.525,
+     108.25
+    ],
+    "size": [
+     1.15,
+     1.8
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     69.475,
+     108.25
+    ],
+    "size": [
+     1.15,
+     1.8
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C19": {
+  "ref": "C19",
+  "value": "10uF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   67.0,
+   79.0,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   65.85,
+   76.625,
+   68.15,
+   81.375
+  ],
+  "bbox_local_uv": [
+   15.85,
+   26.625,
+   18.15,
+   31.375
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     67.0,
+     80.475
+    ],
+    "size": [
+     1.15,
+     1.8
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     67.0,
+     77.525
+    ],
+    "size": [
+     1.15,
+     1.8
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "D5": {
+  "ref": "D5",
+  "value": "TPD1E10B06DYAR",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   66.5,
+   112.9,
+   180.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   65.25,
+   112.2,
+   67.75,
+   113.6
+  ],
+  "bbox_local_uv": [
+   15.25,
+   62.2,
+   17.75,
+   63.6
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     67.2,
+     112.9
+    ],
+    "size": [
+     0.6,
+     0.7
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     65.8,
+     112.9
+    ],
+    "size": [
+     0.6,
+     0.7
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "D4": {
+  "ref": "D4",
+  "value": "SS14",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   54.5,
+   88.5,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   52.75,
+   85.0,
+   56.25,
+   92.0
+  ],
+  "bbox_local_uv": [
+   2.75,
+   35.0,
+   6.25,
+   42.0
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     54.5,
+     90.5
+    ],
+    "size": [
+     2.5,
+     1.8
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     54.5,
+     86.5
+    ],
+    "size": [
+     2.5,
+     1.8
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C38": {
+  "ref": "C38",
+  "value": "DNP / TRIM",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   92.2,
+   78.4,
+   -90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   91.22,
+   76.52,
+   93.18,
+   80.28
+  ],
+  "bbox_local_uv": [
+   41.22,
+   26.52,
+   43.18,
+   30.28
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     92.2,
+     77.3625
+    ],
+    "size": [
+     1.175,
+     1.45
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     92.2,
+     79.4375
+    ],
+    "size": [
+     1.175,
+     1.45
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "R27": {
+  "ref": "R27",
+  "value": "2.7R",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   92.0,
+   75.15,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   89.55,
+   74.02,
+   94.45,
+   76.28
+  ],
+  "bbox_local_uv": [
+   39.55,
+   24.02,
+   44.45,
+   26.28
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     90.45,
+     75.15
+    ],
+    "size": [
+     1.3,
+     1.75
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     93.55,
+     75.15
+    ],
+    "size": [
+     1.3,
+     1.75
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C30": {
+  "ref": "C30",
+  "value": "330pF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   81.5,
+   78.4,
+   -90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   80.52,
+   76.52,
+   82.48,
+   80.28
+  ],
+  "bbox_local_uv": [
+   30.52,
+   26.52,
+   32.48,
+   30.28
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     81.5,
+     77.3625
+    ],
+    "size": [
+     1.175,
+     1.45
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     81.5,
+     79.4375
+    ],
+    "size": [
+     1.175,
+     1.45
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "R31": {
+  "ref": "R31",
+  "value": "200k",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   57.5,
+   86.5,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   56.77,
+   85.02,
+   58.23,
+   87.98
+  ],
+  "bbox_local_uv": [
+   6.77,
+   35.02,
+   8.23,
+   37.98
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     57.5,
+     87.325
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     57.5,
+     85.675
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C6": {
+  "ref": "C6",
+  "value": "22uF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   69.5,
+   97.5,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   68.35,
+   95.125,
+   70.65,
+   99.875
+  ],
+  "bbox_local_uv": [
+   18.35,
+   45.125,
+   20.65,
+   49.875
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     69.5,
+     98.975
+    ],
+    "size": [
+     1.15,
+     1.8
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     69.5,
+     96.025
+    ],
+    "size": [
+     1.15,
+     1.8
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "Q1": {
+  "ref": "Q1",
+  "value": "IRLML6402",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   67.5,
+   105.25,
+   180.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   65.57,
+   103.55,
+   69.43,
+   106.95
+  ],
+  "bbox_local_uv": [
+   15.57,
+   53.55,
+   19.43,
+   56.95
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     68.4375,
+     106.2
+    ],
+    "size": [
+     1.475,
+     0.6
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     68.4375,
+     104.3
+    ],
+    "size": [
+     1.475,
+     0.6
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     66.5625,
+     105.25
+    ],
+    "size": [
+     1.475,
+     0.6
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "R42": {
+  "ref": "R42",
+  "value": "0R",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   74.0,
+   85.85,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   72.15,
+   84.9,
+   75.85,
+   86.8
+  ],
+  "bbox_local_uv": [
+   22.15,
+   34.9,
+   25.85,
+   36.8
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     73.0,
+     85.85
+    ],
+    "size": [
+     1.2,
+     1.4
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     75.0,
+     85.85
+    ],
+    "size": [
+     1.2,
+     1.4
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "Y1": {
+  "ref": "Y1",
+  "value": "27.12MHz / CL 10pF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   82.0,
+   67.6,
+   -90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   80.7,
+   66.1,
+   83.3,
+   69.1
+  ],
+  "bbox_local_uv": [
+   30.7,
+   16.1,
+   33.3,
+   19.1
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     81.475,
+     66.925
+    ],
+    "size": [
+     0.85,
+     0.75
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     81.475,
+     68.275
+    ],
+    "size": [
+     0.85,
+     0.75
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     82.525,
+     68.275
+    ],
+    "size": [
+     0.85,
+     0.75
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     82.525,
+     66.925
+    ],
+    "size": [
+     0.85,
+     0.75
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "A1": {
+  "ref": "A1",
+  "value": "PCB loop 40x40 / 4T",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   80.75,
+   71.0,
+   -90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   59.75,
+   50.0,
+   102.25,
+   92.0
+  ],
+  "bbox_local_uv": [
+   9.75,
+   0.0,
+   52.25,
+   42.0
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     101.35,
+     69.5
+    ],
+    "size": [
+     0.5,
+     0.5
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     101.35,
+     69.5
+    ],
+    "size": [
+     0.8,
+     0.8
+    ],
+    "drill": 0.4
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     95.25,
+     69.5
+    ],
+    "size": [
+     0.5,
+     0.5
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     95.25,
+     69.5
+    ],
+    "size": [
+     0.8,
+     0.8
+    ],
+    "drill": 0.4
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     95.25,
+     69.5
+    ],
+    "size": [
+     1.5,
+     2.0
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     95.25,
+     66.1
+    ],
+    "size": [
+     0.5,
+     0.5
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     95.25,
+     66.1
+    ],
+    "size": [
+     1.5,
+     2.0
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C15": {
+  "ref": "C15",
+  "value": "1uF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   67.0,
+   60.0,
+   180.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   65.3,
+   59.02,
+   68.7,
+   60.98
+  ],
+  "bbox_local_uv": [
+   15.3,
+   9.02,
+   18.7,
+   10.98
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     67.95,
+     60.0
+    ],
+    "size": [
+     1.0,
+     1.45
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     66.05,
+     60.0
+    ],
+    "size": [
+     1.0,
+     1.45
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "R5": {
+  "ref": "R5",
+  "value": "10k",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   64.25,
+   115.25,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   63.52,
+   113.77,
+   64.98,
+   116.73
+  ],
+  "bbox_local_uv": [
+   13.52,
+   63.77,
+   14.98,
+   66.73
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     64.25,
+     116.075
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     64.25,
+     114.425
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "R41": {
+  "ref": "R41",
+  "value": "0R",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   74.0,
+   75.15,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   72.15,
+   74.2,
+   75.85,
+   76.1
+  ],
+  "bbox_local_uv": [
+   22.15,
+   24.2,
+   25.85,
+   26.1
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     73.0,
+     75.15
+    ],
+    "size": [
+     1.2,
+     1.4
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     75.0,
+     75.15
+    ],
+    "size": [
+     1.2,
+     1.4
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "Q4": {
+  "ref": "Q4",
+  "value": "BSS138",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   54.5,
+   64.0,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   52.57,
+   62.3,
+   56.43,
+   65.7
+  ],
+  "bbox_local_uv": [
+   2.57,
+   12.3,
+   6.43,
+   15.7
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     53.5625,
+     63.05
+    ],
+    "size": [
+     1.475,
+     0.6
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     53.5625,
+     64.95
+    ],
+    "size": [
+     1.475,
+     0.6
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     55.4375,
+     64.0
+    ],
+    "size": [
+     1.475,
+     0.6
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "R22": {
+  "ref": "R22",
+  "value": "100k",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   70.0,
+   86.0,
+   180.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   68.52,
+   85.27,
+   71.48,
+   86.73
+  ],
+  "bbox_local_uv": [
+   18.52,
+   35.27,
+   21.48,
+   36.73
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     70.825,
+     86.0
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     69.175,
+     86.0
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C33": {
+  "ref": "C33",
+  "value": "68pF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   87.0,
+   85.85,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   85.12,
+   84.87,
+   88.88,
+   86.83
+  ],
+  "bbox_local_uv": [
+   35.12,
+   34.87,
+   38.88,
+   36.83
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     85.9625,
+     85.85
+    ],
+    "size": [
+     1.175,
+     1.45
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     88.0375,
+     85.85
+    ],
+    "size": [
+     1.175,
+     1.45
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "R40": {
+  "ref": "R40",
+  "value": "100k",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   83.0,
+   116.25,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   81.52,
+   115.52,
+   84.48,
+   116.98
+  ],
+  "bbox_local_uv": [
+   31.52,
+   65.52,
+   34.48,
+   66.98
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     82.175,
+     116.25
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     83.825,
+     116.25
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "R37": {
+  "ref": "R37",
+  "value": "10k",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   68.5,
+   149.5,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   67.02,
+   148.77,
+   69.98,
+   150.23
+  ],
+  "bbox_local_uv": [
+   17.02,
+   98.77,
+   19.98,
+   100.23
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     67.675,
+     149.5
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     69.325,
+     149.5
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C42": {
+  "ref": "C42",
+  "value": "1uF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   54.5,
+   93.25,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   52.8,
+   92.27,
+   56.2,
+   94.23
+  ],
+  "bbox_local_uv": [
+   2.8,
+   42.27,
+   6.2,
+   44.23
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     53.55,
+     93.25
+    ],
+    "size": [
+     1.0,
+     1.45
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     55.45,
+     93.25
+    ],
+    "size": [
+     1.0,
+     1.45
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C40": {
+  "ref": "C40",
+  "value": "10uF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   54.5,
+   73.0,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   52.2,
+   71.85,
+   56.8,
+   74.15
+  ],
+  "bbox_local_uv": [
+   2.2,
+   21.85,
+   6.8,
+   24.15
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     53.025,
+     73.0
+    ],
+    "size": [
+     1.15,
+     1.8
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     55.975,
+     73.0
+    ],
+    "size": [
+     1.15,
+     1.8
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C41": {
+  "ref": "C41",
+  "value": "22pF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   51.5,
+   85.0,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   50.77,
+   83.52,
+   52.23,
+   86.48
+  ],
+  "bbox_local_uv": [
+   0.77,
+   33.52,
+   2.23,
+   36.48
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     51.5,
+     85.775
+    ],
+    "size": [
+     0.9,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     51.5,
+     84.225
+    ],
+    "size": [
+     0.9,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C48": {
+  "ref": "C48",
+  "value": "100nF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   89.75,
+   108.75,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   89.02,
+   107.27,
+   90.48,
+   110.23
+  ],
+  "bbox_local_uv": [
+   39.02,
+   57.27,
+   40.48,
+   60.23
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     89.75,
+     109.525
+    ],
+    "size": [
+     0.9,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     89.75,
+     107.975
+    ],
+    "size": [
+     0.9,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "U2": {
+  "ref": "U2",
+  "value": "SY8089AAAC",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   80.4,
+   94.5,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   78.35,
+   92.8,
+   82.45,
+   96.2
+  ],
+  "bbox_local_uv": [
+   28.35,
+   42.8,
+   32.45,
+   46.2
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     79.2625,
+     93.55
+    ],
+    "size": [
+     1.325,
+     0.6
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     79.2625,
+     94.5
+    ],
+    "size": [
+     1.325,
+     0.6
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     79.2625,
+     95.45
+    ],
+    "size": [
+     1.325,
+     0.6
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     81.5375,
+     95.45
+    ],
+    "size": [
+     1.325,
+     0.6
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     81.5375,
+     93.55
+    ],
+    "size": [
+     1.325,
+     0.6
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C47": {
+  "ref": "C47",
+  "value": "2.2uF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   73.0,
+   114.5,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   72.02,
+   112.8,
+   73.98,
+   116.2
+  ],
+  "bbox_local_uv": [
+   22.02,
+   62.8,
+   23.98,
+   66.2
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     73.0,
+     115.45
+    ],
+    "size": [
+     1.0,
+     1.45
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     73.0,
+     113.55
+    ],
+    "size": [
+     1.0,
+     1.45
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C28": {
+  "ref": "C28",
+  "value": "1nF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   74.0,
+   78.5,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   72.12,
+   77.52,
+   75.88,
+   79.48
+  ],
+  "bbox_local_uv": [
+   22.12,
+   27.52,
+   25.88,
+   29.48
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     72.9625,
+     78.5
+    ],
+    "size": [
+     1.175,
+     1.45
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     75.0375,
+     78.5
+    ],
+    "size": [
+     1.175,
+     1.45
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "R9": {
+  "ref": "R9",
+  "value": "10k",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   89.75,
+   102.0,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   89.02,
+   100.52,
+   90.48,
+   103.48
+  ],
+  "bbox_local_uv": [
+   39.02,
+   50.52,
+   40.48,
+   53.48
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     89.75,
+     102.825
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     89.75,
+     101.175
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C3": {
+  "ref": "C3",
+  "value": "22pF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   87.0,
+   96.95,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   86.27,
+   95.47,
+   87.73,
+   98.43
+  ],
+  "bbox_local_uv": [
+   36.27,
+   45.47,
+   37.73,
+   48.43
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     87.0,
+     97.725
+    ],
+    "size": [
+     0.9,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     87.0,
+     96.175
+    ],
+    "size": [
+     0.9,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C9": {
+  "ref": "C9",
+  "value": "22uF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   102.25,
+   94.5,
+   0.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   99.95,
+   93.35,
+   104.55,
+   95.65
+  ],
+  "bbox_local_uv": [
+   49.95,
+   43.35,
+   54.55,
+   45.65
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     100.775,
+     94.5
+    ],
+    "size": [
+     1.15,
+     1.8
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     103.725,
+     94.5
+    ],
+    "size": [
+     1.15,
+     1.8
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "C54": {
+  "ref": "C54",
+  "value": "33pF",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   83.7,
+   82.6,
+   -90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   82.72,
+   80.72,
+   84.68,
+   84.48
+  ],
+  "bbox_local_uv": [
+   32.72,
+   30.72,
+   34.68,
+   34.48
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     83.7,
+     81.5625
+    ],
+    "size": [
+     1.175,
+     1.45
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     83.7,
+     83.6375
+    ],
+    "size": [
+     1.175,
+     1.45
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "Q2": {
+  "ref": "Q2",
+  "value": "BSS138",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   91.5,
+   118.75,
+   180.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   89.57,
+   117.05,
+   93.43,
+   120.45
+  ],
+  "bbox_local_uv": [
+   39.57,
+   67.05,
+   43.43,
+   70.45
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     92.4375,
+     119.7
+    ],
+    "size": [
+     1.475,
+     0.6
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     92.4375,
+     117.8
+    ],
+    "size": [
+     1.475,
+     0.6
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     90.5625,
+     118.75
+    ],
+    "size": [
+     1.475,
+     0.6
+    ],
+    "drill": null
+   }
+  ]
+ },
+ "R7": {
+  "ref": "R7",
+  "value": "48.7k",
+  "library": "",
+  "footprint": "footprint",
+  "kicad_at": [
+   87.0,
+   93.75,
+   90.0
+  ],
+  "layer": "F.Cu",
+  "bbox_global": [
+   86.27,
+   92.27,
+   87.73,
+   95.23
+  ],
+  "bbox_local_uv": [
+   36.27,
+   42.27,
+   37.73,
+   45.23
+  ],
+  "pads": [
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     87.0,
+     94.575
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   },
+   {
+    "number": "",
+    "shape": "circle",
+    "global": [
+     87.0,
+     92.925
+    ],
+    "size": [
+     0.8,
+     0.95
+    ],
+    "drill": null
+   }
+  ]
+ }
+}
