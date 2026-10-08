@@ -5,12 +5,14 @@ Audience: any coding agent (or human) doing parametric mechanical design
 around measured electronics in this repo — and the pattern generalizes to
 the next board-carrier project. Review this file before extending the CAD.
 
-**Repo scope:** this repo hosts two board projects that share this
-methodology — the LILYGO A7670 + SimHat carrier (root: `cad/`,
-`scripts/`, `exports/`, STEP/DXF-driven) and the **Nucula NFC board
-enclosure** (`nucula/`, KiCad-driven, own `nucula/AGENTS.md` with
-project-specific traps). Lessons here apply to both; run each project's
-scripts from its own root (they are self-pathed, no cross-imports).
+**Repo scope:** this repo is the LILYGO A7670 + SimHat carrier (root:
+`cad/`, `scripts/`, `exports/`, STEP/DXF-driven) and the home of the
+methodology itself — the prompt library below is the seed of an
+AI-assisted case-building framework with multiple targets. Target #2
+lives in its own repo, `Amperstrand/nucula-enclosure` (KiCad front-end,
+own AGENTS.md with project-specific traps); lessons cross-apply. A third
+target, or extraction of the skills listed below, is the trigger to
+restructure into a dedicated multi-target framework repo.
 
 ## Process rules that paid for themselves
 

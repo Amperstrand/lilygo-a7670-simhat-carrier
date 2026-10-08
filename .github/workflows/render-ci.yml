@@ -87,25 +87,3 @@ jobs:
 
       - name: Validate (${{ matrix.profile }})
         run: python scripts/validate.py
-
-  # Nucula NFC enclosure (nucula/): same boolean-validation bar. Its
-  # analysis/*.json is committed, so validation needs no KiCad source.
-  validate-nucula:
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    env:
-      OMP_NUM_THREADS: "1"
-      OPENBLAS_NUM_THREADS: "1"
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-
-      - name: Install dependencies (frozen)
-        run: pip install --quiet -r requirements-frozen.txt
-
-      - name: Validate nucula enclosure (57 checks)
-        working-directory: nucula
-        run: python scripts/validate.py

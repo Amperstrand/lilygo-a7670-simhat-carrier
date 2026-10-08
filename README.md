@@ -156,28 +156,17 @@ docs/                 design decisions, assembly, print settings
 All parameters — standoff height, board gap, clip geometry, ear positions,
 pad locations, clearances — are in `cad/parameters.py`.
 
-## Also in this repo: Nucula NFC board enclosure (`nucula/`)
+## Related project: Nucula NFC board enclosure
 
-A second board project sharing this methodology (own
-[`AGENTS.md`](nucula/AGENTS.md)): a parametric, 3D-printable enclosure for
-the **Nucula board** (zeugmaster/nucula-board) — ESP32-C3 + NFC coil,
-KiCad-driven instead of STEP/DXF-driven. Every board dimension is parsed
-from `nucula-v2.kicad_pcb`; nothing hand-transcribed.
-
-- **57/57 boolean checks PASS** incl. deterministic rebuild (re-verified in
-  this repo's frozen env, cadquery 2.8)
-- Variants V0–V3: calibration coupon, minimal shell, OLED pop-out lid,
-  keyboard-attached blister — all from one parameter set
-- Start at [`nucula/README.md`](nucula/README.md); status of physical
-  prints/measurements in `nucula/analysis/testing_status.json`
-
-```bash
-cd nucula
-../.venv/bin/python scripts/validate.py   # 57 boolean checks
-../.venv/bin/python scripts/build.py      # STEP + STL -> nucula/output/exports
-```
+[`Amperstrand/nucula-enclosure`](https://github.com/Amperstrand/nucula-enclosure) —
+the first outward port of this repo's methodology to a second measurement
+front-end (KiCad instead of manufacturer STEP/DXF): a parametric,
+3D-printable enclosure for the **Nucula board** (ESP32-C3 + NFC coil),
+57/57 boolean checks green in its own CI. This repo's AGENTS.md prompt
+library is the playbook it was built from — treat the two repos as
+targets #1 and #2 of the same AI-assisted case-building framework.
 
 ## Repository
 
-- GitHub: `Amperstrand/lilygo-a7670-simhat-carrier` (private)
+- GitHub: `Amperstrand/lilygo-a7670-simhat-carrier` (public)
 - Branch: `cad/combined-carrier-v1`
