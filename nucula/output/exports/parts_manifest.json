@@ -1,0 +1,10 @@
+{
+ "V0_calibration_coupon": "print FIRST (docs/printing.md)",
+ "V1_bottom_shell": "variant V1/V2 shared bottom",
+ "V1_lid_closed": "variant V1 lid",
+ "V2_lid_screen_popout": "variant V2 lid (window printed closed)",
+ "V3_bottom_shell_full": "variant V3 bottom (keyboard attached)",
+ "V3_lid_keyboard_blister": "variant V3 lid (J3 service blister)",
+ "reference_main_board": "render reference only - do not print",
+ "reference_full_board": "render reference only - do not print"
+}
