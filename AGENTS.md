@@ -6,13 +6,12 @@ around measured electronics in this repo — and the pattern generalizes to
 the next board-carrier project. Review this file before extending the CAD.
 
 **Repo scope:** this repo is the LILYGO A7670 + SimHat carrier (root:
-`cad/`, `scripts/`, `exports/`, STEP/DXF-driven) and the home of the
-methodology itself — the prompt library below is the seed of an
-AI-assisted case-building framework with multiple targets. Target #2
-lives in its own repo, `Amperstrand/nucula-enclosure` (KiCad front-end,
-own AGENTS.md with project-specific traps); lessons cross-apply. A third
-target, or extraction of the skills listed below, is the trigger to
-restructure into a dedicated multi-target framework repo.
+`cad/`, `scripts/`, `exports/`, STEP/DXF-driven) and target #1 of the
+AI-assisted case-building framework that now lives in its own repo,
+`Amperstrand/enclosure-forge` (skill + prompt library + lessons + A/B
+harness; see the pointer at the bottom of this file). Target #2 is
+`Amperstrand/nucula-enclosure` (KiCad front-end, own AGENTS.md with
+project-specific traps). Lessons cross-apply through the forge.
 
 ## Process rules that paid for themselves
 
@@ -332,38 +331,12 @@ restructure into a dedicated multi-target framework repo.
   because the 110 mm tray mouth swallowed the corners. Re-check ear vs
   appendage collisions whenever frame width changes.
 
-## Prompt / skill library for the next board-carrier project
+## Prompt / skill library — moved to Amperstrand/enclosure-forge
 
-Reusable prompts (tested patterns, in order of use):
-
-1. **measure-first**: "Clone the vendor repo, find STEP/DXF under
-   dimensions/, enumerate PCB slab/outline/holes/components into JSON;
-   cross-check hole diameters between DXF dims and STEP cylinders; report
-   deltas. Do not model anything yet."
-2. **fastener-truth**: "From the measured hole diameters, derive the correct
-   metric screw size; refuse to default to M2/M3. Report pilot diameter for
-   self-tap in PETG."
-3. **keep-out-scan**: "Given the component solids JSON, compute every
-   ≥N-mm window of bare laminate on both board strips in the AS-ORIENTED
-   coordinate frame; verify support-pad candidates against all solids, not
-   top-N."
-4. **removal-sim**: "Write staged kinematics for board removal (release
-   tabs → lift δ → slide s → lift clear) and boolean-test each stage against
-   the carrier; include the component sweep envelope during slide."
-5. **coupon-first**: "Extract the exact production snap geometry into a
-   4-variant clearance coupon sharing the same builder functions; label
-   variants by notch count."
-6. **variant-audit**: "After any parameter change (rotation, standoff
-   height, tray width), list every downstream consumer of that parameter
-   and re-run the full validation matrix for each build profile."
-7. **render-honesty**: "Render full + close-up views; verify with a vision
-   model that the feature under test is actually distinguishable; link STL
-   (GitHub viewer) + GLB exports."
-8. **lessons-sync** (end of every session): "Diff what failed vs what the
-   docs claim; append new failure modes and rules to AGENTS.md; delete rules
-   that no longer apply."
-
-Suggested OpenCode skills to capture if this becomes a repeated workflow:
-`pcb-measure` (steps 1-2), `carrier-keepouts` (3, 5), `carrier-validate`
-(4, 6), `cad-render-verify` (7). Each maps 1:1 to a script in `scripts/`
-here — the scripts are the skill bodies.
+The generalizable method (staged pipeline S0–S9, prompt library P1–P12,
+cross-project lesson catalog, validation doctrine, A/B experiment
+harness) now lives in its own repo:
+[`Amperstrand/enclosure-forge`](https://github.com/Amperstrand/enclosure-forge)
+(SKILL.md is the entry point). This file keeps only carrier-specific
+rules and traps. New general lessons sync upstream to the forge
+(its prompt P10); new project traps stay here.
